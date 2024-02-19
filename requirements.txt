@@ -1,2 +1,7 @@
-dash
+dash~=2.15.0
 dash_bootstrap_components
+click~=8.1.7
+setuptools~=69.1.0
+bs4
+pandas
+playwright~=1.41.2
