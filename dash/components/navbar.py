@@ -7,6 +7,9 @@ def navbar_simple():
     nav_items = [
         ("Home", "/"),
         ("About", "/about"),
+        ("Teams", "/teams"),
+        ("Upcoming Games", "/upcominggames"),
+        ("Fantasy Games", "/fantasygames"),
     ]
 
     nav = dbc.NavbarSimple(
@@ -16,7 +19,7 @@ def navbar_simple():
         brand="RunTime 🏀",
         brand_href="/",
         sticky="top",
-        color='primary',
+        color='dark',
         dark=True
     )
 
