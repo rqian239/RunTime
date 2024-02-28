@@ -10,22 +10,20 @@ def get_game_options():
         {'label': 'Team 3', 'value': 'game3'}
     ]
 
-def create_dropdown(id, options, position):
+def create_dropdown(id, options):
     return dcc.Dropdown(
         id=id,
         options=options,
         value=options[0]['value'],  # Set a default value
-        style={'width': '400px', 'marginRight': '20px', 'float': position}
+        style={'width': '400px'}
     )
 
 # Separate layout for the dropdowns
-dropdown_layout_left = html.Div([
-    create_dropdown('left-dropdown', get_game_options(), "left"),
-])
-
-dropdown_layout_right = html.Div([
-    create_dropdown('right-dropdown', get_game_options(), "right"),
-])
+dropdown_layout = html.Div([
+    create_dropdown('left-dropdown', get_game_options()),
+    html.Br(),
+    create_dropdown('right-dropdown', get_game_options()),
+], style={'display': 'flex', 'justifyContent': 'space-between', 'padding': '60px', 'marginTop': '-125px'})
 
 # Style boxes
 nba_colors = {
@@ -33,36 +31,44 @@ nba_colors = {
     'text': '#FFFFFF'          # White
 }
 
+
 # Define styles for the box
-box_style_left = {
+box_style = {
     'border': '2px solid black',
     'padding': '20px',
-    'marginTop': '200px',
-    'marginLeft': '100px',
     'width': '400px',
+    'height': '400px',
     'background-color': nba_colors['background'],
-    'color': nba_colors['text']
+    'color': nba_colors['text'],
+    'marginLeft': '175px'
+
 }
 
-box_style_right = {
+about_box_style = {
     'border': '2px solid black',
-    'padding': '20px',
-    'marginTop': '200px',
-    'marginRight': '80px',
-    'width': '400px',
-    'background-color': nba_colors['background'],
-    'color': nba_colors['text']
+    'padding': '10px',
+    'width': 'calc(100% - 40px)', 
+    'height': '100px',
+    'background-color': 'darkred',
+    'color': 'black',  
+    'marginLeft': '20px', 
+    'marginRight': '20px', 
+    'marginTop': '-100px',
+    'gridColumn': '1 / -1'  
 }
 
 
-# Main layout combining the dropdown layout with other elements
-layout = html.Div(style={'height': '100vh'}, children=[
-    html.H1('Upcoming Games', style={'textAlign': 'center'}),
-    html.Div(dropdown_layout_left, style={'marginTop': '150px', 'marginLeft': '100px'}),
-    html.Div(dropdown_layout_right, style={'marginTop': '150px', 'marginRight': '80px'}),
+# Main layout using CSS grid layout
+layout = html.Div(style={'height': '100vh', 'display': 'grid', 'grid-template-columns': '1fr 1fr'}, children=[
+    html.H1('Upcoming Games', style={'textAlign': 'center', 'grid-column': '1 / -1'}),
+    html.Div("This is a separate box", style=about_box_style ),
+    html.Div(dropdown_layout, style={'marginTop': '-10px', 'grid-column': '1 / -1'}),
 
-    html.Div("This is inside the left box", style=box_style_left),
-    html.Div("This is inside the right box", style=box_style_right)
+    #html.Div("This is another box for options", style=options_box_style),
+
+    html.Div("This is inside the left box", style={**box_style, 'marginTop': '-150px', 'grid-column': '1', 'marginLeft': '58px'}),
+    html.Div("This is inside the right box", style={**box_style, 'marginTop': '-150px', 'grid-column': '2', 'marginLeft': '275px'})
+
     
 
 ])
