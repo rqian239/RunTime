@@ -1,4 +1,5 @@
 import dash
+import ids
 from dash import html
 
 dash.register_page(__name__, path='/')
@@ -18,6 +19,6 @@ about_box_style = {
 
 
 layout = html.Div(style={'height': '100vh'}, children=[
-    html.H1('This is the Landing Page', style={'textAlign': 'center'}),
+    html.H1('This is the Landing Page', style={'textAlign': 'center'}, id=ids.LANDING_HEADER),
     html.Div("This is a separate box", style=about_box_style )
 ])

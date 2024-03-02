@@ -1,4 +1,5 @@
 import dash_bootstrap_components as dbc
+import ids
 
 def navbar_simple():
     link_style = {'color': 'white', 'font-size': '16px'}
@@ -31,7 +32,8 @@ def navbar_simple():
         sticky="top",
         color='dark',
         dark=True,
-        style={'padding': '10px', 'border-radius': '10px'}
+        style={'padding': '10px', 'border-radius': '10px'},
+        id = ids.NAVBAR
     )
 
     return nav
