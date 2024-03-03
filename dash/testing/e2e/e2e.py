@@ -5,6 +5,8 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from webdriver_manager.chrome import ChromeDriverManager
 
+import app.ids as ids
+
 LOCAL_URL = "http://localhost:8050"
 
 # Define a fixture for the WebDriver
@@ -19,7 +21,7 @@ def test_main_layout(driver):
 
     # Wait until the navbar element is present, timeout at 5 seconds
     WebDriverWait(driver, 5).until(
-        EC.presence_of_element_located((By.ID, "navbar"))
+        EC.presence_of_element_located((By.ID, ids.NAVBAR))
     )
 
-    assert driver.find_elements(By.ID, "navbar")
+    assert driver.find_elements(By.ID, ids.NAVBAR)
