@@ -1,41 +1,9 @@
 import dash
 from dash import html, dcc
 
-dash.register_page(__name__, path='/fantasygames')
+from data.nba_teams import get_all_team_options
 
-def get_game_options():
-    return [
-        {'label': 'Atlanta Hawks', 'value': 'team1'},
-        {'label': 'Boston Celtics', 'value': 'team2'},
-        {'label': 'Brooklyn Nets', 'value': 'team3'},
-        {'label': 'Charlotte Hornets', 'value': 'team4'},
-        {'label': 'Chicago Bulls', 'value': 'team5'},
-        {'label': 'Cleveland Cavaliers', 'value': 'team6'},
-        {'label': 'Dallas Mavericks', 'value': 'team7'},
-        {'label': 'Denver Nuggets', 'value': 'team8'},
-        {'label': 'Detroit Pistons', 'value': 'team9'},
-        {'label': 'Golden State Warriors', 'value': 'team10'},
-        {'label': 'Houston Rockets', 'value': 'team11'},
-        {'label': 'Indiana Pacers', 'value': 'team12'},
-        {'label': 'Los Angeles Clippers', 'value': 'team13'},
-        {'label': 'Los Angeles Lakers', 'value': 'team14'},
-        {'label': 'Memphis Grizzlies', 'value': 'team15'},
-        {'label': 'Miami Heat', 'value': 'team16'},
-        {'label': 'Milwaukee Bucks', 'value': 'team17'},
-        {'label': 'Minnesota Timberwolves', 'value': 'team18'},
-        {'label': 'New Orleans Pelicans', 'value': 'team19'},
-        {'label': 'New York Knicks', 'value': 'team20'},
-        {'label': 'Oklahoma City Thunder', 'value': 'team21'},
-        {'label': 'Orlando Magic', 'value': 'team22'},
-        {'label': 'Philadelphia 76ers', 'value': 'team23'},
-        {'label': 'Phoenix Suns', 'value': 'team24'},
-        {'label': 'Portland Trail Blazers', 'value': 'team25'},
-        {'label': 'Sacramento Kings', 'value': 'team26'},
-        {'label': 'San Antonio Spurs', 'value': 'team27'},
-        {'label': 'Toronto Raptors', 'value': 'team28'},
-        {'label': 'Utah Jazz', 'value': 'team29'},
-        {'label': 'Washington Wizards', 'value': 'team30'}
-    ]
+dash.register_page(__name__, path='/fantasygames')
 
 
 def get_model_options():
@@ -60,9 +28,9 @@ dropdown_layout_middle = html.Div([
 
 # Separate layout for the dropdowns
 dropdown_layout = html.Div([
-    create_dropdown('left-dropdown', get_game_options()),
+    create_dropdown('left-dropdown', get_all_team_options()),
     html.Br(),
-    create_dropdown('right-dropdown', get_game_options()),
+    create_dropdown('right-dropdown', get_all_team_options()),
 ], style={'display': 'flex', 'justifyContent': 'space-between', 'padding': '60px', 'marginTop': '-125px'})
 
 # Style boxes
