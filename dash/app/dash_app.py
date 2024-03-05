@@ -19,7 +19,8 @@ import dash_bootstrap_components as dbc
 from dash import Dash, html
 from components.navbar import navbar_simple
 
-
+# Define the app here and choose the DBC theme
+# Themes listed here: https://dash-bootstrap-components.opensource.faculty.ai/docs/themes/
 app = Dash(__name__, external_stylesheets=[dbc.themes.SOLAR], use_pages=True)
 app.title = 'RunTime'
 
