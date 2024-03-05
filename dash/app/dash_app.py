@@ -4,6 +4,7 @@
 import sys
 from pathlib import Path
 
+
 # This is needed so that imports work in this project
 # Not best practice but it makes files within the dash/ directory visible by Python interpreter
 
@@ -19,7 +20,7 @@ from dash import Dash, html
 from components.navbar import navbar_simple
 
 
-app = Dash(__name__, external_stylesheets=[dbc.themes.JOURNAL], use_pages=True)
+app = Dash(__name__, external_stylesheets=[dbc.themes.SOLAR], use_pages=True)
 app.title = 'RunTime'
 
 nav = navbar_simple()
