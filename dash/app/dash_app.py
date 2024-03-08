@@ -21,17 +21,17 @@ from components.navbar import navbar_simple
 
 # Define the app here and choose the DBC theme
 # Themes listed here: https://dash-bootstrap-components.opensource.faculty.ai/docs/themes/
-app = Dash(__name__, external_stylesheets=[dbc.themes.SOLAR], use_pages=True)
+app = Dash(__name__, external_stylesheets=[dbc.themes.VAPOR], use_pages=True)
 app.title = 'RunTime'
 
 nav = navbar_simple()
 
 colors = {
-    'background': '#111111',  # Light purple, reminiscent of basketball courts
-    'text': '#FF5733'         # Vibrant orange, representing the basketball
+    #'background': '#FFFFFF',  # Light purple, reminiscent of basketball courts
+    #'text': '#FF5733'         # Vibrant orange, representing the basketball
 }
 
-app.layout = html.Div(style={'backgroundColor': colors['background'], 'color': colors['text'], 'margin': '0', 'padding': '0', 'font-family': 'Arial, sans-serif'}, children=[
+app.layout = html.Div(style={'margin': '0', 'padding': '0', 'font-family': 'Arial, sans-serif'}, children=[
     html.Div([nav]),        # This will show up for each page
     dash.page_container,    # Page specific layouts
 ])
