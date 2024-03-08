@@ -7,4 +7,7 @@ bs4
 pandas
 chardet
 playwright~=1.41.2
+beautifulsoup4
+nba_api
 pytest
+
