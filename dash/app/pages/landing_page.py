@@ -34,7 +34,7 @@ body = dbc.Container(
                 ),
                 dbc.Col(
                     [
-                    # The spinning earth gif lmao
+                    # basketball gif
                         html.Img(
                             src="dash\assets\images\basketball.gif",
                             width="80%",
@@ -72,7 +72,7 @@ body = dbc.Container(
         ),
         dbc.Row(
             [
-                # Add a bunch of these dbc.Col to add buttons for each sector
+                # add buttons for each website
                 dbc.Col(
                     [
                         html.Br(),
