@@ -1,48 +1,44 @@
 import dash
-from dash import html, dcc
+import dash_bootstrap_components as dbc
+from dash import dcc, html
+import pandas as pd
 
 from data.nba_teams import get_all_team_options
 
 dash.register_page(__name__, path='/teams')
 
-about_box_style = {
-    'border': '2px solid black',
-    'padding': '10px',
-    'width': 'calc(100% - 40px)', 
-    'height': '100px',
-    'background-color': 'darkred',
-    'color': 'black',  
-    'marginLeft': '20px', 
-    'marginRight': '20px', 
-    'marginTop': '40px',
-    'gridColumn': '1 / -1'  
-}
+# Define the layout for the page
+body = dbc.Container(
+    [
+        dbc.Row(
+            [
+                dbc.Col(
+                    [
+                        html.Br(),
+                        html.H1("Teams", className="home-page-title", style={'textAlign': 'center'}),
+                        html.Br(),
+                        html.P(
+                            """\
+                            Welcome to the Teams Page! Delve into the heart of NBA teams with ease! Discover fascinating insights into 
+                            team history, player profiles, coaching staff, and in-depth statistics. Use the search tab to swiftly locate
+                            your favorite team and uncover a treasure trove of information. Whether you're a dedicated fan seeking 
+                            detailed analysis or a casual observer looking to learn more, this page is your ultimate destination for all 
+                            things NBA teams.""",
+                            style={'textAlign': 'center'}
+                        ),
+                    ],
+                ),
+            ]
+        ),
+    ]
+)
 
-# Define styles for the box
-nba_colors = {
-    'background': '#1A477B',  # Blue
-    'text': '#FFFFFF'         # White
-}
+# Assign the layout to the specific path
+layout = body
 
-box_style = {
-    'border': '2px solid black',
-    'padding': '20px',
-    'height': '500px',
-    'background-color': nba_colors['background'],
-    'color': nba_colors['text'],
-    #'marginLeft': '175px'
+# Create a Dash app instance
+app = dash.Dash(__name__)
 
-}
-
-layout = html.Div(style={'height': '100vh'}, children=[
-    html.H1('Teams Page', style={'textAlign': 'center'}),
-    html.Div("This is a separate box", style=about_box_style ),
-    dcc.Dropdown(
-        id='team-dropdown',
-        options=get_all_team_options(),
-        value='option1',  # Default value
-        style={'width': '50%', 'margin': '30px', 'marginTop': '20px', 'textAlign': 'left'}
-    ),
-    html.Div("This is inside the left box", style={**box_style, 'marginTop': '10px', 'width': '900px', 'grid-column': '1', 'marginLeft': '50px'}),
-    html.Div("This is inside the image box", style={**box_style, 'marginTop': '-500px', 'grid-column': '1', 'width': '450px', 'marginLeft': '975px'}),
-])
+# Run the Dash server
+if __name__ == '__main__':
+    app.run_server(debug=True)
