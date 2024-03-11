@@ -1,3 +1,6 @@
+# This is an initial attempt at implementing e2e testing with this dash app
+# IT CURRENTLY DOES NOT WORK!
+
 from dash.testing.application_runners import import_app
 
 import app.ids as ids
