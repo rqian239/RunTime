@@ -21,7 +21,7 @@ def navbar_simple():
                         style=link_style, 
                         className="nav-link-custom"
                     ), 
-                    style={'backgroundColor': 'darkred' if i % 2 == 0 else '#1A477B', 'border-radius': '10px', 'margin-right': '10px'}
+                    style={'border-radius': '10px', 'margin-right': '10px'}
                 ),
                 width="auto"
             ) 
