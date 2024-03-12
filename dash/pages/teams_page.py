@@ -100,12 +100,5 @@ body = dbc.Container(
     ]
 )
 
-# Assign the layout to the specific path
+# This is necessary for Dash to know what the layout of this page is!
 layout = body
-
-# Create a Dash app instance
-app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
-
-# Run the Dash server
-if __name__ == '__main__':
-    app.run_server(debug=True)

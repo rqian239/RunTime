@@ -6,7 +6,8 @@ import pandas as pd
 dash.register_page(__name__, path='/')
 
 # Read the game schedule data from a CSV file
-game_schedule_data = pd.read_csv(r'C:\Users\natar\OneDrive\Desktop\RunTime\RunTime\dash\data\nba-2023-UTC.csv')
+path_to_schedule_csv = "data/nba-2023-UTC.csv"
+game_schedule_data = pd.read_csv(path_to_schedule_csv)
 
 # Modify the "Game" column to contain "Home Team vs Away Team"
 game_schedule_data['Game'] = game_schedule_data['Home Team'] + ' vs ' + game_schedule_data['Away Team']
@@ -251,12 +252,5 @@ body = dbc.Container(
     ]
 )
 
-# Create a Dash app instance
-app = dash.Dash(__name__)
-
-# Assign the layout to the specific path
+# This is necessary for Dash to understand what the layout of the page is!
 layout = body
-
-# Run the Dash server
-if __name__ == '__main__':
-    app.run_server(debug=True)

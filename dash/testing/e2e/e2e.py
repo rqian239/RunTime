@@ -5,7 +5,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from webdriver_manager.chrome import ChromeDriverManager
 
-import app.ids as ids
+import ids
 
 LOCAL_URL = "http://localhost:8050"
 

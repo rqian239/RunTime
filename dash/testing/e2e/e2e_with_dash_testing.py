@@ -3,7 +3,7 @@
 
 from dash.testing.application_runners import import_app
 
-import app.ids as ids
+import ids
 
 def test_layout(dash_duo):
     app = import_app("../app/dash_app.py")  # Import dash app
