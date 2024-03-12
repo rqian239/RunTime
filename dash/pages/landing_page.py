@@ -2,11 +2,14 @@ import dash
 import dash_bootstrap_components as dbc
 from dash import dcc, html
 import pandas as pd
+from pathlib import Path
 
+# Get the directory of the current script file
+script_dir = Path(__file__).parent
 
 # Paths
-PATH_TO_SCHEDULE_CSV = "data/nba-2023-UTC.csv"  # This is a relative path starting from the "dash" directory
-PATH_TO_BASKETBALL_GIF = "assets/images/basketball.gif"
+PATH_TO_SCHEDULE_CSV = script_dir / ".." / "data" / "nba-2023-UTC.csv"  # using pathlib library to find path to csv file
+PATH_TO_BASKETBALL_GIF = "assets/images/basketball.gif" # Dash can recognize the assets folder
 
 # Registers this file as a page within our Dash application
 dash.register_page(__name__, path='/')
