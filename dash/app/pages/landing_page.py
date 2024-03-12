@@ -36,8 +36,8 @@ body = dbc.Container(
                     [
                     # basketball gif
                         html.Img(
-                            src="dash\assets\images\basketball.gif",
-                            width="80%",
+                            src=r"C:\Users\natar\OneDrive\Desktop\RunTime\RunTime\dash\app\pages\basketball.gif",
+                            width="10%",
                             height="auto",
                             className="spinning-globe-gif"
                         )
