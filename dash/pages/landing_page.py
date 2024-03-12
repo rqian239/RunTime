@@ -3,11 +3,16 @@ import dash_bootstrap_components as dbc
 from dash import dcc, html
 import pandas as pd
 
+
+# Paths
+PATH_TO_SCHEDULE_CSV = "data/nba-2023-UTC.csv"  # This is a relative path starting from the "dash" directory
+PATH_TO_BASKETBALL_GIF = "assets/images/basketball.gif"
+
+# Registers this file as a page within our Dash application
 dash.register_page(__name__, path='/')
 
 # Read the game schedule data from a CSV file
-path_to_schedule_csv = "data/nba-2023-UTC.csv"
-game_schedule_data = pd.read_csv(path_to_schedule_csv)
+game_schedule_data = pd.read_csv(PATH_TO_SCHEDULE_CSV)
 
 # Modify the "Game" column to contain "Home Team vs Away Team"
 game_schedule_data['Game'] = game_schedule_data['Home Team'] + ' vs ' + game_schedule_data['Away Team']
@@ -37,10 +42,10 @@ body = dbc.Container(
                     [
                     # basketball gif
                         html.Img(
-                            src=r"C:\Users\natar\OneDrive\Desktop\RunTime\RunTime\dash\app\pages\basketball.gif",
-                            width="10%",
+                            src=PATH_TO_BASKETBALL_GIF,
+                            width="50%",
                             height="auto",
-                            className="spinning-globe-gif"
+                            className="landing-page-basketball-gif"
                         )
                     ],
                     className="centered",
