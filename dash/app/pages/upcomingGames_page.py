@@ -45,11 +45,11 @@ nba_colors = {
 box_style = {
     'border': '2px solid black',
     'padding': '1%',
-    'width': '28.5%',
+    'width': '30%',
     'height': '500px',
     'background-color': nba_colors['background'],
-    'color': nba_colors['text']
-
+    'color': nba_colors['text'],
+    'overflow': 'auto'  # Allow overflow to scroll if content exceeds height
 }
 
 about_box_style = {
@@ -73,16 +73,49 @@ middle_box_style = {
 # Main layout using CSS grid layout
 layout = html.Div(style={'height': '100vh'}, children=[
     html.H1('Upcoming Games', style={'textAlign': 'center'}),
-    html.Div("This is a separate box", style=about_box_style ),
+    html.Div([
+        html.Div([
+            html.Div("Header", className="card-header"),
+            html.Div([
+                html.H4("Secondary card title", className="card-title"),
+                html.P("Some quick example text to build on the card title and make up the bulk of the card's content.", className="card-text")
+            ], className="card-body", style={'height': '250px'})  # Adjust height of the card body
+        ], className="card text-white bg-secondary mb-3", style={'maxWidth': '60rem', 'margin': 'auto'})
+    ], style={'marginTop': '10px'}),
+
+
     html.Div(dropdown_layout, style={'marginTop': '80px'}),
    
     html.Div(dropdown_layout_middle, style={'marginTop': '5%', 'marginLeft': 'auto', 'marginRight': 'auto'}),
-    html.Div("This is the middle box", style={**middle_box_style, 'marginTop': '20px', 'marginLeft': 'auto', 'marginRight': 'auto'}),
+    
     html.Div([
-            html.Div("This is inside the left box", style={**box_style, 'marginTop': '-30%'}),
-            html.Div("This is inside the right box", style={**box_style, 'marginTop': '-30%'}),
-        ], style={'display': 'flex', 'justifyContent': 'space-between', 'padding': '2%'}),
+        html.Div([
+            html.Div("Header", className="card-header"),
+            html.Div([
+                html.H4("Primary card title", className="card-title"),
+                html.P("Some quick example text to build on the card title and make up the bulk of the card's content.", className="card-text")
+            ], className="card-body")
+        ], className="card border-primary mb-3", style={'maxWidth': '20rem', 'margin': 'auto'})
+    ], style={'marginTop': '20px'}),
 
-   
+    html.Div([
+        html.Div([
+            html.Div("Header", className="card-header"),
+            html.Div([
+                html.H4("Another card title", className="card-title"),
+                html.P("Some quick example text to build on the card title and make up the bulk of the card's content.", className="card-text")
+            ], className="card-body", style={'height': '500px'})
+        ], className="card border-primary mb-3", style={'maxWidth': '30rem', 'margin': 'auto'})
+    ], style={'marginTop': '10px', 'marginLeft': '20px', 'float': 'left'}),
+
+    html.Div([
+        html.Div([
+            html.Div("Header", className="card-header"),
+            html.Div([
+                html.H4("Additional Card Title", className="card-title"),
+                html.P("Some quick example text to build on the card title and make up the bulk of the card's content.", className="card-text")
+            ], className="card-body", style={'height': '500px'})
+        ], className="card border-primary mb-3", style={'maxWidth': '30rem', 'margin': 'auto'})
+    ], style={'marginTop': '10px', 'marginRight': '20px', 'float': 'right'})
 
 ])
