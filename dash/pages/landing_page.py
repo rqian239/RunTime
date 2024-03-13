@@ -2,11 +2,22 @@ import dash
 import dash_bootstrap_components as dbc
 from dash import dcc, html
 import pandas as pd
+from pathlib import Path
 
+import ids
+
+# Get the directory of the current script file
+script_dir = Path(__file__).parent
+
+# Paths
+PATH_TO_SCHEDULE_CSV = script_dir / ".." / "data" / "nba-2023-UTC.csv"  # using pathlib library to find path to csv file
+PATH_TO_BASKETBALL_GIF = "assets/images/basketball.gif" # Dash can recognize the assets folder
+
+# Registers this file as a page within our Dash application
 dash.register_page(__name__, path='/')
 
 # Read the game schedule data from a CSV file
-game_schedule_data = pd.read_csv(r'C:\Users\natar\OneDrive\Desktop\RunTime\RunTime\dash\data\nba-2023-UTC.csv')
+game_schedule_data = pd.read_csv(PATH_TO_SCHEDULE_CSV)
 
 # Modify the "Game" column to contain "Home Team vs Away Team"
 game_schedule_data['Game'] = game_schedule_data['Home Team'] + ' vs ' + game_schedule_data['Away Team']
@@ -19,7 +30,7 @@ body = dbc.Container(
                 dbc.Col(
                     [
                         html.Br(),
-                        html.H1("RunTime's Game Simulator", className="home-page-title"),
+                        html.H1("RunTime's Game Simulator", className="home-page-title", id=ids.LANDING_HEADER),
                         html.Br(),
                         html.P(
                             """\
@@ -36,10 +47,10 @@ body = dbc.Container(
                     [
                     # basketball gif
                         html.Img(
-                            src="dash\assets\images\basketball.gif",
-                            width="80%",
+                            src=PATH_TO_BASKETBALL_GIF,
+                            width="50%",
                             height="auto",
-                            className="spinning-globe-gif"
+                            className="landing-page-basketball-gif"
                         )
                     ],
                     className="centered",
@@ -52,7 +63,7 @@ body = dbc.Container(
                 dbc.Col(
                     [
                         html.Br(),
-                        dbc.Button("Learn More about the Project and the Team", id="learn-more-button", href="/about", className="btn btn-lg btn-primary get-started-button"),
+                        dbc.Button("Learn More about the Project and the Team", id=ids.LEARN_MORE_BUTTON, href="/about", className="btn btn-lg btn-primary get-started-button"),
                     ],
                 )
             ]
@@ -251,12 +262,5 @@ body = dbc.Container(
     ]
 )
 
-# Create a Dash app instance
-app = dash.Dash(__name__)
-
-# Assign the layout to the specific path
+# This is necessary for Dash to understand what the layout of the page is!
 layout = body
-
-# Run the Dash server
-if __name__ == '__main__':
-    app.run_server(debug=True)
