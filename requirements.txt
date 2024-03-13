@@ -13,3 +13,4 @@ webdriver-manager
 beautifulsoup4
 nba_api
 pytest
+pathlib

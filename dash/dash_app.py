@@ -1,17 +1,18 @@
 # Main entry point for Dash
 
-# --------------------------------------------------------
-import sys
-from pathlib import Path
+# COMMENT THIS OUT FOR NOW - this section is no longer needed since I deleted the "app" directory
+# # --------------------------------------------------------
+# import sys
+# from pathlib import Path
 
 
-# This is needed so that imports work in this project
-# Not best practice but it makes files within the dash/ directory visible by Python interpreter
+# # This is needed so that imports work in this project
+# # Not best practice but it makes files within the dash/ directory visible by Python interpreter
 
-src_dir = Path(__file__).resolve().parent.parent
-# print(src_dir)
-sys.path.append(str(src_dir))
-# --------------------------------------------------------
+# src_dir = Path(__file__).resolve().parent.parent
+# # print(src_dir)
+# sys.path.append(str(src_dir))
+# # --------------------------------------------------------
 
 import dash
 import dash_bootstrap_components as dbc
