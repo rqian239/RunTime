@@ -20,3 +20,10 @@ TEAM_PAGE_DROPDOWN_MENU = "team-page-dropdown-menu"
 UPCOMING_GAMES_DROPDOWN_LEFT = "upcoming-games-dropdown-left"
 UPCOMING_GAMES_DROPDOWN_MIDDLE = "upcoming-games-dropdown-middle"
 UPCOMING_GAMES_DROPDOWN_RIGHT = "upcoming-games-dropdown-right"
+
+# navbar.py
+NAVBAR_HOME_BUTTON = "navbar-home-button"
+NAVBAR_ABOUT_BUTTON = "navbar-about-button"
+NAVBAR_TEAMS_BUTTON = "navbar-teams-button"
+NAVBAR_UPCOMING_BUTTON = "navbar-upcoming-button"
+NAVBAR_FANTASY_BUTTON = "navbar-fantasy-button"
