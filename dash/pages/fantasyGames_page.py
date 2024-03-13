@@ -2,6 +2,8 @@ import dash
 import dash_bootstrap_components as dbc
 from dash import dcc, html
 
+import ids
+
 dash.register_page(__name__, path='/fantasygames')  # Change the path here
 
 # Define the layout for the page
@@ -34,7 +36,7 @@ body = dbc.Container(
                     [
                         dbc.DropdownMenu(
                             label="Select Team",
-                            id="dropdown-menu-1",
+                            id=ids.FANTASY_DROPDOWN_MENU_1,
                             style={'overflowY': 'auto', 'marginBottom': '10px'}  # Add marginBottom to add space between dropdown and card
                         ),
                         dbc.Card(
@@ -61,7 +63,7 @@ body = dbc.Container(
                     [
                         dbc.DropdownMenu(
                             label="Select Team",
-                            id="dropdown-menu-2",
+                            id=ids.FANTASY_DROPDOWN_MENU_2,
                             style={'overflowY': 'auto', 'marginBottom': '10px'}  # Add marginBottom to add space between dropdown and card
                         ),
                         dbc.Card(
@@ -88,7 +90,7 @@ body = dbc.Container(
                     [
                         dbc.DropdownMenu(
                             label="Select Team",
-                            id="dropdown-menu-3",
+                            id=ids.FANTASY_DROPDOWN_MENU_3,
                             style={'overflowY': 'auto', 'marginBottom': '10px'}  # Add marginBottom to add space between dropdown and card
                         ),
                         dbc.Card(

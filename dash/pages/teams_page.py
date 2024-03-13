@@ -2,6 +2,8 @@ import dash
 import dash_bootstrap_components as dbc
 from dash import dcc, html
 
+import ids
+
 dash.register_page(__name__, path='/teams')
 
 # Define the layout for the page
@@ -36,7 +38,7 @@ body = dbc.Container(
                         html.Br(),
                         dbc.DropdownMenu(
                             label="Select Team",
-                            id="dropdown-menu",
+                            id=ids.TEAM_PAGE_DROPDOWN_MENU,
                             style={'overflowY': 'auto'}
                             # maxHeight and overflowY set the maximum height and enable scrolling
                             # to handle longer dropdown menus

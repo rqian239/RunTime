@@ -4,6 +4,8 @@ from dash import dcc, html
 import pandas as pd
 from pathlib import Path
 
+import ids
+
 # Get the directory of the current script file
 script_dir = Path(__file__).parent
 
@@ -28,7 +30,7 @@ body = dbc.Container(
                 dbc.Col(
                     [
                         html.Br(),
-                        html.H1("RunTime's Game Simulator", className="home-page-title"),
+                        html.H1("RunTime's Game Simulator", className="home-page-title", id=ids.LANDING_HEADER),
                         html.Br(),
                         html.P(
                             """\
@@ -61,7 +63,7 @@ body = dbc.Container(
                 dbc.Col(
                     [
                         html.Br(),
-                        dbc.Button("Learn More about the Project and the Team", id="learn-more-button", href="/about", className="btn btn-lg btn-primary get-started-button"),
+                        dbc.Button("Learn More about the Project and the Team", id=ids.LEARN_MORE_BUTTON, href="/about", className="btn btn-lg btn-primary get-started-button"),
                     ],
                 )
             ]

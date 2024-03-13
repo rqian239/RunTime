@@ -2,6 +2,7 @@ import dash
 from dash import html, dcc
 
 from data.nba_teams import get_all_team_options
+import ids
 
 dash.register_page(__name__, path='/upcominggames')
 
@@ -14,24 +15,24 @@ def get_model_options():
         {'label': 'Team Statistics', 'value': 'team_stats'}
     ]
 
-def create_dropdown(id, options):
+def create_dropdown(_id, options):
     return dcc.Dropdown(
-        id=id,
+        id=_id,
         options=options,
         value=options[0]['value'],  # Set a default value
         style={'width': '400px'}
     )
 
 dropdown_layout_middle = html.Div([
-    create_dropdown('middle-dropdown', get_model_options()),
+    create_dropdown(ids.UPCOMING_GAMES_DROPDOWN_MIDDLE, get_model_options()),
 ], style={'display': 'flex', 'justifyContent': 'center'})
 
 
 # Separate layout for the dropdowns
 dropdown_layout = html.Div([
-    create_dropdown('left-dropdown', get_all_team_options()),
+    create_dropdown(ids.UPCOMING_GAMES_DROPDOWN_LEFT, get_all_team_options()),
     html.Br(),
-    create_dropdown('right-dropdown', get_all_team_options()),
+    create_dropdown(ids.UPCOMING_GAMES_DROPDOWN_RIGHT, get_all_team_options()),
 ], style={'display': 'flex', 'justifyContent': 'space-between', 'padding': '2%', 'marginTop': '-5%'})
 
 # Style boxes

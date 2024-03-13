@@ -33,7 +33,7 @@ def navbar_simple():
         color='dark',
         dark=True,
         style={'padding': '10px', 'border-radius': '10px'},
-        id = ids.NAVBAR
+        id=ids.NAVBAR
     )
 
     return nav
