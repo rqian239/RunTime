@@ -4,11 +4,11 @@ import ids
 def navbar_simple():
     link_style = {'color': 'white', 'font-size': '16px'}
     nav_items = [
-        ("Home", "/", "primary"),
-        ("About", "/about", "primary"),
-        ("Teams", "/teams", "primary"),
-        ("Upcoming Games", "/upcominggames", "primary"),
-        ("Fantasy Games", "/fantasygames", "primary"),
+        ("Home", "/", ids.NAVBAR_HOME_BUTTON),
+        ("About", "/about", ids.NAVBAR_ABOUT_BUTTON),
+        ("Teams", "/teams", ids.NAVBAR_TEAMS_BUTTON),
+        ("Upcoming Games", "/upcominggames", ids.NAVBAR_UPCOMING_BUTTON),
+        ("Fantasy Games", "/fantasygames", ids.NAVBAR_FANTASY_BUTTON),
     ]
 
     nav = dbc.NavbarSimple(
@@ -19,13 +19,14 @@ def navbar_simple():
                         label, 
                         href=link_href, 
                         style=link_style, 
+                        id=button_id,
                         className="nav-link-custom"
                     ), 
                     style={'border-radius': '10px', 'margin-right': '10px'}
                 ),
                 width="auto"
             ) 
-            for i, (label, link_href, _) in enumerate(nav_items)
+            for i, (label, link_href, button_id) in enumerate(nav_items)
         ],
         brand="RunTime 🏀",
         brand_href="/",
@@ -33,7 +34,7 @@ def navbar_simple():
         color='dark',
         dark=True,
         style={'padding': '10px', 'border-radius': '10px'},
-        id = ids.NAVBAR
+        id=ids.NAVBAR
     )
 
     return nav
