@@ -2,7 +2,10 @@ import dash
 import dash_bootstrap_components as dbc
 from dash import dcc, html
 
+from data.nba_teams import get_all_team_options
+
 import ids
+
 
 dash.register_page(__name__, path='/fantasygames')  # Change the path here
 
@@ -34,10 +37,12 @@ body = dbc.Container(
                 # Adding the first card with dropdown
                 dbc.Col(
                     [
-                        dbc.DropdownMenu(
-                            label="Select Team",
-                            id=ids.FANTASY_DROPDOWN_MENU_1,
-                            style={'overflowY': 'auto', 'marginBottom': '10px'}  # Add marginBottom to add space between dropdown and card
+            
+                        dcc.Dropdown(
+                        id=ids.FANTASY_DROPDOWN_MENU_1,
+                        options=get_all_team_options(),  # Options generated from the function
+                        placeholder="Select a Team",  # Placeholder text for the dropdown
+                        style={'width': '100%'}  # Set the width of the dropdown
                         ),
                         dbc.Card(
                             [
@@ -66,7 +71,7 @@ body = dbc.Container(
                             id=ids.FANTASY_DROPDOWN_MENU_2,
                             style={'overflowY': 'auto', 'marginBottom': '10px'}  # Add marginBottom to add space between dropdown and card
                         ),
-                        dbc.Card(
+                         dbc.Card(
                             [
                                 dbc.CardHeader("Card 2"),
                                 dbc.CardBody(
@@ -88,10 +93,11 @@ body = dbc.Container(
                 # Adding the third card with dropdown
                 dbc.Col(
                     [
-                        dbc.DropdownMenu(
-                            label="Select Team",
-                            id=ids.FANTASY_DROPDOWN_MENU_3,
-                            style={'overflowY': 'auto', 'marginBottom': '10px'}  # Add marginBottom to add space between dropdown and card
+                         dcc.Dropdown(
+                        id=ids.FANTASY_DROPDOWN_MENU_3,
+                        options=get_all_team_options(),  # Options generated from the function
+                        placeholder="Select a Team",  # Placeholder text for the dropdown
+                        style={'width': '100%'}  # Set the width of the dropdown
                         ),
                         dbc.Card(
                             [

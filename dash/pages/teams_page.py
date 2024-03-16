@@ -2,6 +2,8 @@ import dash
 import dash_bootstrap_components as dbc
 from dash import dcc, html
 
+from data.nba_teams import get_all_team_options
+
 import ids
 
 dash.register_page(__name__, path='/teams')
@@ -36,12 +38,11 @@ body = dbc.Container(
                 dbc.Col(
                     [
                         html.Br(),
-                        dbc.DropdownMenu(
-                            label="Select Team",
+                        dcc.Dropdown(
                             id=ids.TEAM_PAGE_DROPDOWN_MENU,
-                            style={'overflowY': 'auto'}
-                            # maxHeight and overflowY set the maximum height and enable scrolling
-                            # to handle longer dropdown menus
+                            options=get_all_team_options(),  # Options generated from the function
+                            placeholder="Select a Team",  # Placeholder text for the dropdown
+                            style={'width': '100%'}  # Set the width of the dropdown
                         ),
                         html.Br()
                     ],
@@ -59,9 +60,9 @@ body = dbc.Container(
                                 dbc.CardHeader("Header"),
                                 dbc.CardBody(
                                     [
-                                        html.H4("Card title", className="card-title"),
+                                        html.H4("Team Information", className="card-title"),
                                         html.P(
-                                            "This is some text inside the card body. You can add any content you want here.",
+                                            "This is some text inside the card body. Will be adding tea info based on selection in dropdown.",
                                             className="card-text"
                                         )
                                     ]
@@ -82,7 +83,7 @@ body = dbc.Container(
                                 dbc.CardHeader("Header"),
                                 dbc.CardBody(
                                     [
-                                        html.H4("Card title", className="card-title"),
+                                        html.H4("Team Image", className="card-title"),
                                         html.P(
                                             "This is some text inside the card body. You can add any content you want here.",
                                             className="card-text"
