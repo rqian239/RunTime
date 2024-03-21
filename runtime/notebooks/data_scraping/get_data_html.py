@@ -5,7 +5,7 @@ sys.stdout = codecs.getwriter('utf-8')(sys.stdout.detach())
 
 SEASONS = list(range(2016, 2025))
 
-DATA_DIR = "data2"
+DATA_DIR = "../../data/raw"
 STANDINGS_DIR = os.path.join(DATA_DIR, "standings")
 SCORES_DIR = os.path.join(DATA_DIR, "scores")
 SEASONS
