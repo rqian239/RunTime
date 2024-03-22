@@ -66,13 +66,3 @@ layout = html.Div(style={'height': '100vh', 'background-color': 'black', 'displa
     red_card,
     small_blue_cards
 ])
-
-# Create the Dash app instance
-app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
-
-# Set the layout
-app.layout = layout
-
-# Run the app
-if __name__ == '__main__':
-    app.run_server(debug=True)
