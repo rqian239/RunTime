@@ -1,68 +1,185 @@
 import dash
 import dash_bootstrap_components as dbc
-from dash import html
+from dash import dcc, html
 
-# Register the page
-dash.register_page(__name__, path='/about')
+from data.nba_teams import get_all_team_options
 
-# Define the styles
-about_box_style = {
-    'border': '2px solid black',
-    'padding': '10px',
-    'width': '60%',  # Adjust width as needed
-    'height': '300px',  # Adjust height as needed
-    'background-color': 'darkred',
-    'color': 'white',  # Change text color to white
-    'margin': '40px auto',  # Centering the box horizontally with top margin
-}
+import ids
 
-nba_colors = {
-    'background': '#1A477B',  # Blue
-    'text': '#FFFFFF'         # White
-}
 
-small_box_style = {
-    'border': '2px solid black',
-    'padding': '10px',
-    'width': 'calc(20% - 20px)',  # Adjust width as needed for 5 columns
-    'height': 'calc(25vh - 40px)',  # Adjust height as needed (25vh is a quarter of the viewport height)
-    'background-color': nba_colors['background'],
-    'color': nba_colors['text'],
-    'margin': '10px 0 10px 10px',  # Margin between small boxes (added margin-left)
-    'display': 'inline-block'  # Make small boxes appear side by side
-}
+dash.register_page(__name__, path='/about')  # Change the path here
 
-# Creating 5 small blue cards using the provided card template
-small_blue_cards = html.Div(
+# Define the layout for the page
+body = dbc.Container(
     [
-        html.Div([
-            html.Div("Header", className="card-header"),
-            html.Div([
-                html.H4("Primary card title", className="card-title"),
-                html.P("info", className="card-text")
-            ], className="card-body")
-        ], className="card border-primary mb-3", style=small_box_style)
-        for _ in range(5)
-    ],
-    style={'display': 'flex', 'justifyContent': 'space-between', 'width': '80%', 'margin': 'auto'}  # Adjust container width and center it horizontally
-)
-
-# Red card using the provided template
-red_card = html.Div(
-    [
-        html.Div([
-            html.Div("Header", className="card-header"),
-            html.Div([
-                html.H4("Secondary card title", className="card-title"),
-                html.P("Some quick example text to build on the card title and make up the bulk of the card's content.", className="card-text")
-            ], className="card-body")
-        ], className="card border-secondary mb-3", style={'maxWidth': '100rem', 'height': '400px', 'color': 'white', 'margin': '40px auto 0', 'display': 'flex', 'flexDirection': 'column', 'justifyContent': 'center', 'alignItems': 'center'})  # Adjust height and width here
+        dbc.Row(
+            [
+                dbc.Col(
+                    [
+                        html.Br(),
+                        html.H1("About Us", className="team-page-title", style={'textAlign': 'center'}),
+                        html.Br(),
+                        html.P(
+                            """\
+                            Welcome to the About Us Page!""",
+                            style={'textAlign': 'center'}
+                        ),
+                    ],
+                    width=12  # Full width for this column
+                )
+            ]
+        ),
+        dbc.Row(
+            [
+                # Adding the first card with dropdown
+                dbc.Col(
+                    [
+                        dbc.Card(
+                            [
+                                dbc.CardHeader("Card 1"),
+                                dbc.CardBody(
+                                    [
+                                        html.H4("Card title", className="card-title"),
+                                        html.P(
+                                            "This is some text inside the card body. You can add any content you want here.",
+                                            className="card-text"
+                                        )
+                                    ]
+                                )
+                            ],
+                            className="card text-white bg-primary mb-3",
+                            style={"maxWidth": "80rem", "width": "100%", "margin": "auto"}  # Adjust the maxWidth and width here
+                        ),
+                    ],
+                    width=15,  # 100% width for this column
+                    align='center'  # Center align the column content
+                )
+            ],
+            justify="center"  # Center align the row
+        ),
+        dbc.Row(
+            [
+                dbc.Col(width=100),  # Empty column to occupy space
+            ]
+        ),
+        dbc.Row(
+            [
+                # Adding a new row for small cards
+                dbc.Col(
+                    [
+                        dbc.Card(
+                            [
+                                dbc.CardHeader("Small Card 1"),
+                                dbc.CardBody(
+                                    [
+                                        html.H4("Small Card Title", className="card-title"),
+                                        html.P(
+                                            "This is some text inside the small card body. You can add any content you want here.",
+                                            className="card-text"
+                                        )
+                                    ]
+                                )
+                            ],
+                            className="border-primary mb-3",
+                            style={"maxWidth": "20rem", "width": "auto", "margin": "auto"}  # Adjust the maxWidth and width here
+                        ),
+                    ],
+                    width=2,  # Adjusted width for this column
+                    align='center'  # Center align the column content
+                ),
+                dbc.Col(
+                    [
+                        dbc.Card(
+                            [
+                                dbc.CardHeader("Small Card 2"),
+                                dbc.CardBody(
+                                    [
+                                        html.H4("Small Card Title", className="card-title"),
+                                        html.P(
+                                            "This is some text inside the small card body. You can add any content you want here.",
+                                            className="card-text"
+                                        )
+                                    ]
+                                )
+                            ],
+                            className="border-primary mb-3",
+                            style={"maxWidth": "20rem", "width": "auto", "margin": "auto"}  # Adjust the maxWidth and width here
+                        ),
+                    ],
+                    width=2,  # Adjusted width for this column
+                    align='center'  # Center align the column content
+                ),
+                dbc.Col(
+                    [
+                        dbc.Card(
+                            [
+                                dbc.CardHeader("Small Card 3"),
+                                dbc.CardBody(
+                                    [
+                                        html.H4("Small Card Title", className="card-title"),
+                                        html.P(
+                                            "This is some text inside the small card body. You can add any content you want here.",
+                                            className="card-text"
+                                        )
+                                    ]
+                                )
+                            ],
+                            className="border-primary mb-3",
+                            style={"maxWidth": "20rem", "width": "auto", "margin": "auto"}  # Adjust the maxWidth and width here
+                        ),
+                    ],
+                    width=2,  # Adjusted width for this column
+                    align='center'  # Center align the column content
+                ),
+                dbc.Col(
+                    [
+                        dbc.Card(
+                            [
+                                dbc.CardHeader("Small Card 4"),
+                                dbc.CardBody(
+                                    [
+                                        html.H4("Small Card Title", className="card-title"),
+                                        html.P(
+                                            "This is some text inside the small card body. You can add any content you want here.",
+                                            className="card-text"
+                                        )
+                                    ]
+                                )
+                            ],
+                            className="border-primary mb-3",
+                            style={"maxWidth": "20rem", "width": "auto", "margin": "auto"}  # Adjust the maxWidth and width here
+                        ),
+                    ],
+                    width=2,  # Adjusted width for this column
+                    align='center'  # Center align the column content
+                ),
+                dbc.Col(
+                    [
+                        dbc.Card(
+                            [
+                                dbc.CardHeader("Small Card 5"),
+                                dbc.CardBody(
+                                    [
+                                        html.H4("Small Card Title", className="card-title"),
+                                        html.P(
+                                            "This is some text inside the small card body. You can add any content you want here.",
+                                            className="card-text"
+                                        )
+                                    ]
+                                )
+                            ],
+                            className="border-primary mb-3",
+                            style={"maxWidth": "20rem", "width": "auto", "margin": "auto"}  # Adjust the maxWidth and width here
+                        ),
+                    ],
+                    width=2,  # Adjusted width for this column
+                    align='center'  # Center align the column content
+                )
+            ],
+            justify="center"  # Center align the row
+        )
     ]
 )
 
-# Define the layout
-layout = html.Div(style={'height': '100vh', 'background-color': 'black', 'display': 'flex', 'flexDirection': 'column', 'alignItems': 'center'}, children=[
-    html.H1('This is the About Page', style={'textAlign': 'center', 'color': 'white', 'marginTop': '50px', 'fontWeight': 'bold'}),  # Adding fontWeight for boldness
-    red_card,
-    small_blue_cards
-])
+# Assign the layout to the specific path
+layout = body
