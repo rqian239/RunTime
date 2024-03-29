@@ -1,89 +1,127 @@
 import dash
-from dash import html, dcc
+import dash_bootstrap_components as dbc
+from dash import dcc, html
 
 from data.nba_teams import get_all_team_options
+
 import ids
 
-dash.register_page(__name__, path='/upcominggames')
 
+dash.register_page(__name__, path='/upcominggames')  # Change the path here
 
-def get_model_options():
-    return [
-        {'label': 'Wins/Losses', 'value': 'wins_losses'},
-        {'label': 'Scores', 'value': 'scores'},
-        {'label': 'Player Statistics', 'value': 'player_stats'},
-        {'label': 'Team Statistics', 'value': 'team_stats'}
+# Define the layout for the page
+body = dbc.Container(
+    [
+        dbc.Row(
+            [
+                dbc.Col(
+                    [
+                        html.Br(),
+                        html.H1("Upcoming Games", className="team-page-title", style={'textAlign': 'center'}),
+                        html.Br(),
+                        html.P(
+                            """\
+                            Welcome to the Upcoming Games Page! Dive into the world of fantasy sports and games with ease! 
+                            Discover exciting adventures, challenge your friends, and compete for glory in virtual arenas.
+                            Whether you're a seasoned player seeking new challenges or a beginner looking to start your journey,
+                            this page is your ultimate destination for all things fantasy games.""",
+                            style={'textAlign': 'center'}
+                        ),
+                    ],
+                    width=12  # Full width for this column
+                )
+            ]
+        ),
+        dbc.Row(
+            [
+                # Adding the first card with dropdown
+                dbc.Col(
+                    [
+            
+                        dcc.Dropdown(
+                        id=ids.FANTASY_DROPDOWN_MENU_1,
+                        options=get_all_team_options(),  # Options generated from the function
+                        placeholder="Select a Team",  # Placeholder text for the dropdown
+                        style={'width': '100%'}  # Set the width of the dropdown
+                        ),
+                        dbc.Card(
+                            [
+                                dbc.CardHeader("Card 1"),
+                                dbc.CardBody(
+                                    [
+                                        html.H4("Card title", className="card-title"),
+                                        html.P(
+                                            "This is some text inside the card body. You can add any content you want here.",
+                                            className="card-text"
+                                        )
+                                    ]
+                                )
+                            ],
+                            className="border-primary mb-3",
+                            style={"maxWidth": "30rem"}  # Adjust the maxWidth here
+                        ),
+                    ],
+                    width=4  # 33% width for this column
+                ),
+                # Adding the second card with dropdown
+                dbc.Col(
+                    [
+                        dbc.DropdownMenu(
+                            label="Select Team",
+                            id=ids.FANTASY_DROPDOWN_MENU_2,
+                            style={'overflowY': 'auto', 'marginBottom': '10px'}  # Add marginBottom to add space between dropdown and card
+                        ),
+                         dbc.Card(
+                            [
+                                dbc.CardHeader("Card 2"),
+                                dbc.CardBody(
+                                    [
+                                        html.H4("Card title", className="card-title"),
+                                        html.P(
+                                            "This is some text inside the card body. You can add any content you want here.",
+                                            className="card-text"
+                                        )
+                                    ]
+                                )
+                            ],
+                            className="border-primary mb-3",
+                            style={"maxWidth": "30rem"}  # Adjust the maxWidth here
+                        ),
+                    ],
+                    width=4  # 33% width for this column
+                ),
+                # Adding the third card with dropdown
+                dbc.Col(
+                    [
+                         dcc.Dropdown(
+                        id=ids.FANTASY_DROPDOWN_MENU_3,
+                        options=get_all_team_options(),  # Options generated from the function
+                        placeholder="Select a Team",  # Placeholder text for the dropdown
+                        style={'width': '100%'}  # Set the width of the dropdown
+                        ),
+                        dbc.Card(
+                            [
+                                dbc.CardHeader("Card 3"),
+                                dbc.CardBody(
+                                    [
+                                        html.H4("Card title", className="card-title"),
+                                        html.P(
+                                            "This is some text inside the card body. You can add any content you want here.",
+                                            className="card-text"
+                                        )
+                                    ]
+                                )
+                            ],
+                            className="border-primary mb-3",
+                            style={"maxWidth": "30rem"}  # Adjust the maxWidth here
+                        ),
+                    ],
+                    width=4  # 33% width for this column
+                )
+            ]
+        )
     ]
+)
 
-def create_dropdown(_id, options):
-    return dcc.Dropdown(
-        id=_id,
-        options=options,
-        value=options[0]['value'],  # Set a default value
-        style={'width': '400px'}
-    )
-
-dropdown_layout_middle = html.Div([
-    create_dropdown(ids.UPCOMING_GAMES_DROPDOWN_MIDDLE, get_model_options()),
-], style={'display': 'flex', 'justifyContent': 'center'})
-
-
-# Separate layout for the dropdowns
-dropdown_layout = html.Div([
-    create_dropdown(ids.UPCOMING_GAMES_DROPDOWN_LEFT, get_all_team_options()),
-    html.Br(),
-    create_dropdown(ids.UPCOMING_GAMES_DROPDOWN_RIGHT, get_all_team_options()),
-], style={'display': 'flex', 'justifyContent': 'space-between', 'padding': '2%', 'marginTop': '-5%'})
-
-# Style boxes
-nba_colors = {
-    'background': '#1A477B',  # Blue
-    'text': '#FFFFFF'          # White
-}
-
-
-# Define styles for the box
-box_style = {
-    'border': '2px solid black',
-    'padding': '1%',
-    'width': '28.5%',
-    'height': '500px',
-    'background-color': nba_colors['background'],
-    'color': nba_colors['text']
-
-}
-
-about_box_style = {
-    'border': '2px solid black',
-    'padding': '10px',
-    'width': 'calc(100% - 40px)', 
-    'height': '100px',
-    'background-color': 'darkred',
-    'color': 'black',  
-    'marginLeft': '20px', 
-    'marginRight': '20px', 
-    'marginTop': '40px'
-}
-
-middle_box_style = {
-    **box_style,
-    'height': '30%',
-    'width': '27%'
-}
-
-# Main layout using CSS grid layout
-layout = html.Div(style={'height': '100vh'}, children=[
-    html.H1('Upcoming Games', style={'textAlign': 'center'}),
-    html.Div("This is a separate box", style=about_box_style ),
-    html.Div(dropdown_layout, style={'marginTop': '80px'}),
-   
-    html.Div(dropdown_layout_middle, style={'marginTop': '5%', 'marginLeft': 'auto', 'marginRight': 'auto'}),
-    html.Div("This is the middle box", style={**middle_box_style, 'marginTop': '20px', 'marginLeft': 'auto', 'marginRight': 'auto'}),
-    html.Div([
-            html.Div("This is inside the left box", style={**box_style, 'marginTop': '-30%'}),
-            html.Div("This is inside the right box", style={**box_style, 'marginTop': '-30%'}),
-        ], style={'display': 'flex', 'justifyContent': 'space-between', 'padding': '2%'}),
-
-   
-
-])
+# Assign the layout to the specific path
+layout = body
