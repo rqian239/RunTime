@@ -39,7 +39,10 @@ body = dbc.Container(
                             informed decisions. Whether you're a passionate fan or a seasoned bettor, our intuitive interface and real-time updates will keep you at the edge of
                             your seat. Join us now and elevate your NBA experience with our cutting-edge game predictor!""",
                             #style={'textAlign': 'center'}
+                            
                         ),
+                        html.Br(),
+                        dbc.Button("Learn More about the Project and the Team", id=ids.LEARN_MORE_BUTTON, href="/about", className="btn btn-lg btn-primary get-started-button"),
                     ],
                     md=6
                 ),
@@ -48,24 +51,14 @@ body = dbc.Container(
                     # basketball gif
                         html.Img(
                             src=PATH_TO_BASKETBALL_GIF,
-                            width="50%",
+                            width="60%",
                             height="auto",
                             className="landing-page-basketball-gif"
                         )
                     ],
-                    className="centered",
+                     className="text-center",
                     md=6,
                 ),
-            ]
-        ),
-        dbc.Row(
-            [
-                dbc.Col(
-                    [
-                        html.Br(),
-                        dbc.Button("Learn More about the Project and the Team", id=ids.LEARN_MORE_BUTTON, href="/about", className="btn btn-lg btn-primary get-started-button"),
-                    ],
-                )
             ]
         ),
         dbc.Row(
