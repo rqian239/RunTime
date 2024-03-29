@@ -56,7 +56,7 @@ red_card = html.Div(
                 html.H4("Secondary card title", className="card-title"),
                 html.P("Some quick example text to build on the card title and make up the bulk of the card's content.", className="card-text")
             ], className="card-body")
-        ], className="card border-secondary mb-3", style={'maxWidth': '100rem', 'height': '400px', 'backgroundColor': 'darkred', 'color': 'white', 'margin': '40px auto 0', 'display': 'flex', 'flexDirection': 'column', 'justifyContent': 'center', 'alignItems': 'center'})  # Adjust height and width here
+        ], className="card border-secondary mb-3", style={'maxWidth': '100rem', 'height': '400px', 'color': 'white', 'margin': '40px auto 0', 'display': 'flex', 'flexDirection': 'column', 'justifyContent': 'center', 'alignItems': 'center'})  # Adjust height and width here
     ]
 )
 
