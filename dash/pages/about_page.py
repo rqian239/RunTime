@@ -69,12 +69,12 @@ body = dbc.Container(
                     [
                         dbc.Card(
                             [
-                                dbc.CardHeader("Small Card 1"),
+                                dbc.CardHeader("Front-End Developer"),
                                 dbc.CardBody(
                                     [
-                                        html.H4("Small Card Title", className="card-title"),
+                                        html.H4("Nivedha Natarajan", className="card-title"),
                                         html.P(
-                                            "This is some text inside the small card body. You can add any content you want here.",
+                                            "4th Year Computer Science Major",
                                             className="card-text"
                                         )
                                     ]
@@ -91,12 +91,12 @@ body = dbc.Container(
                     [
                         dbc.Card(
                             [
-                                dbc.CardHeader("Small Card 2"),
+                                dbc.CardHeader("Front-End Developer"),
                                 dbc.CardBody(
                                     [
-                                        html.H4("Small Card Title", className="card-title"),
+                                        html.H4("Nikitha Chintalapati", className="card-title"),
                                         html.P(
-                                            "This is some text inside the small card body. You can add any content you want here.",
+                                            "4th Year Computer Science Major",
                                             className="card-text"
                                         )
                                     ]
@@ -113,12 +113,12 @@ body = dbc.Container(
                     [
                         dbc.Card(
                             [
-                                dbc.CardHeader("Small Card 3"),
+                                dbc.CardHeader("Back-End Developer"),
                                 dbc.CardBody(
                                     [
-                                        html.H4("Small Card Title", className="card-title"),
+                                        html.H4("Bryan Hernandez", className="card-title"),
                                         html.P(
-                                            "This is some text inside the small card body. You can add any content you want here.",
+                                            "4th Year Computer Science Major",
                                             className="card-text"
                                         )
                                     ]
@@ -135,12 +135,12 @@ body = dbc.Container(
                     [
                         dbc.Card(
                             [
-                                dbc.CardHeader("Small Card 4"),
+                                dbc.CardHeader("Back-End Developer"),
                                 dbc.CardBody(
                                     [
-                                        html.H4("Small Card Title", className="card-title"),
+                                        html.H4("Ria Manoj Gandhi", className="card-title"),
                                         html.P(
-                                            "This is some text inside the small card body. You can add any content you want here.",
+                                            "4th Year Computer Science Major",
                                             className="card-text"
                                         )
                                     ]
@@ -157,12 +157,12 @@ body = dbc.Container(
                     [
                         dbc.Card(
                             [
-                                dbc.CardHeader("Small Card 5"),
+                                dbc.CardHeader("Back-End Developer"),
                                 dbc.CardBody(
                                     [
-                                        html.H4("Small Card Title", className="card-title"),
+                                        html.H4("Richard Qian", className="card-title"),
                                         html.P(
-                                            "This is some text inside the small card body. You can add any content you want here.",
+                                            "4th Year Computer Science Major",
                                             className="card-text"
                                         )
                                     ]
