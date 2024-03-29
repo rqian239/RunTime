@@ -24,11 +24,11 @@ def footer():
                         dbc.Col(
                             html.Div([
                                 html.H5("Quick Links", className="text-uppercase"),
-                                dbc.NavLink("Home", href="/", className = "footer-link"),
-                                dbc.NavLink("About", href="/about", className = "footer-link"),
-                                dbc.NavLink("Teams", href="/teams", className = "footer-link"),
-                                dbc.NavLink("Upcoming Games", href="/upcominggames", className = "footer-link"),
-                                dbc.NavLink("Fantasy Games", href="/fantasygames", className = "footer-link")                               
+                                dbc.NavLink("Home", href="/", className="footer-link"),
+                                dbc.NavLink("About", href="/about", className="footer-link"),
+                                dbc.NavLink("Teams", href="/teams", className="footer-link"),
+                                dbc.NavLink("Upcoming Games", href="/upcominggames", className="footer-link"),
+                                dbc.NavLink("Fantasy Games", href="/fantasygames", className="footer-link")
                             ]),
                             className="centered"
                         ),
@@ -36,18 +36,19 @@ def footer():
                             html.Div([
                                 html.Br(),
                                 html.Br(),
-                                html.P("🌎🌍🌏"),
+                                html.P("🏀🏆🔥"),
                             ]),
                             className="centered",
                             md=2
                         ),
                         dbc.Col(
                             html.Div([
-                                html.P("Richard Qian"),
-                                html.P("William Sobczak"),
-                                html.P("Nikhil Pandya"),
-                            ]),
-                            className="centered"
+                                html.P("Ria Gandhi", className="text-center"),
+                                html.P("Richard Qian", className="text-center"),
+                                html.P("Nivedha Natarajan", className="text-center"),
+                                html.P("Nikitha Chintalapati", className="text-center"),
+                                html.P("Bryan Hernandez-Sanchez", className="text-center"),
+                            ])
                         ),
                     ],
                     className="justify-content-center"
@@ -55,7 +56,7 @@ def footer():
             ],
             fluid=True,
         ),
-        className="p-5 mt-5 bg-light",
-        style={"margin-top": "30px"},
+        className="p-5 mt-5",
+        style={"margin-top": "30px", "background-color": "#483D8B"}
     )
     return ftr
