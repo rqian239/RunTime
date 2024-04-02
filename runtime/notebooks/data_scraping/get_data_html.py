@@ -3,12 +3,11 @@ import sys
 import codecs
 sys.stdout = codecs.getwriter('utf-8')(sys.stdout.detach())
 
-SEASONS = list(range(2016, 2025))
+SEASONS = list(range(2024, 2025))
 
-DATA_DIR = "data2"
+DATA_DIR = "data(2023-2024)"
 STANDINGS_DIR = os.path.join(DATA_DIR, "standings")
 SCORES_DIR = os.path.join(DATA_DIR, "scores")
-SEASONS
 
 from bs4 import BeautifulSoup
 from playwright.sync_api import sync_playwright, TimeoutError as PlaywrightTimeout
@@ -22,7 +21,7 @@ def get_html(url, selector, sleep=5, retries=3):
         time.sleep(sleep * i)
         try:
             with sync_playwright() as p:
-                browser = p.chromium.launch()
+                browser = p.firefox.launch()
                 page = browser.new_page()
                 page.goto(url)
                 print(page.title())
@@ -38,7 +37,6 @@ def get_html(url, selector, sleep=5, retries=3):
 def scrape_season(season):
     url = f"https://www.basketball-reference.com/leagues/NBA_{season}_games.html"
     html = get_html(url, "#content .filter")
-
     soup = BeautifulSoup(html, "lxml")
     links = soup.find_all("a")
     standings_pages = [f"https://www.basketball-reference.com{l['href']}" for l in links]
