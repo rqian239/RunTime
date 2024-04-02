@@ -3,8 +3,12 @@ import dash_bootstrap_components as dbc
 from dash import dcc, html
 
 from data.nba_teams import get_all_team_options
+from data.teamdetails import TeamDetails  # Import TeamDetails class
+
 
 import ids
+
+app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
 
 dash.register_page(__name__, path='/teams')
 
@@ -105,3 +109,24 @@ body = dbc.Container(
 
 # This is necessary for Dash to know what the layout of this page is!
 layout = body
+
+@app.callback(
+    [dash.Output("team-info-title", "children"),
+     dash.Output("team-info-content", "children")],
+    [dash.Input(ids.TEAM_PAGE_DROPDOWN_MENU, "value")]
+)
+
+def update_team_info(selected_team):
+    if selected_team:
+        for team_name, team_id in nba_teams_ids:
+            printf(selected_team)
+            printf(team_name)
+            if selected_team == team_name:
+                team_id = teams[selected_team]
+                break
+        # Initialize the TeamDetails class with the specified team_id
+        team_details = TeamDetails(team_id=team_id)
+        # Get the team details data frame
+        nba_team_details_df = team_details.get_data_frames()
+        return nba_team_details_df
+
