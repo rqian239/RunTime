@@ -3,8 +3,8 @@ import dash_bootstrap_components as dbc
 from dash import dcc, html
 
 from data.nba_teams import get_all_team_options
-from data.teamdetails import TeamDetails  # Import TeamDetails class
-
+from data.teamdetails import TeamDetails 
+# from data.teamID_teamName import nba_teams_ids
 
 import ids
 
@@ -119,10 +119,8 @@ layout = body
 def update_team_info(selected_team):
     if selected_team:
         for team_name, team_id in nba_teams_ids:
-            printf(selected_team)
-            printf(team_name)
             if selected_team == team_name:
-                team_id = teams[selected_team]
+                # team_id = teams[selected_team]
                 break
         # Initialize the TeamDetails class with the specified team_id
         team_details = TeamDetails(team_id=team_id)
