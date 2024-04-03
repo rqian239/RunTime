@@ -27,12 +27,14 @@ app = Dash(__name__, external_stylesheets=[dbc.themes.VAPOR], use_pages=True)
 app.title = 'RunTime'
 
 nav = navbar_simple()
-foo = footer()
+ftr = footer()
 
-app.layout = html.Div(style={'margin': '0', 'padding': '0', 'font-family': 'Arial, sans-serif'}, children=[
-    html.Div([nav]),        # This will show up for each page
-    dash.page_container,    # Page specific layouts
-    html.Div(foo)
+app.layout = html.Div(
+    style={'margin': '0', 'padding': '0', 'font-family': 'Arial, sans-serif'},
+    children=[
+        html.Div([nav]),        # This will show up for each page
+        dash.page_container,    # Page specific layouts
+        html.Div([ftr])
 ])
 
 if __name__ == '__main__':
