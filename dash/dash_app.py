@@ -29,11 +29,6 @@ app.title = 'RunTime'
 nav = navbar_simple()
 foo = footer()
 
-colors = {
-    #'background': '#FFFFFF',  # Light purple, reminiscent of basketball courts
-    #'text': '#FF5733'         # Vibrant orange, representing the basketball
-}
-
 app.layout = html.Div(style={'margin': '0', 'padding': '0', 'font-family': 'Arial, sans-serif'}, children=[
     html.Div([nav]),        # This will show up for each page
     dash.page_container,    # Page specific layouts
