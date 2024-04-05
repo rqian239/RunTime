@@ -1,3 +1,8 @@
+# exclude large data files from the data directory (these can be generated or downloaded from the Google Drive)
+data/**/*.csv
+data/**/*.html
+data/**/*.zip
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
