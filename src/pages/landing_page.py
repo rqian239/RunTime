@@ -6,15 +6,15 @@ from pathlib import Path
 
 import ids
 
+# Registers this file as a page within our Dash application
+dash.register_page(__name__, path='/')
+
 # Get the directory of the current script file
 script_dir = Path(__file__).parent
 
 # Paths
 PATH_TO_SCHEDULE_CSV = script_dir / ".." / "data" / "nba-2023-UTC.csv"  # using pathlib library to find path to csv file
-PATH_TO_BASKETBALL_GIF = "assets/images/basketball.gif" # Dash can recognize the assets folder
-
-# Registers this file as a page within our Dash application
-dash.register_page(__name__, path='/')
+PATH_TO_BASKETBALL_GIF = "assets/images/nba_logo_and_players.gif" # Dash can recognize the assets folder
 
 # Read the game schedule data from a CSV file
 game_schedule_data = pd.read_csv(PATH_TO_SCHEDULE_CSV)
@@ -30,7 +30,7 @@ body = dbc.Container(
                 dbc.Col(
                     [
                         html.Br(),
-                        html.H1("RunTime's Game Simulator", className="home-page-title", id=ids.LANDING_HEADER),
+                        html.H1("RunTime's NBA Portal", className="landing-page-title", id=ids.LANDING_HEADER),
                         html.Br(),
                         html.P(
                             """\
@@ -39,22 +39,28 @@ body = dbc.Container(
                             informed decisions. Whether you're a passionate fan or a seasoned bettor, our intuitive interface and real-time updates will keep you at the edge of
                             your seat. Join us now and elevate your NBA experience with our cutting-edge game predictor!""",
                             #style={'textAlign': 'center'}
-                            
                         ),
                         html.Br(),
-                        dbc.Button("Learn More about the Project and the Team", id=ids.LEARN_MORE_BUTTON, href="/about", className="btn btn-lg btn-primary get-started-button"),
+                        dbc.Button("Learn More", id=ids.LEARN_MORE_BUTTON, href="/about", className="btn btn-lg btn-primary get-started-button"),
                     ],
                     md=6
                 ),
                 dbc.Col(
                     [
                     # basketball gif
-                        html.Img(
-                            src=PATH_TO_BASKETBALL_GIF,
-                            width="60%",
-                            height="auto",
-                            className="landing-page-basketball-gif"
-                        )
+                    html.A(
+                        href="https://www.behance.net/gallery/72162251/The-Next-NBA-logo-NBA-Logoman-Series",
+                        children=[
+                            html.Img(
+                                src=PATH_TO_BASKETBALL_GIF,
+                                width="100%",
+                                height="auto",
+                                className="landing-page-basketball-gif",
+                                title="Images by Tyson Beck"
+                            )
+                        ],
+                        target="_blank"
+                    )
                     ],
                      className="text-center",
                     md=6,

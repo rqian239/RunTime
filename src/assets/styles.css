@@ -2,6 +2,15 @@
 
 .landing-page-basketball-gif
 {
+    width: 60%;
+    height: auto;
     border-style: outset;
+    border-color: #15438a;
     border-width: 8px;
+}
+
+.landing-page-title
+{
+    font-size: 45px;
+    /* font-weight: bold; */
 }
