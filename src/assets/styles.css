@@ -14,3 +14,13 @@
     font-size: 45px;
     /* font-weight: bold; */
 }
+
+.navbar_style
+{
+    padding: 10px;
+    border-radius: 10px;
+    border-width: 2px;
+    border-bottom-width: 2px;
+    border-bottom-color: White;
+    border-bottom-style: solid;
+}
