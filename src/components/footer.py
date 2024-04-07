@@ -12,46 +12,60 @@ def footer():
                     [
                         dbc.Col(
                             html.Div([
-                                html.H5("Runtime Terrors", className="text-uppercase footer-title"),
+                                html.H4("Quick Links", className="text-uppercase"),
+                                # html.Div([
+                                #     dbc.NavLink("Home", href="/", className="footer-link d-inline-flex"),
+                                #     dbc.NavLink("About", href="/about", className="footer-link d-inline-flex"),
+                                #     dbc.NavLink("Teams", href="/teams", className="footer-link d-inline-flex"),
+                                #     dbc.NavLink("Upcoming Games", href="/upcominggames", className="footer-link d-inline-flex"),
+                                #     dbc.NavLink("Fantasy Games", href="/fantasygames", className="footer-link d-inline-flex")
+                                # ], className="d-flex flex-row justify-content-around"),  # Adjust justify-content as needed
                             ]),
-                            className="centered"
+                            class_name="text-center mt-3"
                         ),
+                    ]
+                ),
+                dbc.Row(
+                    [
+                        dbc.Col(html.Div([dbc.NavLink("Home", href="/")])),
+                        dbc.Col(html.Div([dbc.NavLink("About", href="/about"),])),
+                        dbc.Col(html.Div([dbc.NavLink("Teams", href="/teams"),])),
+                        dbc.Col(html.Div([dbc.NavLink("Upcoming Games", href="/upcominggames"),])),
+                        dbc.Col(html.Div([dbc.NavLink("Fantasy Games", href="/fantasygames"),])),
                     ],
-                    style={"margin-bottom": "30px"},
+                    class_name="text-center g-1 footer-link mb-4"
                 ),
                 dbc.Row(
                     [
                         dbc.Col(
                             html.Div([
-                                html.H5("Quick Links", className="text-uppercase"),
-                                dbc.NavLink("Home", href="/", className="footer-link"),
-                                dbc.NavLink("About", href="/about", className="footer-link"),
-                                dbc.NavLink("Teams", href="/teams", className="footer-link"),
-                                dbc.NavLink("Upcoming Games", href="/upcominggames", className="footer-link"),
-                                dbc.NavLink("Fantasy Games", href="/fantasygames", className="footer-link")
+                                html.H5("Created by the Runtime Terrors", className="footer-title text-center text-italic"),
                             ]),
-                            className="centered"
-                        ),
-                        dbc.Col(
-                            html.Div([
-                                html.Br(),
-                                html.Br(),
-                                html.P("🏀🏆🔥"),
-                            ]),
-                            className="centered",
-                            md=2
-                        ),
-                        dbc.Col(
-                            html.Div([
-                                html.P("Ria Gandhi", className="text-center"),
-                                html.P("Richard Qian", className="text-center"),
-                                html.P("Nivedha Natarajan", className="text-center"),
-                                html.P("Nikitha Chintalapati", className="text-center"),
-                                html.P("Bryan Hernandez-Sanchez", className="text-center"),
-                            ])
                         ),
                     ],
-                    className="justify-content-center"
+                    # className="my-2",
+                ),
+                dbc.Row(
+                    [
+                        # dbc.Col(
+                        #     html.Div([
+                        #         html.H5("Quick Links", className="text-uppercase"),
+                        #         dbc.NavLink("Home", href="/", className="footer-link"),
+                        #         dbc.NavLink("About", href="/about", className="footer-link"),
+                        #         dbc.NavLink("Teams", href="/teams", className="footer-link"),
+                        #         dbc.NavLink("Upcoming Games", href="/upcominggames", className="footer-link"),
+                        #         dbc.NavLink("Fantasy Games", href="/fantasygames", className="footer-link")
+                        #     ]),
+                        #     className="centered"
+                        # ),
+                        dbc.Col(
+                            html.Div([
+                                html.P("Nikitha Chintalapati, Ria Gandhi, Bryan Hernandez-Sanchez, Nivedha Natarajan, Richard Qian", className="mb-2"),
+                                # html.P("University of Florida 2024 🐊")
+                            ]),
+                            className="text-center text-italic",
+                        ),
+                    ],
                 ),
             ],
             fluid=True,

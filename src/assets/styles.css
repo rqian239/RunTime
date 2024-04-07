@@ -50,6 +50,10 @@
     text-align: center;
 }
 
+.text-italic {
+    font-style: italic;
+}
+
 .center-content {
     display: flex;
     justify-content: center;
@@ -57,6 +61,20 @@
 }
 
 .footer-styling {
+    padding: 10px;
     margin-top: 5px;
     background-color: #483D8B;
+}
+
+.footer-title {
+    font-weight: bold;
+    text-shadow:
+    1px 1px 1px var(--bs-primary-text-emphasis),
+    2px 2px 1px var(--bs-primary-text-emphasis);
+}
+
+.footer-link {
+    font-size: large;
+    font-weight: bold;
+    text-decoration: underline;
 }
