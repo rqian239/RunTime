@@ -25,7 +25,7 @@ app = Dash(__name__, external_stylesheets=[dbc.themes.VAPOR], use_pages=True)
 app.title = 'RunTime'
 
 app.layout = html.Div(
-    className="project_font",
+    className="project-font",
     children=[
         dash.page_container,    # Page specific layouts
     ]

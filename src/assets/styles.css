@@ -15,7 +15,7 @@
     /* font-weight: bold; */
 }
 
-.navbar_style
+.navbar-style
 {
     padding: 10px;
     border-radius: 10px;
@@ -25,7 +25,7 @@
     border-bottom-style: solid;
 }
 
-.project_font
+.project-font
 {
     font-family: 'Arial';
 }
@@ -44,3 +44,19 @@
     min-height: 100vh;
 }
 /* -------------------------------------------------------------------------------------- */
+
+.centered
+{
+    text-align: center;
+}
+
+.center-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer-styling {
+    margin-top: 5px;
+    background-color: #483D8B;
+}

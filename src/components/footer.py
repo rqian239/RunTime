@@ -56,7 +56,6 @@ def footer():
             ],
             fluid=True,
         ),
-        className="p-5 mt-5",
-        style={"margin-top": "30px", "background-color": "#483D8B"}
+        className="footer-styling",
     )
     return ftr
