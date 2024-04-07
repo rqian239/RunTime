@@ -4,6 +4,9 @@ from dash import dcc, html
 import pandas as pd
 from pathlib import Path
 
+
+from components.navbar import navbar_simple
+from components.footer import footer
 import ids
 
 # Registers this file as a page within our Dash application
@@ -21,6 +24,10 @@ game_schedule_data = pd.read_csv(PATH_TO_SCHEDULE_CSV)
 
 # Modify the "Game" column to contain "Home Team vs Away Team"
 game_schedule_data['Game'] = game_schedule_data['Home Team'] + ' vs ' + game_schedule_data['Away Team']
+
+# Navbar and footer imported here
+nav = navbar_simple()
+ftr = footer()
 
 # Define the layout for the page
 body = dbc.Container(
@@ -261,5 +268,5 @@ body = dbc.Container(
     ]
 )
 
-# This is necessary for Dash to understand what the layout of the page is!
-layout = body
+# This is how Dash knows what the layout of the page is!
+layout = html.Div([nav, body, ftr], className="make-footer-stick")
