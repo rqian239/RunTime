@@ -20,9 +20,17 @@
     padding: 10px;
     border-radius: 10px;
     border-width: 2px;
-    border-bottom-width: 2px;
-    border-bottom-color: White;
+    border-bottom-width: 4px;
+    border-bottom-color: var(--bs-primary-text-emphasis);
     border-bottom-style: solid;
+    border-left-width: 4px;
+    border-left-color: var(--bs-primary-text-emphasis);
+    border-left-style: solid;
+    border-right-width: 4px;
+    border-right-color: var(--bs-primary-text-emphasis);
+    border-right-style: solid;
+        /* Glow effect */
+    box-shadow: 0 0 15px 5px var(--bs-primary);
 }
 
 /* .animate-background {
