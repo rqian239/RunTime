@@ -25,6 +25,27 @@
     border-bottom-style: solid;
 }
 
+/* .animate-background {
+    animation: animateBg 10s linear infinite;
+    background-image: linear-gradient(
+    90deg,
+    #17022a,
+    #542f90,
+    #64b3d9,
+    #208ea2,
+    #498ada,
+    #5b73df,
+    #897ed3,
+    #cf5c5c,
+    #c19b4a);
+    background-size: 1100% 100%;
+} */
+
+/* @keyframes animateBg {
+    0% { background-position: 0% 0%; }
+    100% { background-position: 100% 0%; }
+} */
+
 .project-font
 {
     font-family: 'Arial';
