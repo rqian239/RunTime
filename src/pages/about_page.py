@@ -182,8 +182,9 @@ body = dbc.Container(
                 )
             ],
             justify="center"  # Center align the row
-        )
-    ]
+        ),
+    ],
+    class_name="body-flex-wrapper",
 )
 
 # Assign the layout to the specific path

@@ -262,10 +262,11 @@ body = dbc.Container(
                         )
                     ],
                     md=6
-                )
-            ]
-        )
-    ]
+                ),
+            ],
+        ),
+    ],
+    class_name="body-flex-wrapper",
 )
 
 # This is how Dash knows what the layout of the page is!

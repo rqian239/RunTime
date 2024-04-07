@@ -106,10 +106,11 @@ body = dbc.Container(
                     ],
                     width=4,  # 30% width for this column
                     md=3  # Adjust the column size for medium-sized screens
-                )
-            ]
-        )
-    ]
+                ),
+            ],
+        ),
+    ],
+    class_name="body-flex-wrapper",
 )
 
 # This is how Dash knows what the layout of the page is!
