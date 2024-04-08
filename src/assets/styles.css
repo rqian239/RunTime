@@ -93,13 +93,6 @@
     background-color: #483D8B;
 }
 
-.footer-title {
-    font-weight: bold;
-    text-shadow:
-    1px 1px 1px var(--bs-primary-text-emphasis),
-    2px 2px 1px var(--bs-primary-text-emphasis);
-}
-
 .footer-link {
     font-size: large;
     font-weight: bold;

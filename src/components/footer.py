@@ -27,19 +27,19 @@ def footer():
                 ),
                 dbc.Row(
                     [
-                        dbc.Col(html.Div([dbc.NavLink("Home", href="/")])),
-                        dbc.Col(html.Div([dbc.NavLink("About", href="/about"),])),
-                        dbc.Col(html.Div([dbc.NavLink("Teams", href="/teams"),])),
-                        dbc.Col(html.Div([dbc.NavLink("Upcoming Games", href="/upcominggames"),])),
-                        dbc.Col(html.Div([dbc.NavLink("Fantasy Games", href="/fantasygames"),])),
+                        dbc.Col(dbc.Button("Home", href="/", class_name="btn-link")),
+                        dbc.Col(dbc.Button("About", href="/about", class_name="btn-link")),
+                        dbc.Col(dbc.Button("Teams", href="/teams", class_name="btn-link")),
+                        dbc.Col(dbc.Button("Upcoming Games", href="/upcominggames", class_name="btn-link")),
+                        dbc.Col(dbc.Button("Fantasy Games", href="/fantasygames", class_name="btn-link")),
                     ],
-                    class_name="text-center g-1 footer-link mb-4"
+                    class_name="text-center g-1 mb-4"
                 ),
                 dbc.Row(
                     [
                         dbc.Col(
                             html.Div([
-                                html.H5("Created by the Runtime Terrors", className="footer-title text-center text-italic"),
+                                html.H5("Created by the Runtime Terrors", className="text-center text-italic"),
                             ]),
                         ),
                     ],
@@ -61,7 +61,7 @@ def footer():
                         dbc.Col(
                             html.Div([
                                 html.P("Nikitha Chintalapati, Ria Gandhi, Bryan Hernandez-Sanchez, Nivedha Natarajan, Richard Qian", className="mb-2"),
-                                # html.P("University of Florida 2024 🐊")
+                                html.P("University of Florida 2024 🐊")
                             ]),
                             className="text-center text-italic",
                         ),
