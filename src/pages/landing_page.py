@@ -36,7 +36,6 @@ body = dbc.Container(
             [
                 dbc.Col(
                     [
-                        html.Br(),
                         html.H1("RunTime's NBA Portal", className="landing-page-title", id=ids.LANDING_HEADER),
                         html.Br(),
                         html.P(
@@ -50,7 +49,8 @@ body = dbc.Container(
                         html.Br(),
                         dbc.Button("Learn More", id=ids.LEARN_MORE_BUTTON, href="/about", className="btn btn-lg btn-primary get-started-button"),
                     ],
-                    md=6
+                    md=6,
+                    class_name="mt-4"
                 ),
                 dbc.Col(
                     [
@@ -69,7 +69,7 @@ body = dbc.Container(
                         target="_blank"
                     )
                     ],
-                     className="text-center",
+                    className="centered mt-4",
                     md=6,
                 ),
             ]
@@ -78,11 +78,7 @@ body = dbc.Container(
             [
                 dbc.Col(
                     [
-                        html.Br(),
-                        html.Br(),
-                        html.Br(),
-                        html.H2("Top NBA Websites", className="websites-title", style={'textAlign': 'center'}),
-                        html.Br()
+                        html.H2("Popular NBA Websites", className="text-center mt-5"),
                     ],
                 )
             ]
@@ -111,6 +107,19 @@ body = dbc.Container(
                             color="danger",
                             className="mr-2",
                             href="https://bleacherreport.com/nba%20",
+                            external_link=True,
+                            style={'width': '100%'}
+                        )
+                    ],
+                ),
+                dbc.Col(
+                    [
+                        html.Br(),
+                        dbc.Button(
+                            "ESPN",
+                            color="danger",
+                            className="mr-2",
+                            href="https://www.espn.com/nba/",
                             external_link=True,
                             style={'width': '100%'}
                         )
@@ -150,19 +159,6 @@ body = dbc.Container(
                             color="danger",
                             className="mr-2",
                             href="https://hoopshype.com/",
-                            external_link=True,
-                            style={'width': '100%'}
-                        )
-                    ],
-                ),
-                dbc.Col(
-                    [
-                        html.Br(),
-                        dbc.Button(
-                            "ESPN",
-                            color="danger",
-                            className="mr-2",
-                            href="https://www.espn.com/nba/",
                             external_link=True,
                             style={'width': '100%'}
                         )
