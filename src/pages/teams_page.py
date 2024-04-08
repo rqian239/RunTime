@@ -5,12 +5,17 @@ from dash import dcc, html
 from data.nba_teams import get_all_team_options
 from data.teamdetails import TeamDetails 
 # from data.teamID_teamName import nba_teams_ids
-
+from components.navbar import navbar_simple
+from components.footer import footer
 import ids
 
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
 
 dash.register_page(__name__, path='/teams')
+
+# Navbar and footer imported here
+nav = navbar_simple()
+ftr = footer()
 
 # Define the layout for the page
 body = dbc.Container(
@@ -101,14 +106,15 @@ body = dbc.Container(
                     ],
                     width=4,  # 30% width for this column
                     md=3  # Adjust the column size for medium-sized screens
-                )
-            ]
-        )
-    ]
+                ),
+            ],
+        ),
+    ],
+    class_name="body-flex-wrapper",
 )
 
-# This is necessary for Dash to know what the layout of this page is!
-layout = body
+# This is how Dash knows what the layout of the page is!
+layout = html.Div([nav, body, ftr], className="make-footer-stick")
 
 @app.callback(
     [dash.Output("team-info-title", "children"),

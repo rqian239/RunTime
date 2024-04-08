@@ -4,10 +4,16 @@ from dash import dcc, html
 
 from data.nba_teams import get_all_team_options
 
+from components.navbar import navbar_simple
+from components.footer import footer
 import ids
 
 
 dash.register_page(__name__, path='/upcominggames')  # Change the path here
+
+# Navbar and footer imported here
+nav = navbar_simple()
+ftr = footer()
 
 # Define the layout for the page
 body = dbc.Container(
@@ -117,11 +123,12 @@ body = dbc.Container(
                         ),
                     ],
                     width=4  # 33% width for this column
-                )
-            ]
-        )
-    ]
+                ),
+            ],
+        ),
+    ],
+    class_name="body-flex-wrapper",
 )
 
-# Assign the layout to the specific path
-layout = body
+# This is how Dash knows what the layout of the page is!
+layout = html.Div([nav, body, ftr], className="make-footer-stick")

@@ -3,11 +3,16 @@ import dash_bootstrap_components as dbc
 from dash import dcc, html
 
 from data.nba_teams import get_all_team_options
-
+from components.navbar import navbar_simple
+from components.footer import footer
 import ids
 
 
 dash.register_page(__name__, path='/about')  # Change the path here
+
+# Navbar and footer imported here
+nav = navbar_simple()
+ftr = footer()
 
 # Define the layout for the page
 body = dbc.Container(
@@ -177,9 +182,10 @@ body = dbc.Container(
                 )
             ],
             justify="center"  # Center align the row
-        )
-    ]
+        ),
+    ],
+    class_name="body-flex-wrapper",
 )
 
 # Assign the layout to the specific path
-layout = body
+layout = layout = html.Div([nav, body, ftr], className="make-footer-stick")

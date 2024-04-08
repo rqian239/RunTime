@@ -33,7 +33,7 @@ def navbar_simple():
         sticky="top",
         color='dark',
         dark=True,
-        style={'padding': '10px', 'border-radius': '10px'},
+        class_name="navbar-style",
         id=ids.NAVBAR
     )
 
