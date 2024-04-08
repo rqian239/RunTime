@@ -165,21 +165,19 @@ body = dbc.Container(
                     ],
                 ),
             ],
-            className="centered",
+            className="centered mb-5",
         ),
         dbc.Row(
             [
                 dbc.Col(
                     [
-                        html.Br(),
-                        html.Br(),
-                        html.Br(),
                         html.H2("Game Schedule", className="home-page-title", style={'textAlign': 'center'}),
                         html.Br(), 
                         html.P("To view the games scheduled for March and April of the 2023-2024 season, utilize the scroll bar to navigate through them.", style={'textAlign': 'center'})
                     ],
                 )
-            ]
+            ],
+            class_name="my-5",
         ),
         dbc.Row(
             [
@@ -260,6 +258,7 @@ body = dbc.Container(
                     md=6
                 ),
             ],
+            class_name="mb-5",
         ),
     ],
     class_name="body-flex-wrapper",
