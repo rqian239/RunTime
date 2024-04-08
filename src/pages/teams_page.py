@@ -24,18 +24,33 @@ body = dbc.Container(
             [
                 dbc.Col(
                     [
-                        html.Br(),
-                        html.H1("Teams", className="team-page-title", style={'textAlign': 'center'}),
-                        html.Br(),
-                        html.P(
-                            """\
-                            Welcome to the Teams Page! Delve into the heart of NBA teams with ease! Discover fascinating insights into 
-                            team history, player profiles, coaching staff, and in-depth statistics. Use the search tab to swiftly locate
-                            your favorite team and uncover a treasure trove of information. Whether you're a dedicated fan seeking 
-                            detailed analysis or a casual observer looking to learn more, this page is your ultimate destination for all 
-                            things NBA teams.""",
-                            style={'textAlign': 'center'}
+                        html.Div(
+                            children = [
+                                html.H1("Teams Page", className="team-page-title text-center")
+                            ],
+                            id=ids.TEAM_PAGE_TITLE
                         ),
+                    ],
+                    width=12  # Full width for this column
+                )
+            ],
+            class_name="my-4"
+        ),
+        dbc.Row(
+            [
+                dbc.Col(
+                    [
+                        html.Div(
+                            children = [
+                                html.P(
+                                    """\
+                                    Welcome to the Team Info Page. Here you will be able to quickly search for up-to-date information about your NBA team.
+                                    Look up recent box scores, your team's schedule, or in-depth statistics all in one place. Select an NBA team using the dropdown below.""",
+                                    className="text-center"
+                                )
+                            ],
+                            id=ids.TEAM_PAGE_DESCRIPTION
+                        )
                     ],
                     width=12  # Full width for this column
                 )
