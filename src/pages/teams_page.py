@@ -1,7 +1,10 @@
 import dash
 import dash_bootstrap_components as dbc
 from dash import dcc, html
-
+from dash.dependencies import Input, Output
+import pandas as pd
+from nba_api.stats.static import teams
+from nba_api.stats.endpoints import TeamDetails
 from data.nba_teams import get_all_team_options
 from data.teamdetails import TeamDetails 
 # from data.teamID_teamName import nba_teams_ids
@@ -117,19 +120,33 @@ body = dbc.Container(
 layout = html.Div([nav, body, ftr], className="make-footer-stick")
 
 @app.callback(
-    [dash.Output("team-info-title", "children"),
-     dash.Output("team-info-content", "children")],
-    [dash.Input(ids.TEAM_PAGE_DROPDOWN_MENU, "value")]
+    [Output("team-info-title", "children"),
+     Output("team-info-content", "children")],
+    [Input(ids.TEAM_PAGE_DROPDOWN_MENU, "value")]
 )
-
 def update_team_info(selected_team):
+    print("Selected team:", selected_team)  # Debugging output
     if selected_team:
-        for team_name, team_id in nba_teams_ids:
-            if selected_team == team_name:
-                # team_id = teams[selected_team]
+        # Retrieve team ID based on the selected team name
+        all_teams = teams.get_teams()
+        team_id = None
+        for team in all_teams:
+            if team['full_name'] == selected_team:
+                team_id = team['id']
                 break
-        # Initialize the TeamDetails class with the specified team_id
-        team_details = TeamDetails(team_id=team_id)
-        # Get the team details data frame
-        nba_team_details_df = team_details.get_data_frames()
-        return nba_team_details_df
+        print("Selected team ID:", team_id)  # Debugging output
+        if team_id:
+            # Initialize the TeamDetails class with the specified team_id
+            team_details = TeamDetails(team_id=team_id)
+            # Get the team details data frame
+            nba_team_details_df = team_details.get_data_frames()[0]
+            print("Team details DataFrame:", nba_team_details_df)  # Debugging output
+            return "Team Information", html.Table(
+                # You can adjust the format as per your preference
+                # Here, I'm converting DataFrame to HTML table for display
+                [html.Tr([html.Th(col) for col in nba_team_details_df.columns])] +
+                [html.Tr([html.Td(nba_team_details_df.iloc[i][col]) for col in nba_team_details_df.columns]) for i in range(len(nba_team_details_df))])
+        else:
+            return "Team Information", "No information available for the selected team."
+    else:
+        return "Team Information", ""
