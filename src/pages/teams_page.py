@@ -141,7 +141,6 @@ body = dbc.Container(
 
 # This is how Dash knows what the layout of the page is!
 layout = html.Div([nav, body, ftr], className="make-footer-stick")
-<<<<<<< HEAD
 
 @app.callback(
     [Output("team-info-title", "children"),
@@ -174,5 +173,3 @@ def update_team_info(selected_team):
             return "Team Information", "No information available for the selected team."
     else:
         return "Team Information", ""
-=======
->>>>>>> 86ca3e2da5928c883ca9e55ae2957455356c23d4
