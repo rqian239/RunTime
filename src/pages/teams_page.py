@@ -78,7 +78,7 @@ body = dbc.Container(
             [
                 dbc.Col(
                         children=[
-                            html.Div(html.P("Please select a team with the dropdown menu."), className="text-center")
+                            # This is where we display team info with a callback
                         ],
                         id=ids.TEAM_PAGE_CONTENT
                 )
@@ -148,4 +148,6 @@ layout = html.Div([nav, body, ftr], className="make-footer-stick")
 )
 def display_team_info(team_selection):
     if team_selection is None:
-        return html.Div(html.P("Filler text"), className="text-center")
+        return html.Div(html.P("Please select a team with the dropdown menu."), className="text-center")
+    else:
+        return html.Div(html.P(f"You have select {team_selection}"), className="text-center")
