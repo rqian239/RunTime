@@ -139,8 +139,17 @@ body = dbc.Container(
     class_name="body-flex-wrapper",
 )
 
+
+def build_team_info_body(abbrev):
+    team_info_body = html.Div(
+        html.P(f"You have selected {abbrev}"), 
+        className="text-center"
+    )
+    return team_info_body
+
 # This is how Dash knows what the layout of the page is!
 layout = html.Div([nav, body, ftr], className="make-footer-stick")
+
 
 @callback(
     Output(ids.TEAM_PAGE_CONTENT, 'children'),
@@ -150,4 +159,4 @@ def display_team_info(team_selection):
     if team_selection is None:
         return html.Div(html.P("Please select a team with the dropdown menu."), className="text-center")
     else:
-        return html.Div(html.P(f"You have select {team_selection}"), className="text-center")
+        return build_team_info_body(team_selection)
