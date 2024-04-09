@@ -69,7 +69,18 @@ body = dbc.Container(
                 )
             ],
             justify="center",
-            class_name="mb-4"
+            class_name="my-4"
+        ),
+        dbc.Row(
+            [
+                dbc.Col(
+                        children=[
+                            html.Div(html.P("Please select a team with the dropdown menu."), className="text-center")
+                        ],
+                        id=ids.TEAM_PAGE_CONTENT
+                )
+            ],
+            class_name="my-4"
         ),
         # dbc.Row(
         #     [
@@ -127,3 +138,6 @@ body = dbc.Container(
 
 # This is how Dash knows what the layout of the page is!
 layout = html.Div([nav, body, ftr], className="make-footer-stick")
+
+# Team page callbacks
+
