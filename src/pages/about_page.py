@@ -13,6 +13,11 @@ dash.register_page(__name__, path='/about')  # Change the path here
 # Navbar and footer imported here
 nav = navbar_simple()
 ftr = footer()
+image_path = "/assets/images/nivedha.jpeg"
+image_path2 = "/assets/images/ria.jpg"
+image_path3 = "/assets/images/richard.jpg"
+image_path4 = "/assets/images/bryan.jpg"
+image_path5 = "/assets/images/nikki.jpg"
 
 # Define the layout for the page
 body = dbc.Container(
@@ -78,10 +83,10 @@ body = dbc.Container(
                                 dbc.CardBody(
                                     [
                                         html.H4("Nivedha Natarajan", className="card-title"),
-                                        html.P(
-                                            "4th Year Computer Science Major",
-                                            className="card-text"
-                                        )
+                                        html.Img(src=image_path, alt="Nivedha Natarajan", className="card-img-top"),
+
+                                    
+            
                                     ]
                                 )
                             ],
@@ -100,10 +105,9 @@ body = dbc.Container(
                                 dbc.CardBody(
                                     [
                                         html.H4("Nikitha Chintalapati", className="card-title"),
-                                        html.P(
-                                            "4th Year Computer Science Major",
-                                            className="card-text"
-                                        )
+                                        html.Img(src=image_path5, alt="Nikitha Chintalapai", className="card-img-top"),
+
+
                                     ]
                                 )
                             ],
@@ -122,10 +126,8 @@ body = dbc.Container(
                                 dbc.CardBody(
                                     [
                                         html.H4("Bryan Hernandez", className="card-title"),
-                                        html.P(
-                                            "4th Year Computer Science Major",
-                                            className="card-text"
-                                        )
+                                        html.Img(src=image_path4, alt="Bryan Hernandez", className="card-img-top"),
+
                                     ]
                                 )
                             ],
@@ -144,10 +146,9 @@ body = dbc.Container(
                                 dbc.CardBody(
                                     [
                                         html.H4("Ria Manoj Gandhi", className="card-title"),
-                                        html.P(
-                                            "4th Year Computer Science Major",
-                                            className="card-text"
-                                        )
+                                        html.Img(src=image_path2, alt="Ria Manoj Gandhi", className="card-img-top"),
+
+                                        
                                     ]
                                 )
                             ],
@@ -166,10 +167,8 @@ body = dbc.Container(
                                 dbc.CardBody(
                                     [
                                         html.H4("Richard Qian", className="card-title"),
-                                        html.P(
-                                            "4th Year Computer Science Major",
-                                            className="card-text"
-                                        )
+                                        html.Img(src=image_path3, alt="Richard Qian", className="card-img-top"),
+
                                     ]
                                 )
                             ],
