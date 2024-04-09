@@ -7,6 +7,9 @@ import pandas as pd
 from data.nba_teams import get_all_team_options
 from components.navbar import navbar_simple
 from components.footer import footer
+
+from dash import callback
+
 import ids
 
 dash.register_page(__name__, path='/teams')
@@ -138,3 +141,11 @@ body = dbc.Container(
 
 # This is how Dash knows what the layout of the page is!
 layout = html.Div([nav, body, ftr], className="make-footer-stick")
+
+@callback(
+    Output(ids.TEAM_PAGE_CONTENT, 'children'),
+    Input(ids.TEAM_PAGE_DROPDOWN_MENU, 'value')
+)
+def display_team_info(team_selection):
+    if team_selection is None:
+        return html.Div(html.P("Filler text"), className="text-center")
