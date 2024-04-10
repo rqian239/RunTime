@@ -7,6 +7,7 @@ import pandas as pd
 from data.nba_teams import get_all_team_options
 from components.navbar import navbar_simple
 from components.footer import footer
+from utils.functions import basic_team_info
 
 from dash import callback
 
@@ -141,9 +142,15 @@ body = dbc.Container(
 
 
 def build_team_info_body(abbrev):
+
+    team_name, team_city, team_state, year_founded = basic_team_info(abbrev)
+
     team_info_body = html.Div(
-        html.P(f"You have selected {abbrev}"), 
-        className="text-center"
+        children=[
+            html.H3(f"{team_name}"),
+            html.H5(f"Based in {team_city}, {team_state} and founded in {year_founded}."),
+        ],
+        className="text-center",
     )
     return team_info_body
 
