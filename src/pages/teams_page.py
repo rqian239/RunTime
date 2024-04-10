@@ -7,7 +7,7 @@ import pandas as pd
 from data.nba_teams import get_all_team_options
 from components.navbar import navbar_simple
 from components.footer import footer
-from utils.functions import basic_team_info
+from utils.functions import basic_team_info, detailed_team_info
 
 from dash import callback
 
@@ -76,15 +76,11 @@ body = dbc.Container(
             class_name="my-4"
         ),
         dbc.Row(
-            [
-                dbc.Col(
-                        children=[
-                            # This is where we display team info with a callback
-                        ],
-                        id=ids.TEAM_PAGE_CONTENT
-                )
+            children=[
+                # This is where we display team info with a callback
             ],
-            class_name="my-4"
+            id=ids.TEAM_PAGE_CONTENT,
+            class_name="my-4",
         ),
         # dbc.Row(
         #     [
@@ -145,12 +141,24 @@ def build_team_info_body(abbrev):
 
     team_name, team_city, team_state, year_founded = basic_team_info(abbrev)
 
-    team_info_body = html.Div(
-        children=[
-            html.H3(f"{team_name}"),
-            html.H5(f"Based in {team_city}, {team_state} and founded in {year_founded}."),
-        ],
-        className="text-center",
+    detailed_team_info_df = detailed_team_info(abbrev)
+
+    if "No Affiliate" not in detailed_team_info_df['DLEAGUEAFFILIATION'].iloc[0]:
+        g_league_affiliate_str = f"This team's G League affiliate is {detailed_team_info_df['DLEAGUEAFFILIATION'].iloc[0]}."
+    else:
+        g_league_affiliate_str = f""
+
+    team_info_body = dbc.Container(
+            html.Div(
+            children=[
+                html.H2(f"{team_name}", className="text-center"),
+                html.Br(),
+                html.P(f"""The {team_name} are based in {team_city}, {team_state} and were founded in {year_founded}. The {detailed_team_info_df['NICKNAME'].iloc[0]} play in {detailed_team_info_df['ARENA'].iloc[0]}.
+                       The current head coach of the {team_name} is {detailed_team_info_df['HEADCOACH'].iloc[0]}, the GM is {detailed_team_info_df['GENERALMANAGER'].iloc[0]} the owner is {detailed_team_info_df['OWNER'].iloc[0]}. 
+                       {g_league_affiliate_str} Navigate with the buttons to discover more about this team!
+                       """),
+            ],
+        )
     )
     return team_info_body
 
