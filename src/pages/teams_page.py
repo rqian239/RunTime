@@ -168,12 +168,12 @@ def build_team_info_body(abbrev):
                                     {g_league_affiliate_str}
                                     """),
                                     html.Br(),
-                                    html.P("Navigate with the buttons to discover more about this team!")
+                                    html.P("Navigate with the buttons below to discover more about this team!")
                                 ],
                             )
                         ],
                         class_name="centered",
-                        style={"font-size" : "larger" },
+                        style={ "font-size" : "larger" },
                     ),
                     dbc.Col(
                         [
@@ -182,11 +182,13 @@ def build_team_info_body(abbrev):
                                 href="https://www.behance.net/gallery/100429525/NBA-Logos-Looped-Bleacher-Report",
                                 children=[
                                     html.Img(
+                                        id=ids.TEAM_LOGO_GIF,
                                         src=f"../assets/images/looped_nba_logos/{abbrev}_animated_logo.gif",
                                         width="45%",
                                         height="auto",
                                         # className="landing-page-basketball-gif",
-                                        title="Animated logos created by Vincent Portolan for Bleacher Report"
+                                        title="Animated logos created by Vincent Portolan for Bleacher Report",
+                                        className="animated-logo-gif"
                                     )
                                 ],
                                 target="_blank",
@@ -213,3 +215,8 @@ def display_team_info(team_selection):
         return html.Div(html.P("Please select a team with the dropdown menu."), className="text-center")
     else:
         return build_team_info_body(team_selection)
+
+# @callback(
+#     Output(ids.TEAM_LOGO_GIF, 'style'),
+#     [Input(ids.TEAM_PAGE_DROPDOWN_MENU, 'value')]
+# )

@@ -110,3 +110,11 @@
     justify-content: center;
     align-items: center;
 }
+
+.animated-logo-gif
+{
+    width: 60%;
+    height: auto;
+    border-style: outset;
+    border-width: 8px;
+}
