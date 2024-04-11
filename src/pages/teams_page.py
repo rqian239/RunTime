@@ -8,6 +8,7 @@ from data.nba_teams import get_all_team_options
 from components.navbar import navbar_simple
 from components.footer import footer
 from utils.functions import basic_team_info, detailed_team_info
+from assets.links_to_nba_logo_gifs import nba_logo_gifs_links
 
 from dash import callback
 
@@ -149,16 +150,44 @@ def build_team_info_body(abbrev):
         g_league_affiliate_str = f""
 
     team_info_body = dbc.Container(
-            html.Div(
-            children=[
-                html.H2(f"{team_name}", className="text-center"),
-                html.Br(),
-                html.P(f"""The {team_name} are based in {team_city}, {team_state} and were founded in {year_founded}. The {detailed_team_info_df['NICKNAME'].iloc[0]} play in {detailed_team_info_df['ARENA'].iloc[0]}.
-                       The current head coach of the {team_name} is {detailed_team_info_df['HEADCOACH'].iloc[0]}, the GM is {detailed_team_info_df['GENERALMANAGER'].iloc[0]} the owner is {detailed_team_info_df['OWNER'].iloc[0]}. 
-                       {g_league_affiliate_str} Navigate with the buttons to discover more about this team!
-                       """),
-            ],
-        )
+        children=[
+            dbc.Row(
+                [
+                    dbc.Col(
+                        [
+                            html.Div(
+                            children=[
+                                html.H2(f"{team_name}", className="text-center"),
+                                html.Br(),
+                                html.P(f"""The {team_name} are based in {team_city}, {team_state} and were founded in {year_founded}. The {detailed_team_info_df['NICKNAME'].iloc[0]} play in {detailed_team_info_df['ARENA'].iloc[0]}.
+                                    The current head coach of the {team_name} is {detailed_team_info_df['HEADCOACH'].iloc[0]}, the GM is {detailed_team_info_df['GENERALMANAGER'].iloc[0]} the owner is {detailed_team_info_df['OWNER'].iloc[0]}. 
+                                    {g_league_affiliate_str} Navigate with the buttons to discover more about this team!
+                                    """),
+                                ],
+                            )
+                        ]
+                    ),
+                    dbc.Col(
+                        [
+                            # Animated NBA Logo gif
+                            html.A(
+                                href="https://www.behance.net/gallery/100429525/NBA-Logos-Looped-Bleacher-Report",
+                                children=[
+                                    html.Img(
+                                        src=f"../assets/images/looped_nba_logos/{abbrev}_animated_logo.gif",
+                                        width="50%",
+                                        height="auto",
+                                        # className="landing-page-basketball-gif",
+                                        title="Animated logos created by Vincent Portolan for Bleacher Report"
+                                    )
+                                ],
+                                target="_blank"
+                            )
+                        ]
+                    )
+                ]
+            )
+        ]
     )
     return team_info_body
 
