@@ -145,7 +145,7 @@ def build_team_info_body(abbrev):
     detailed_team_info_df = detailed_team_info(abbrev)
 
     if "No Affiliate" not in detailed_team_info_df['DLEAGUEAFFILIATION'].iloc[0]:
-        g_league_affiliate_str = f"This team's G League affiliate is {detailed_team_info_df['DLEAGUEAFFILIATION'].iloc[0]}."
+        g_league_affiliate_str = f"This team's G League affiliate is the {detailed_team_info_df['DLEAGUEAFFILIATION'].iloc[0]}."
     else:
         g_league_affiliate_str = f""
 
@@ -153,19 +153,27 @@ def build_team_info_body(abbrev):
         children=[
             dbc.Row(
                 [
+                    html.H1(f"{team_name}", className="text-center"),
+                ],
+                class_name="mb-3"
+            ),
+            dbc.Row(
+                [
                     dbc.Col(
                         [
                             html.Div(
                             children=[
-                                html.H2(f"{team_name}", className="text-center"),
-                                html.Br(),
                                 html.P(f"""The {team_name} are based in {team_city}, {team_state} and were founded in {year_founded}. The {detailed_team_info_df['NICKNAME'].iloc[0]} play in {detailed_team_info_df['ARENA'].iloc[0]}.
-                                    The current head coach of the {team_name} is {detailed_team_info_df['HEADCOACH'].iloc[0]}, the GM is {detailed_team_info_df['GENERALMANAGER'].iloc[0]} the owner is {detailed_team_info_df['OWNER'].iloc[0]}. 
-                                    {g_league_affiliate_str} Navigate with the buttons to discover more about this team!
+                                    The current head coach of the {team_name} is {detailed_team_info_df['HEADCOACH'].iloc[0]}, the GM is {detailed_team_info_df['GENERALMANAGER'].iloc[0]}, and the owner is {detailed_team_info_df['OWNER'].iloc[0]}. 
+                                    {g_league_affiliate_str}
                                     """),
+                                    html.Br(),
+                                    html.P("Navigate with the buttons to discover more about this team!")
                                 ],
                             )
-                        ]
+                        ],
+                        class_name="centered",
+                        style={"font-size" : "larger" },
                     ),
                     dbc.Col(
                         [
@@ -175,15 +183,16 @@ def build_team_info_body(abbrev):
                                 children=[
                                     html.Img(
                                         src=f"../assets/images/looped_nba_logos/{abbrev}_animated_logo.gif",
-                                        width="50%",
+                                        width="45%",
                                         height="auto",
                                         # className="landing-page-basketball-gif",
                                         title="Animated logos created by Vincent Portolan for Bleacher Report"
                                     )
                                 ],
-                                target="_blank"
+                                target="_blank",
                             )
-                        ]
+                        ],
+                        class_name="centered"
                     )
                 ]
             )
