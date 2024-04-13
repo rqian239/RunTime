@@ -21,7 +21,12 @@ from dash import Dash, html
 
 # Define the app here and choose the DBC theme
 # Themes listed here: https://dash-bootstrap-components.opensource.faculty.ai/docs/themes/
-app = Dash(__name__, external_stylesheets=[dbc.themes.VAPOR], use_pages=True)
+app = Dash(
+    __name__, 
+    external_stylesheets=[dbc.themes.VAPOR], 
+    use_pages=True,
+    # suppress_callback_exceptions=True,
+)
 app.title = 'RunTime'
 
 app.layout = html.Div(
