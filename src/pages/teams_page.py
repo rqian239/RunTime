@@ -1,7 +1,7 @@
 import dash
 import dash_bootstrap_components as dbc
-from dash import dcc, html, callback_context
-from dash.dependencies import Input, Output
+from dash import dcc, html, callback_context, no_update
+from dash.dependencies import Input, Output, State
 import pandas as pd
 
 from data.nba_teams import get_all_team_options
@@ -91,21 +91,7 @@ body = dbc.Container(
 
 def build_team_info_body(abbrev):
 
-    team_name, team_city, team_state, year_founded = basic_team_info(abbrev)
-
-    detailed_team_info_df = detailed_team_info(abbrev)
-
-    championships_df = get_team_championships(abbrev)
-    num_championships = len(championships_df)
-
-    championship_string = ', '.join(f"{row['YEARAWARDED']} ({row['OPPOSITETEAM']})" for index, row in championships_df.iterrows())
-    championship_string = f"{num_championships} Championship{('' if num_championships == 1 else 's')} {(': ' if num_championships > 0 else '')}{championship_string}"
-
-
-    if "No Affiliate" not in detailed_team_info_df['DLEAGUEAFFILIATION'].iloc[0]:
-        g_league_affiliate_str = f"This team's G League affiliate is the {detailed_team_info_df['DLEAGUEAFFILIATION'].iloc[0]}."
-    else:
-        g_league_affiliate_str = f"This team currently does not have a G League affiliate team."
+    team_name = basic_team_info(abbrev)[0]
 
     team_info_body = dbc.Container(
         children=[
@@ -170,57 +156,7 @@ def build_team_info_body(abbrev):
             ),
             dbc.Container(
                 id=ids.TEAM_INFO_BODY,
-                children=[
-                    dbc.Row(
-                        [
-                            html.P(f"{'🏆' * num_championships}"),
-                            html.P(f"{championship_string}", style={"font-size" : "small"}),
-                        ],
-                        class_name="text-center mb-4"
-                    ),
-                    dbc.Row(
-                        [
-                            dbc.Col(
-                                [
-                                    html.Div(
-                                    children=[
-                                        html.P(f"""The {team_name} are based in {team_city}, {team_state} and were founded in {year_founded}. The {detailed_team_info_df['NICKNAME'].iloc[0]} play in {detailed_team_info_df['ARENA'].iloc[0]}.
-                                            The current head coach of the {team_name} is {detailed_team_info_df['HEADCOACH'].iloc[0]}, the GM is {detailed_team_info_df['GENERALMANAGER'].iloc[0]}, and the owner is {detailed_team_info_df['OWNER'].iloc[0]}. 
-                                            {g_league_affiliate_str}
-                                            """),
-                                            html.Br(),
-                                            html.P("Navigate with the buttons to discover more about this team!")
-                                        ],
-                                    )
-                                ],
-                                class_name="centered",
-                                style={ "font-size" : "larger" },
-                            ),
-                            dbc.Col(
-                                [
-                                    # Animated NBA Logo gif
-                                    html.A(
-                                        href="https://www.behance.net/gallery/100429525/NBA-Logos-Looped-Bleacher-Report",
-                                        children=[
-                                            html.Img(
-                                                id=ids.TEAM_LOGO_GIF,
-                                                src=f"../assets/images/looped_nba_logos/{abbrev}_animated_logo.gif",
-                                                width="45%",
-                                                height="auto",
-                                                # className="landing-page-basketball-gif",
-                                                title="Animated logos created by Vincent Portolan for Bleacher Report",
-                                                className="animated-logo-gif",
-                                                style={'border-color': f'{get_top_left_pixel_color(f"./assets/images/looped_nba_logos/{abbrev}_animated_logo.gif")}'},
-                                            )
-                                        ],
-                                        target="_blank",
-                                    )
-                                ],
-                                class_name="centered"
-                            )
-                        ]
-                    )
-                ]
+                children=get_general_team_info_body(abbrev)
             ),
         ]
     )
@@ -237,6 +173,78 @@ def build_roster_body(abbrev):
     )
 
     return roster_body
+
+def get_general_team_info_body(abbrev):
+    
+    team_name, team_city, team_state, year_founded = basic_team_info(abbrev)
+
+    detailed_team_info_df = detailed_team_info(abbrev)
+
+    championships_df = get_team_championships(abbrev)
+    num_championships = len(championships_df)
+
+    championship_string = ', '.join(f"{row['YEARAWARDED']} ({row['OPPOSITETEAM']})" for index, row in championships_df.iterrows())
+    championship_string = f"{num_championships} Championship{('' if num_championships == 1 else 's')} {(': ' if num_championships > 0 else '')}{championship_string}"
+
+
+    if "No Affiliate" not in detailed_team_info_df['DLEAGUEAFFILIATION'].iloc[0]:
+        g_league_affiliate_str = f"This team's G League affiliate is the {detailed_team_info_df['DLEAGUEAFFILIATION'].iloc[0]}."
+    else:
+        g_league_affiliate_str = f"This team currently does not have a G League affiliate team."
+
+    general_team_info_body = [
+        dbc.Row(
+            [
+                html.P(f"{'🏆' * num_championships}"),
+                html.P(f"{championship_string}", style={"font-size" : "small"}),
+            ],
+            class_name="text-center mb-4"
+        ),
+        dbc.Row(
+            [
+                dbc.Col(
+                    [
+                        html.Div(
+                        children=[
+                            html.P(f"""The {team_name} are based in {team_city}, {team_state} and were founded in {year_founded}. The {detailed_team_info_df['NICKNAME'].iloc[0]} play in {detailed_team_info_df['ARENA'].iloc[0]}.
+                                The current head coach of the {team_name} is {detailed_team_info_df['HEADCOACH'].iloc[0]}, the GM is {detailed_team_info_df['GENERALMANAGER'].iloc[0]}, and the owner is {detailed_team_info_df['OWNER'].iloc[0]}. 
+                                {g_league_affiliate_str}
+                                """),
+                                html.Br(),
+                                html.P("Navigate with the buttons to discover more about this team!")
+                            ],
+                        )
+                    ],
+                    class_name="centered",
+                    style={ "font-size" : "larger" },
+                ),
+                dbc.Col(
+                    [
+                        # Animated NBA Logo gif
+                        html.A(
+                            href="https://www.behance.net/gallery/100429525/NBA-Logos-Looped-Bleacher-Report",
+                            children=[
+                                html.Img(
+                                    id=ids.TEAM_LOGO_GIF,
+                                    src=f"../assets/images/looped_nba_logos/{abbrev}_animated_logo.gif",
+                                    width="45%",
+                                    height="auto",
+                                    # className="landing-page-basketball-gif",
+                                    title="Animated logos created by Vincent Portolan for Bleacher Report",
+                                    className="animated-logo-gif",
+                                    style={'border-color': f'{get_top_left_pixel_color(f"./assets/images/looped_nba_logos/{abbrev}_animated_logo.gif")}'},
+                                )
+                            ],
+                            target="_blank",
+                        )
+                    ],
+                    class_name="centered"
+                )
+            ]
+        )
+    ]
+
+    return general_team_info_body
 
 # This is how Dash knows what the layout of the page is!
 layout = html.Div([nav, body, ftr], className="make-footer-stick")
@@ -255,13 +263,21 @@ def display_team_info(team_selection):
 @callback(
     Output(ids.TEAM_INFO_BODY, 'children'),
     [Input(ids.ROSTER_BUTTON, 'n_clicks'),
-     Input(ids.TEAM_PAGE_DROPDOWN_MENU, 'value')]
+     Input(ids.GENERAL_TEAM_INFO_BUTTON, 'n_clicks')],
+    [State(ids.TEAM_PAGE_DROPDOWN_MENU, 'value')]
 )
-def display_roster_on_team_page(n_clicks, team_selection):
-    if n_clicks is None:
-        return dash.no_update
-    if not callback_context.triggered:
-        return dash.no_update
-    trigger = callback_context.triggered[0]
-    if trigger['value'] is not None:    # update roster here
-        return build_roster_body(team_selection)
+def update_team_info(roster_clicks, general_info_clicks, team_selection):
+    ctx = callback_context
+    
+    if not ctx.triggered:
+        return no_update  # No button was clicked, do nothing.
+
+    button_id = ctx.triggered[0]['prop_id'].split('.')[0]
+
+    # Check which button was clicked and act accordingly.
+    if button_id == ids.ROSTER_BUTTON and roster_clicks:
+        return build_roster_body(team_selection)  # Function that builds the roster layout.
+    elif button_id == ids.GENERAL_TEAM_INFO_BUTTON and general_info_clicks:
+        return get_general_team_info_body(team_selection)  # Function that builds general info layout.
+    else:
+        return no_update  # If none match, do nothing.
