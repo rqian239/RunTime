@@ -18,6 +18,10 @@ def detailed_team_info(abbrev):
     team_id = get_team_id_from_abbrev(abbrev)
     return teamdetails.TeamDetails(team_id).team_background.get_data_frame()
 
+def get_team_championships(abbrev):
+    team_id = get_team_id_from_abbrev(abbrev)
+    return teamdetails.TeamDetails(team_id).team_awards_championships.get_data_frame()
+
 def get_top_left_pixel_color(image_path):
     with Image.open(image_path) as img:
         img = img.convert('RGB')

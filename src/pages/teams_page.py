@@ -7,7 +7,7 @@ import pandas as pd
 from data.nba_teams import get_all_team_options
 from components.navbar import navbar_simple
 from components.footer import footer
-from utils.functions import basic_team_info, detailed_team_info
+from utils.functions import basic_team_info, detailed_team_info, get_team_championships
 from utils.functions import get_top_left_pixel_color
 from assets.links_to_nba_logo_gifs import nba_logo_gifs_links
 
@@ -145,6 +145,13 @@ def build_team_info_body(abbrev):
 
     detailed_team_info_df = detailed_team_info(abbrev)
 
+    championships_df = get_team_championships(abbrev)
+    num_championships = len(championships_df)
+
+    championship_string = ', '.join(f"{row['YEARAWARDED']} ({row['OPPOSITETEAM']})" for index, row in championships_df.iterrows())
+    championship_string = f"{num_championships} Championship{('' if num_championships == 1 else 's')} {(': ' if num_championships > 0 else '')}{championship_string}"
+
+
     if "No Affiliate" not in detailed_team_info_df['DLEAGUEAFFILIATION'].iloc[0]:
         g_league_affiliate_str = f"This team's G League affiliate is the {detailed_team_info_df['DLEAGUEAFFILIATION'].iloc[0]}."
     else:
@@ -156,7 +163,14 @@ def build_team_info_body(abbrev):
                 [
                     html.H1(f"{team_name}", className="text-center"),
                 ],
-                class_name="mb-3"
+                class_name="mb-2"
+            ),
+            dbc.Row(
+                [
+                    html.P(f"{'🏆' * num_championships}"),
+                    html.P(f"{championship_string}", style={"font-size" : "small"}),
+                ],
+                class_name="text-center mb-4"
             ),
             dbc.Row(
                 [
