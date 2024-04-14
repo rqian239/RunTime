@@ -22,6 +22,7 @@ TEAM_LOGO_GIF = "team-logo-gif"
 TEAM_INFO_HEADER = "team-info-header"
 TEAM_INFO_BODY = "team-info-body"
 ROSTER_BUTTON = "roster-button"
+GENERAL_TEAM_INFO_BUTTON = "general-team-info-button"
 
 # upcoming_games_page.py
 UPCOMING_GAMES_DROPDOWN_LEFT = "upcoming-games-dropdown-left"

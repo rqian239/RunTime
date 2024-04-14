@@ -169,7 +169,18 @@ def build_team_info_body(abbrev):
                     ),
                     dbc.Row(
                         [
-                            # add buttons for each website
+                            dbc.Col(
+                                [
+                                    html.Br(),
+                                    dbc.Button(
+                                        id=ids.GENERAL_TEAM_INFO_BUTTON,
+                                        children="General Info",
+                                        color="info",
+                                        className="mx-2",
+                                        style={'width': '100%'}
+                                    )
+                                ],
+                            ),
                             dbc.Col(
                                 [
                                     html.Br(),
@@ -177,7 +188,7 @@ def build_team_info_body(abbrev):
                                         id=ids.ROSTER_BUTTON,
                                         children="Roster",
                                         color="info",
-                                        className="mr-2",
+                                        className="mx-2",
                                         style={'width': '100%'}
                                     )
                                 ],

@@ -37,4 +37,6 @@ app.layout = html.Div(
 )
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(
+        debug=True, # Comment out to turn off development mode (for demos)
+    )
