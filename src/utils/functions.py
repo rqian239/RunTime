@@ -3,6 +3,8 @@
 from nba_api.stats.static import teams
 from nba_api.stats.endpoints import teamdetails
 
+from PIL import Image
+
 import json
 
 def get_team_id_from_abbrev(abbrev):
@@ -15,3 +17,11 @@ def basic_team_info(abbrev):
 def detailed_team_info(abbrev):
     team_id = get_team_id_from_abbrev(abbrev)
     return teamdetails.TeamDetails(team_id).team_background.get_data_frame()
+
+def get_top_left_pixel_color(image_path):
+    with Image.open(image_path) as img:
+        img = img.convert('RGB')
+        pixel_color = img.getpixel((0, 0))  # (0, 0) is the top-left corner
+        hex_color = '#{:02x}{:02x}{:02x}'.format(*pixel_color)  # convert color into hex
+    return hex_color
+

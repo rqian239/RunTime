@@ -8,6 +8,7 @@ from data.nba_teams import get_all_team_options
 from components.navbar import navbar_simple
 from components.footer import footer
 from utils.functions import basic_team_info, detailed_team_info
+from utils.functions import get_top_left_pixel_color
 from assets.links_to_nba_logo_gifs import nba_logo_gifs_links
 
 from dash import callback
@@ -216,7 +217,11 @@ def display_team_info(team_selection):
     else:
         return build_team_info_body(team_selection)
 
-# @callback(
-#     Output(ids.TEAM_LOGO_GIF, 'style'),
-#     [Input(ids.TEAM_PAGE_DROPDOWN_MENU, 'value')]
-# )
+@callback(
+    Output(ids.TEAM_LOGO_GIF, 'style'),
+    [Input(ids.TEAM_PAGE_DROPDOWN_MENU, 'value')]
+)
+def change_logo_border(team_selection):
+    path_to_animated_gifs = f'./assets/images/looped_nba_logos/{team_selection}_animated_logo.gif'
+    border_color = get_top_left_pixel_color(path_to_animated_gifs)
+    return {'border': f'5px solid {border_color}'}

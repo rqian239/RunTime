@@ -14,3 +14,4 @@ beautifulsoup4
 nba_api
 pytest
 pathlib
+Pillow
