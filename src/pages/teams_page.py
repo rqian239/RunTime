@@ -155,7 +155,7 @@ def build_team_info_body(abbrev):
     if "No Affiliate" not in detailed_team_info_df['DLEAGUEAFFILIATION'].iloc[0]:
         g_league_affiliate_str = f"This team's G League affiliate is the {detailed_team_info_df['DLEAGUEAFFILIATION'].iloc[0]}."
     else:
-        g_league_affiliate_str = f""
+        g_league_affiliate_str = f"This team currently does not have a G Leagure affiliate team."
 
     team_info_body = dbc.Container(
         children=[
