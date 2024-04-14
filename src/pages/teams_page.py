@@ -159,61 +159,71 @@ def build_team_info_body(abbrev):
 
     team_info_body = dbc.Container(
         children=[
-            dbc.Row(
-                [
-                    html.H1(f"{team_name}", className="text-center"),
-                ],
-                class_name="mb-2"
-            ),
-            dbc.Row(
-                [
-                    html.P(f"{'🏆' * num_championships}"),
-                    html.P(f"{championship_string}", style={"font-size" : "small"}),
-                ],
-                class_name="text-center mb-4"
-            ),
-            dbc.Row(
-                [
-                    dbc.Col(
-                        [
-                            html.Div(
-                            children=[
-                                html.P(f"""The {team_name} are based in {team_city}, {team_state} and were founded in {year_founded}. The {detailed_team_info_df['NICKNAME'].iloc[0]} play in {detailed_team_info_df['ARENA'].iloc[0]}.
-                                    The current head coach of the {team_name} is {detailed_team_info_df['HEADCOACH'].iloc[0]}, the GM is {detailed_team_info_df['GENERALMANAGER'].iloc[0]}, and the owner is {detailed_team_info_df['OWNER'].iloc[0]}. 
-                                    {g_league_affiliate_str}
-                                    """),
-                                    html.Br(),
-                                    html.P("Navigate with the buttons below to discover more about this team!")
-                                ],
-                            )
-                        ],
-                        class_name="centered",
-                        style={ "font-size" : "larger" },
+            dbc.Container(
+                id=ids.TEAM_INFO_HEADER,
+                children=[
+                    dbc.Row(
+                    [
+                        html.H1(f"{team_name}", className="text-center"),
+                    ],
+                    class_name="mb-2"
                     ),
-                    dbc.Col(
+                ],
+            ),
+            dbc.Container(
+                id=ids.TEAM_INFO_BODY,
+                children=[
+                    dbc.Row(
                         [
-                            # Animated NBA Logo gif
-                            html.A(
-                                href="https://www.behance.net/gallery/100429525/NBA-Logos-Looped-Bleacher-Report",
-                                children=[
-                                    html.Img(
-                                        id=ids.TEAM_LOGO_GIF,
-                                        src=f"../assets/images/looped_nba_logos/{abbrev}_animated_logo.gif",
-                                        width="45%",
-                                        height="auto",
-                                        # className="landing-page-basketball-gif",
-                                        title="Animated logos created by Vincent Portolan for Bleacher Report",
-                                        className="animated-logo-gif",
-                                        style={'border-color': f'{get_top_left_pixel_color(f"./assets/images/looped_nba_logos/{abbrev}_animated_logo.gif")}'},
+                            html.P(f"{'🏆' * num_championships}"),
+                            html.P(f"{championship_string}", style={"font-size" : "small"}),
+                        ],
+                        class_name="text-center mb-4"
+                    ),
+                    dbc.Row(
+                        [
+                            dbc.Col(
+                                [
+                                    html.Div(
+                                    children=[
+                                        html.P(f"""The {team_name} are based in {team_city}, {team_state} and were founded in {year_founded}. The {detailed_team_info_df['NICKNAME'].iloc[0]} play in {detailed_team_info_df['ARENA'].iloc[0]}.
+                                            The current head coach of the {team_name} is {detailed_team_info_df['HEADCOACH'].iloc[0]}, the GM is {detailed_team_info_df['GENERALMANAGER'].iloc[0]}, and the owner is {detailed_team_info_df['OWNER'].iloc[0]}. 
+                                            {g_league_affiliate_str}
+                                            """),
+                                            html.Br(),
+                                            html.P("Navigate with the buttons below to discover more about this team!")
+                                        ],
                                     )
                                 ],
-                                target="_blank",
+                                class_name="centered",
+                                style={ "font-size" : "larger" },
+                            ),
+                            dbc.Col(
+                                [
+                                    # Animated NBA Logo gif
+                                    html.A(
+                                        href="https://www.behance.net/gallery/100429525/NBA-Logos-Looped-Bleacher-Report",
+                                        children=[
+                                            html.Img(
+                                                id=ids.TEAM_LOGO_GIF,
+                                                src=f"../assets/images/looped_nba_logos/{abbrev}_animated_logo.gif",
+                                                width="45%",
+                                                height="auto",
+                                                # className="landing-page-basketball-gif",
+                                                title="Animated logos created by Vincent Portolan for Bleacher Report",
+                                                className="animated-logo-gif",
+                                                style={'border-color': f'{get_top_left_pixel_color(f"./assets/images/looped_nba_logos/{abbrev}_animated_logo.gif")}'},
+                                            )
+                                        ],
+                                        target="_blank",
+                                    )
+                                ],
+                                class_name="centered"
                             )
-                        ],
-                        class_name="centered"
+                        ]
                     )
                 ]
-            )
+            ),
         ]
     )
     return team_info_body
