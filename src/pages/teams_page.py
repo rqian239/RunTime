@@ -1,6 +1,6 @@
 import dash
 import dash_bootstrap_components as dbc
-from dash import dcc, html
+from dash import dcc, html, callback_context
 from dash.dependencies import Input, Output
 import pandas as pd
 
@@ -155,7 +155,7 @@ def build_team_info_body(abbrev):
     if "No Affiliate" not in detailed_team_info_df['DLEAGUEAFFILIATION'].iloc[0]:
         g_league_affiliate_str = f"This team's G League affiliate is the {detailed_team_info_df['DLEAGUEAFFILIATION'].iloc[0]}."
     else:
-        g_league_affiliate_str = f"This team currently does not have a G Leagure affiliate team."
+        g_league_affiliate_str = f"This team currently does not have a G League affiliate team."
 
     team_info_body = dbc.Container(
         children=[
@@ -163,10 +163,27 @@ def build_team_info_body(abbrev):
                 id=ids.TEAM_INFO_HEADER,
                 children=[
                     dbc.Row(
-                    [
-                        html.H1(f"{team_name}", className="text-center"),
-                    ],
-                    class_name="mb-2"
+                        [
+                            html.H1(f"{team_name}", className="text-center"),
+                        ],
+                    ),
+                    dbc.Row(
+                        [
+                            # add buttons for each website
+                            dbc.Col(
+                                [
+                                    html.Br(),
+                                    dbc.Button(
+                                        id=ids.ROSTER_BUTTON,
+                                        children="Roster",
+                                        color="info",
+                                        className="mr-2",
+                                        style={'width': '100%'}
+                                    )
+                                ],
+                            ),
+                        ],
+                        className="centered mb-3",
                     ),
                 ],
             ),
@@ -241,3 +258,16 @@ def display_team_info(team_selection):
         return html.Div(html.P("Please select a team with the dropdown menu."), className="text-center")
     else:
         return build_team_info_body(team_selection)
+    
+@callback(
+    Output(ids.TEAM_INFO_BODY, 'children'),
+    Input(ids.ROSTER_BUTTON, 'n_clicks')
+)
+def display_roster_on_team_page(n_clicks):
+    if n_clicks is None:
+        return dash.no_update
+    if not callback_context.triggered:
+        return dash.no_update
+    trigger = callback_context.triggered[0]
+    if trigger['value'] is not None:    # update roster here
+        return html.Div([])
