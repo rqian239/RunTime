@@ -84,56 +84,6 @@ body = dbc.Container(
             id=ids.TEAM_PAGE_CONTENT,
             class_name="my-4",
         ),
-        # dbc.Row(
-        #     [
-        #         # First card taking up 70% width
-        #         dbc.Col(
-        #             [
-        #                 dbc.Card(
-        #                     [
-        #                         dbc.CardHeader("Header"),
-        #                         dbc.CardBody(
-        #                             [
-        #                                 html.H4("Team Information", className="card-title"),
-        #                                 html.P(
-        #                                     "This is some text inside the card body. Will be adding tea info based on selection in dropdown.",
-        #                                     className="card-text"
-        #                                 )
-        #                             ]
-        #                         )
-        #                     ],
-        #                     className="border-primary mb-3",
-        #                     style={"maxWidth": "70rem"}  # Adjust the maxWidth here to make the card wider
-        #                 ),
-        #             ],
-        #             width=8,  # 70% width for this column
-        #             md=9  # Adjust the column size for medium-sized screens
-        #         ),
-        #         # Second card taking up 30% width
-        #         dbc.Col(
-        #             [
-        #                 dbc.Card(
-        #                     [
-        #                         dbc.CardHeader("Header"),
-        #                         dbc.CardBody(
-        #                             [
-        #                                 html.H4("Team Image", className="card-title"),
-        #                                 html.P(
-        #                                     "This is some text inside the card body. You can add any content you want here.",
-        #                                     className="card-text"
-        #                                 )
-        #                             ]
-        #                         )
-        #                     ],
-        #                     className="border-primary mb-3",
-        #                     style={"maxWidth": "20rem"}  # Adjust the maxWidth here to make the card wider
-        #                 ),
-        #             ],
-        #             width=4,  # 30% width for this column
-        #             md=3  # Adjust the column size for medium-sized screens
-        #         ),
-        #     ],
-        # ),
     ],
     class_name="body-flex-wrapper",
 )
