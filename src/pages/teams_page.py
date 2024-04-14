@@ -189,7 +189,8 @@ def build_team_info_body(abbrev):
                                         height="auto",
                                         # className="landing-page-basketball-gif",
                                         title="Animated logos created by Vincent Portolan for Bleacher Report",
-                                        className="animated-logo-gif"
+                                        className="animated-logo-gif",
+                                        style={'border-color': f'{get_top_left_pixel_color(f"./assets/images/looped_nba_logos/{abbrev}_animated_logo.gif")}'},
                                     )
                                 ],
                                 target="_blank",
@@ -216,12 +217,3 @@ def display_team_info(team_selection):
         return html.Div(html.P("Please select a team with the dropdown menu."), className="text-center")
     else:
         return build_team_info_body(team_selection)
-
-@callback(
-    Output(ids.TEAM_LOGO_GIF, 'style'),
-    [Input(ids.TEAM_PAGE_DROPDOWN_MENU, 'value')]
-)
-def change_logo_border(team_selection):
-    path_to_animated_gifs = f'./assets/images/looped_nba_logos/{team_selection}_animated_logo.gif'
-    border_color = get_top_left_pixel_color(path_to_animated_gifs)
-    return {'border': f'5px solid {border_color}'}
