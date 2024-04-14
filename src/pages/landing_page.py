@@ -41,7 +41,7 @@ body = dbc.Container(
                         html.P(
                             """\
                             Embark on an unparalleled NBA journey with our innovative prediction tool! Utilizing the NBA API and a 
-                            meticulously crafted algorithm, our application forecasts the outcomes of upcoming or potential matchups 
+                            well-crafted algorithm, our application forecasts the outcomes of upcoming or potential matchups 
                             between NBA teams. With our user-friendly interface and real-time updates, you'll find yourself fully 
                             immersed in the excitement, whether seeking deeper insights as a passionate fan or making informed decisions
                             as a seasoned bettor. Join us now and experience the thrill of elevating your NBA experience with our 
