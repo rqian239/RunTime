@@ -156,7 +156,7 @@ def build_team_info_body(abbrev):
             ),
             dbc.Container(
                 id=ids.TEAM_INFO_BODY,
-                children=get_general_team_info_body(abbrev)
+                children=build_general_team_info_body(abbrev)
             ),
         ]
     )
@@ -174,7 +174,7 @@ def build_roster_body(abbrev):
 
     return roster_body
 
-def get_general_team_info_body(abbrev):
+def build_general_team_info_body(abbrev):
     
     team_name, team_city, team_state, year_founded = basic_team_info(abbrev)
 
@@ -246,6 +246,31 @@ def get_general_team_info_body(abbrev):
 
     return general_team_info_body
 
+def build_team_schedule_body(abbrev):
+
+    # Create the schedule body here
+    team_schedule_body = dbc.Container(
+        children=[
+            html.P(f"This is the schedule body for {abbrev}.")
+        ],
+        class_name="text-center"
+    )
+
+    return team_schedule_body
+
+def build_team_standings_body(abbrev):
+
+    # Create the standings body here
+    team_standings_body = dbc.Container(
+        children=[
+            html.P(f"This is the standings body for {abbrev}.")
+        ],
+        class_name="text-center"
+    )
+
+    return team_standings_body
+
+
 # This is how Dash knows what the layout of the page is!
 layout = html.Div([nav, body, ftr], className="make-footer-stick")
 
@@ -263,10 +288,12 @@ def display_team_info(team_selection):
 @callback(
     Output(ids.TEAM_INFO_BODY, 'children'),
     [Input(ids.ROSTER_BUTTON, 'n_clicks'),
-     Input(ids.GENERAL_TEAM_INFO_BUTTON, 'n_clicks')],
+     Input(ids.GENERAL_TEAM_INFO_BUTTON, 'n_clicks'),
+     Input(ids.TEAM_INFO_SCHEDULE_BUTTON, 'n_clicks'),
+     Input(ids.STANDINGS_BUTTON, 'n_clicks'),],
     [State(ids.TEAM_PAGE_DROPDOWN_MENU, 'value')]
 )
-def update_team_info(roster_clicks, general_info_clicks, team_selection):
+def update_team_info(roster_clicks, general_info_clicks, schedule_clicks, standings_clicks, team_selection):
     ctx = callback_context
     
     if not ctx.triggered:
@@ -274,10 +301,14 @@ def update_team_info(roster_clicks, general_info_clicks, team_selection):
 
     button_id = ctx.triggered[0]['prop_id'].split('.')[0]
 
-    # Check which button was clicked and act accordingly.
+    # Check which button was clicked
     if button_id == ids.ROSTER_BUTTON and roster_clicks:
-        return build_roster_body(team_selection)  # Function that builds the roster layout.
+        return build_roster_body(team_selection)
     elif button_id == ids.GENERAL_TEAM_INFO_BUTTON and general_info_clicks:
-        return get_general_team_info_body(team_selection)  # Function that builds general info layout.
+        return build_general_team_info_body(team_selection)
+    elif button_id == ids.TEAM_INFO_SCHEDULE_BUTTON and schedule_clicks:
+        return build_team_schedule_body(team_selection)
+    elif button_id == ids.STANDINGS_BUTTON and standings_clicks:
+        return build_team_standings_body(team_selection)
     else:
         return no_update  # If none match, do nothing.
