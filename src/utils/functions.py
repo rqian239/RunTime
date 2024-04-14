@@ -1,7 +1,7 @@
 # File for helpful functions in this project
 
 from nba_api.stats.static import teams
-from nba_api.stats.endpoints import teamdetails
+from nba_api.stats.endpoints import teamdetails, commonteamroster
 
 from PIL import Image
 
@@ -28,4 +28,8 @@ def get_top_left_pixel_color(image_path):
         pixel_color = img.getpixel((0, 0))  # (0, 0) is the top-left corner
         hex_color = '#{:02x}{:02x}{:02x}'.format(*pixel_color)  # convert color into hex
     return hex_color
+
+def get_team_roster(abbrev):
+    team_id = get_team_id_from_abbrev(abbrev)
+    return commonteamroster.CommonTeamRoster(team_id=team_id).common_team_roster.get_data_frame()
 

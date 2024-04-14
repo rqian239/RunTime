@@ -7,7 +7,7 @@ import pandas as pd
 from data.nba_teams import get_all_team_options
 from components.navbar import navbar_simple
 from components.footer import footer
-from utils.functions import basic_team_info, detailed_team_info, get_team_championships
+from utils.functions import basic_team_info, detailed_team_info, get_team_championships, get_team_roster
 from utils.functions import get_top_left_pixel_color
 from assets.links_to_nba_logo_gifs import nba_logo_gifs_links
 
@@ -245,6 +245,18 @@ def build_team_info_body(abbrev):
     )
     return team_info_body
 
+def build_roster_body(abbrev):
+    roster_df = get_team_roster(abbrev)
+
+    roster_body = dbc.Container(
+        children=[
+            dbc.Table.from_dataframe(roster_df, striped=True, bordered=True, hover=True)
+        ],
+        class_name="centered"
+    )
+
+    return roster_body
+
 # This is how Dash knows what the layout of the page is!
 layout = html.Div([nav, body, ftr], className="make-footer-stick")
 
@@ -261,13 +273,14 @@ def display_team_info(team_selection):
     
 @callback(
     Output(ids.TEAM_INFO_BODY, 'children'),
-    Input(ids.ROSTER_BUTTON, 'n_clicks')
+    [Input(ids.ROSTER_BUTTON, 'n_clicks'),
+     Input(ids.TEAM_PAGE_DROPDOWN_MENU, 'value')]
 )
-def display_roster_on_team_page(n_clicks):
+def display_roster_on_team_page(n_clicks, team_selection):
     if n_clicks is None:
         return dash.no_update
     if not callback_context.triggered:
         return dash.no_update
     trigger = callback_context.triggered[0]
     if trigger['value'] is not None:    # update roster here
-        return html.Div([])
+        return build_roster_body(team_selection)
