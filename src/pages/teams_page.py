@@ -164,14 +164,13 @@ def build_team_info_body(abbrev):
                 children=[
                     dbc.Row(
                         [
-                            html.H1(f"{team_name}", className="text-center"),
+                            html.H1(f"{team_name}", className="text-center mb-4"),
                         ],
                     ),
                     dbc.Row(
                         [
                             dbc.Col(
                                 [
-                                    html.Br(),
                                     dbc.Button(
                                         id=ids.GENERAL_TEAM_INFO_BUTTON,
                                         children="General Info",
@@ -183,10 +182,31 @@ def build_team_info_body(abbrev):
                             ),
                             dbc.Col(
                                 [
-                                    html.Br(),
                                     dbc.Button(
                                         id=ids.ROSTER_BUTTON,
                                         children="Roster",
+                                        color="info",
+                                        className="mx-2",
+                                        style={'width': '100%'}
+                                    )
+                                ],
+                            ),
+                            dbc.Col(
+                                [
+                                    dbc.Button(
+                                        id=ids.TEAM_INFO_SCHEDULE_BUTTON,
+                                        children="Schedule",
+                                        color="info",
+                                        className="mx-2",
+                                        style={'width': '100%'}
+                                    )
+                                ],
+                            ),
+                            dbc.Col(
+                                [
+                                    dbc.Button(
+                                        id=ids.STANDINGS_BUTTON,
+                                        children="Standings",
                                         color="info",
                                         className="mx-2",
                                         style={'width': '100%'}
@@ -219,7 +239,7 @@ def build_team_info_body(abbrev):
                                             {g_league_affiliate_str}
                                             """),
                                             html.Br(),
-                                            html.P("Navigate with the buttons below to discover more about this team!")
+                                            html.P("Navigate with the buttons to discover more about this team!")
                                         ],
                                     )
                                 ],
