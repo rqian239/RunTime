@@ -40,10 +40,12 @@ body = dbc.Container(
                         html.Br(),
                         html.P(
                             """\
-                            Welcome! Experience the thrill of the NBA like never before with our innovative game predictor! \n Our application harnesses the power of advanced analytics 
-                            to provide you with accurate predictions for upcoming NBA games. Delve into detailed player stats, team performances, and historical data to make 
-                            informed decisions. Whether you're a passionate fan or a seasoned bettor, our intuitive interface and real-time updates will keep you at the edge of
-                            your seat. Join us now and elevate your NBA experience with our cutting-edge game predictor!""",
+                            Embark on an unparalleled NBA journey with our innovative prediction tool! Utilizing the NBA API and a 
+                            meticulously crafted algorithm, our application forecasts the outcomes of upcoming or potential matchups 
+                            between NBA teams. With our user-friendly interface and real-time updates, you'll find yourself fully 
+                            immersed in the excitement, whether seeking deeper insights as a passionate fan or making informed decisions
+                            as a seasoned bettor. Join us now and experience the thrill of elevating your NBA experience with our 
+                            cutting-edge prediction tool!""",
                             #style={'textAlign': 'center'}
                         ),
                         html.Br(),
