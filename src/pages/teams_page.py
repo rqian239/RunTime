@@ -211,7 +211,25 @@ def build_general_team_info_body(abbrev):
                                 {g_league_affiliate_str}
                                 """),
                                 html.Br(),
-                                html.P("Navigate with the buttons to discover more about this team!")
+                                html.P("Navigate with the buttons above to discover more about this team!"),
+                                dbc.Row(
+                                    [
+                                        html.Img(
+                                            src="../assets/images/facebook-white-icon.svg", 
+                                            className="social-media-icon"
+                                        ),
+                                        html.Img(
+                                            src="../assets/images/x-social-media-white-icon.svg", 
+                                            className="social-media-icon"
+                                        ),
+                                        html.Img(
+                                            src="../assets/images/instagram-white-icon.svg", 
+                                            className="social-media-icon"
+                                        ),
+
+                                    ],
+                                    class_name="justify-center mt-5"
+                                )
                             ],
                         )
                     ],
