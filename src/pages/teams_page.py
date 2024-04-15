@@ -7,7 +7,7 @@ import pandas as pd
 from data.nba_teams import get_all_team_options
 from components.navbar import navbar_simple
 from components.footer import footer
-from utils.functions import basic_team_info, detailed_team_info, get_team_championships, get_team_roster
+from utils.functions import basic_team_info, detailed_team_info, get_team_championships, get_team_roster, get_social_media_links
 from utils.functions import get_top_left_pixel_color
 from assets.links_to_nba_logo_gifs import nba_logo_gifs_links
 
@@ -186,6 +186,7 @@ def build_general_team_info_body(abbrev):
     championship_string = ', '.join(f"{row['YEARAWARDED']} ({row['OPPOSITETEAM']})" for index, row in championships_df.iterrows())
     championship_string = f"{num_championships} Championship{('' if num_championships == 1 else 's')} {(': ' if num_championships > 0 else '')}{championship_string}"
 
+    facebook_link, twitter_link, instagram_link = get_social_media_links(abbrev)
 
     if "No Affiliate" not in detailed_team_info_df['DLEAGUEAFFILIATION'].iloc[0]:
         g_league_affiliate_str = f"This team's G League affiliate is the {detailed_team_info_df['DLEAGUEAFFILIATION'].iloc[0]}."

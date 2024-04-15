@@ -33,3 +33,9 @@ def get_team_roster(abbrev):
     team_id = get_team_id_from_abbrev(abbrev)
     return commonteamroster.CommonTeamRoster(team_id=team_id).common_team_roster.get_data_frame()
 
+def get_social_media_links(abbrev):
+    team_id = get_team_id_from_abbrev(abbrev)
+    social_df = teamdetails.TeamDetails(team_id).team_social_sites.get_data_frame()
+    social_df.set_index('ACCOUNTTYPE', inplace=True)
+    return social_df.loc['Facebook', 'WEBSITE_LINK'], social_df.loc['Twitter', 'WEBSITE_LINK'], social_df.loc['Instagram', 'WEBSITE_LINK']
+
