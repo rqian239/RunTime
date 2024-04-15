@@ -32,7 +32,7 @@ def footer():
                             ]),
                         ),
                     ],
-                    # className="my-2",
+                    className="my-2",
                 ),
                 dbc.Row(
                     [
