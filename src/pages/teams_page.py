@@ -215,21 +215,48 @@ def build_general_team_info_body(abbrev):
                                 html.P("Navigate with the buttons above to discover more about this team!"),
                                 dbc.Row(
                                     [
-                                        html.Img(
-                                            src="../assets/images/facebook-white-icon.svg", 
-                                            className="social-media-icon"
+                                        dbc.Col(),  # These empty columns are added to squeeze the icons together more
+                                        dbc.Col(),
+                                        dbc.Col(
+                                            html.A(
+                                                href=facebook_link,
+                                                children=[
+                                                    html.Img(
+                                                        src="../assets/images/facebook-white-icon.svg", 
+                                                        className="social-media-icon"
+                                                    ),
+                                                ],
+                                                target="_blank"
+                                            ),
                                         ),
-                                        html.Img(
-                                            src="../assets/images/x-social-media-white-icon.svg", 
-                                            className="social-media-icon"
+                                        dbc.Col(
+                                            html.A(
+                                                href=twitter_link,
+                                                children=[
+                                                    html.Img(
+                                                        src="../assets/images/x-social-media-white-icon.svg", 
+                                                        className="social-media-icon"
+                                                    ),
+                                                ],
+                                                target="_blank"
+                                            ),
                                         ),
-                                        html.Img(
-                                            src="../assets/images/instagram-white-icon.svg", 
-                                            className="social-media-icon"
+                                        dbc.Col(
+                                            html.A(
+                                                href=instagram_link,
+                                                children=[
+                                                    html.Img(
+                                                        src="../assets/images/instagram-white-icon.svg", 
+                                                        className="social-media-icon"
+                                                    ),
+                                                ],
+                                                target="_blank"
+                                            ),
                                         ),
-
+                                        dbc.Col(), # These empty columns are added to squeeze the icons together more
+                                        dbc.Col(),
                                     ],
-                                    class_name="justify-center mt-5"
+                                    class_name="justify-content-center align-items-center mt-5 g-1"
                                 )
                             ],
                         )
