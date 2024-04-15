@@ -59,10 +59,8 @@ body = dbc.Container(
                                 dbc.CardBody(
                                     [
                                         html.H4("Nivedha Natarajan", className="card-title"),
-                                        html.Img(src=image_path, alt="Nivedha Natarajan", className="card-img-top"),
+                                        html.Img(src=image_path, alt="Nivedha Natarajan", className="card-img-top"),   
 
-                                    
-            
                                     ]
                                 )
                             ],
@@ -124,8 +122,8 @@ body = dbc.Container(
                                 dbc.CardHeader("Back-End Developer"),
                                 dbc.CardBody(
                                     [
-                                        html.H4("Ria Manoj Gandhi", className="card-title"),
-                                        html.Img(src=image_path2, alt="Ria Manoj Gandhi", className="card-img-top"),
+                                        html.H4("Ria Gandhi", className="card-title"),
+                                        html.Img(src=image_path2, alt="Ria Gandhi", className="card-img-top"),
 
                                         
                                     ]
@@ -174,11 +172,10 @@ body = dbc.Container(
                             [
                                 html.P(
                                     """
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. 
-                                    Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. 
-                                    Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris 
-                                    massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent 
-                                    per conubia nostra, per inceptos himenaeos.
+                                    Hello, I'm Nivedha Natarajan, a Front-End Developer on our project team. I am a 4th year Computer 
+                                    Science student. My focus on web development and design has allowed me to deepen my understanding of implementing frontend solutions 
+                                    for full-stack applications. I've enjoyed the opportunity to enhance my skills in this area and 
+                                    contribute to our project's success.
                                     """,
                                     className="card-text"
                                 )
@@ -240,12 +237,12 @@ dbc.Row(
                             [
                                 html.P(
                                     """
-                                    Nulla metus metus, ullamcorper vel, tincidunt sed, euismod in, nibh. Quisque volutpat 
-                                    condimentum velit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, 
-                                    per inceptos himenaeos. Nam nec ante. Sed lacinia, urna non tincidunt mattis, tortor 
-                                    neque adipiscing diam, a cursus ipsum ante quis turpis. Nulla facilisi. Ut fringilla. 
-                                    Suspendisse potenti. Nunc feugiat mi a tellus consequat imperdiet. Vestibulum sapien. 
-                                    Proin quam. Etiam ultrices.
+                                    Hello, my name is Bryan Hernandez-Sanchez and I am a 4th year computer science student at The 
+                                    University of Florida! I'm originally from Miami, Florida and I am one of Runtime's Backend 
+                                    developers. I agreed to work on Runtime because of the massive sports-betting craze that has 
+                                    been happening all around campus, and I wanted to see if I can help garner more attention to it 
+                                    via our prediction model and website! 
+
                                     """,
                                     className="card-text"
                                 )
@@ -274,13 +271,11 @@ dbc.Row(
                             [
                                 html.P(
                                     """
-                                    Suspendisse in justo eu magna luctus suscipit. Sed lectus. Integer euismod lacus luctus 
-                                    magna. Quisque cursus, metus vitae pharetra auctor, sem massa mattis sem, at interdum 
-                                    magna augue eget diam. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices 
-                                    posuere cubilia Curae; Morbi lacinia molestie dui. Praesent blandit dolor. Sed non quam. 
-                                    In vel mi sit amet augue congue elementum. Morbi in ipsum sit amet pede facilisis laoreet. 
-                                    Donec lacus nunc, viverra nec, blandit vel, egestas et, augue. Vestibulum tincidunt 
-                                    malesuada tellus. Ut ultrices ultrices enim.
+                                    Hi there, I'm Ria, currently pursuing a major in Computer Science with a minor in Engineering Innovation.
+                                    Fueled by interest in the intersection of business and technology, I have experience in both research and 
+                                    a software engineering internship. Combining my passion for sports, I ideated an innovative service tailored 
+                                    for college student-athletes during an entrepreneurship class at UF. Currently, my interest lies in exploring 
+                                    ERP software and other cutting-edge business technologies.
                                     """,
                                     className="card-text"
                                 )
@@ -309,12 +304,10 @@ dbc.Row(
                             [
                                 html.P(
                                     """
-                                    Curabitur sit amet mauris. Morbi in dui quis est pulvinar ullamcorper. Nulla facilisi. 
-                                    Integer lacinia sollicitudin massa. Cras metus. Sed aliquet risus a tortor. Integer 
-                                    id quam. Morbi mi. Quisque nisl felis, venenatis tristique, dignissim in, ultrices 
-                                    sit amet, augue. Proin sodales libero eget ante. Nulla quam. Aenean laoreet. Vestibulum 
-                                    nisi lectus, commodo ac, facilisis ac, ultricies eu, pede. Ut orci risus, accumsan porttitor, 
-                                    cursus quis, aliquet eget, justo.
+                                    Hello, my name is Richard, and I am a CS major and Math minor here at UF! I am a huge Toronto Raptors
+                                    fan and, overall, a big fan of basketball. Python is also one of my favorite programming languages, 
+                                    which is used extensively in this project. I am also interested in data analytics, statistical modeling, 
+                                    and data visualization.
                                     """,
                                     className="card-text"
                                 )

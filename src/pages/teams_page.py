@@ -1,12 +1,15 @@
 import dash
 import dash_bootstrap_components as dbc
-from dash import dcc, html
-from dash.dependencies import Input, Output
+from dash import dcc, html, callback_context, no_update
+from dash.dependencies import Input, Output, State
 import pandas as pd
 
 from data.nba_teams import get_all_team_options
 from components.navbar import navbar_simple
 from components.footer import footer
+from utils.functions import basic_team_info, detailed_team_info, get_team_championships, get_team_roster, get_social_media_links
+from utils.functions import get_top_left_pixel_color
+from assets.links_to_nba_logo_gifs import nba_logo_gifs_links
 
 from dash import callback
 
@@ -75,77 +78,244 @@ body = dbc.Container(
             class_name="my-4"
         ),
         dbc.Row(
-            [
-                dbc.Col(
-                        children=[
-                            # This is where we display team info with a callback
-                        ],
-                        id=ids.TEAM_PAGE_CONTENT
-                )
+            children=[
+                # This is where we display team info with a callback
             ],
-            class_name="my-4"
+            id=ids.TEAM_PAGE_CONTENT,
+            class_name="my-4",
         ),
-        # dbc.Row(
-        #     [
-        #         # First card taking up 70% width
-        #         dbc.Col(
-        #             [
-        #                 dbc.Card(
-        #                     [
-        #                         dbc.CardHeader("Header"),
-        #                         dbc.CardBody(
-        #                             [
-        #                                 html.H4("Team Information", className="card-title"),
-        #                                 html.P(
-        #                                     "This is some text inside the card body. Will be adding tea info based on selection in dropdown.",
-        #                                     className="card-text"
-        #                                 )
-        #                             ]
-        #                         )
-        #                     ],
-        #                     className="border-primary mb-3",
-        #                     style={"maxWidth": "70rem"}  # Adjust the maxWidth here to make the card wider
-        #                 ),
-        #             ],
-        #             width=8,  # 70% width for this column
-        #             md=9  # Adjust the column size for medium-sized screens
-        #         ),
-        #         # Second card taking up 30% width
-        #         dbc.Col(
-        #             [
-        #                 dbc.Card(
-        #                     [
-        #                         dbc.CardHeader("Header"),
-        #                         dbc.CardBody(
-        #                             [
-        #                                 html.H4("Team Image", className="card-title"),
-        #                                 html.P(
-        #                                     "This is some text inside the card body. You can add any content you want here.",
-        #                                     className="card-text"
-        #                                 )
-        #                             ]
-        #                         )
-        #                     ],
-        #                     className="border-primary mb-3",
-        #                     style={"maxWidth": "20rem"}  # Adjust the maxWidth here to make the card wider
-        #                 ),
-        #             ],
-        #             width=4,  # 30% width for this column
-        #             md=3  # Adjust the column size for medium-sized screens
-        #         ),
-        #     ],
-        # ),
     ],
     class_name="body-flex-wrapper",
 )
 
 
 def build_team_info_body(abbrev):
-    team_info_body = html.Div(
-        html.P(f"You have selected {abbrev}"), 
-        className="text-center"
+
+    team_name = basic_team_info(abbrev)[0]
+
+    team_info_body = dbc.Container(
+        children=[
+            dbc.Container(
+                id=ids.TEAM_INFO_HEADER,
+                children=[
+                    dbc.Row(
+                        [
+                            html.H1(f"{team_name}", className="text-center mb-4"),
+                        ],
+                    ),
+                    dbc.Row(
+                        [
+                            dbc.Col(
+                                [
+                                    dbc.Button(
+                                        id=ids.GENERAL_TEAM_INFO_BUTTON,
+                                        children="General Info",
+                                        color="info",
+                                        className="mx-2",
+                                        style={'width': '100%'}
+                                    )
+                                ],
+                            ),
+                            dbc.Col(
+                                [
+                                    dbc.Button(
+                                        id=ids.ROSTER_BUTTON,
+                                        children="Roster",
+                                        color="info",
+                                        className="mx-2",
+                                        style={'width': '100%'}
+                                    )
+                                ],
+                            ),
+                            dbc.Col(
+                                [
+                                    dbc.Button(
+                                        id=ids.TEAM_INFO_SCHEDULE_BUTTON,
+                                        children="Schedule",
+                                        color="info",
+                                        className="mx-2",
+                                        style={'width': '100%'}
+                                    )
+                                ],
+                            ),
+                            dbc.Col(
+                                [
+                                    dbc.Button(
+                                        id=ids.STANDINGS_BUTTON,
+                                        children="Standings",
+                                        color="info",
+                                        className="mx-2",
+                                        style={'width': '100%'}
+                                    )
+                                ],
+                            ),
+                        ],
+                        className="centered mb-3",
+                    ),
+                ],
+            ),
+            dbc.Container(
+                id=ids.TEAM_INFO_BODY,
+                children=build_general_team_info_body(abbrev)
+            ),
+        ]
     )
     return team_info_body
+
+def build_roster_body(abbrev):
+    roster_df = get_team_roster(abbrev)
+
+    roster_body = dbc.Container(
+        children=[
+            dbc.Table.from_dataframe(roster_df, striped=True, bordered=True, hover=True)
+        ],
+        class_name="centered"
+    )
+
+    return roster_body
+
+def build_general_team_info_body(abbrev):
+    
+    team_name, team_city, team_state, year_founded = basic_team_info(abbrev)
+
+    detailed_team_info_df = detailed_team_info(abbrev)
+
+    championships_df = get_team_championships(abbrev)
+    num_championships = len(championships_df)
+
+    championship_string = ', '.join(f"{row['YEARAWARDED']} ({row['OPPOSITETEAM']})" for index, row in championships_df.iterrows())
+    championship_string = f"{num_championships} Championship{('' if num_championships == 1 else 's')} {(': ' if num_championships > 0 else '')}{championship_string}"
+
+    facebook_link, twitter_link, instagram_link = get_social_media_links(abbrev)
+
+    if "No Affiliate" not in detailed_team_info_df['DLEAGUEAFFILIATION'].iloc[0]:
+        g_league_affiliate_str = f"This team's G League affiliate is the {detailed_team_info_df['DLEAGUEAFFILIATION'].iloc[0]}."
+    else:
+        g_league_affiliate_str = f"This team currently does not have a G League affiliate team."
+
+    general_team_info_body = [
+        dbc.Row(
+            [
+                html.P(f"{'🏆' * num_championships}"),
+                html.P(f"{championship_string}", style={"font-size" : "small"}),
+            ],
+            class_name="text-center mb-4"
+        ),
+        dbc.Row(
+            [
+                dbc.Col(
+                    [
+                        html.Div(
+                        children=[
+                            html.P(f"""The {team_name} are based in {team_city}, {team_state} and were founded in {year_founded}. The {detailed_team_info_df['NICKNAME'].iloc[0]} play in {detailed_team_info_df['ARENA'].iloc[0]}.
+                                The current head coach of the {team_name} is {detailed_team_info_df['HEADCOACH'].iloc[0]}, the GM is {detailed_team_info_df['GENERALMANAGER'].iloc[0]}, and the owner is {detailed_team_info_df['OWNER'].iloc[0]}. 
+                                {g_league_affiliate_str}
+                                """),
+                                html.Br(),
+                                html.P("Navigate with the buttons above to discover more about this team!"),
+                                dbc.Row(
+                                    [
+                                        dbc.Col(),  # These empty columns are added to squeeze the icons together more
+                                        dbc.Col(),
+                                        dbc.Col(
+                                            html.A(
+                                                href=facebook_link,
+                                                children=[
+                                                    html.Img(
+                                                        src="../assets/images/facebook-white-icon.svg", 
+                                                        className="social-media-icon"
+                                                    ),
+                                                ],
+                                                target="_blank"
+                                            ),
+                                        ),
+                                        dbc.Col(
+                                            html.A(
+                                                href=twitter_link,
+                                                children=[
+                                                    html.Img(
+                                                        src="../assets/images/x-social-media-white-icon.svg", 
+                                                        className="social-media-icon"
+                                                    ),
+                                                ],
+                                                target="_blank"
+                                            ),
+                                        ),
+                                        dbc.Col(
+                                            html.A(
+                                                href=instagram_link,
+                                                children=[
+                                                    html.Img(
+                                                        src="../assets/images/instagram-white-icon.svg", 
+                                                        className="social-media-icon"
+                                                    ),
+                                                ],
+                                                target="_blank"
+                                            ),
+                                        ),
+                                        dbc.Col(), # These empty columns are added to squeeze the icons together more
+                                        dbc.Col(),
+                                    ],
+                                    class_name="justify-content-center align-items-center mt-5 g-1"
+                                )
+                            ],
+                        )
+                    ],
+                    class_name="centered",
+                    style={ "font-size" : "larger" },
+                ),
+                dbc.Col(
+                    [
+                        # Animated NBA Logo gif
+                        html.A(
+                            href="https://www.behance.net/gallery/100429525/NBA-Logos-Looped-Bleacher-Report",
+                            children=[
+                                html.Img(
+                                    id=ids.TEAM_LOGO_GIF,
+                                    src=f"../assets/images/looped_nba_logos/{abbrev}_animated_logo.gif",
+                                    width="45%",
+                                    height="auto",
+                                    # className="landing-page-basketball-gif",
+                                    title="Animated logos created by Vincent Portolan for Bleacher Report",
+                                    className="animated-logo-gif",
+                                    style={'border-color': f'{get_top_left_pixel_color(f"./assets/images/looped_nba_logos/{abbrev}_animated_logo.gif")}'},
+                                )
+                            ],
+                            target="_blank",
+                        )
+                    ],
+                    class_name="centered"
+                )
+            ]
+        )
+    ]
+
+    return general_team_info_body
+
+def build_team_schedule_body(abbrev):
+
+    # Create the schedule body here
+    team_schedule_body = dbc.Container(
+        children=[
+            html.P(f"This is the schedule body for {abbrev}.")
+        ],
+        class_name="text-center"
+    )
+
+    return team_schedule_body
+
+def build_team_standings_body(abbrev):
+
+    # Create the standings body here
+    team_standings_body = dbc.Container(
+        children=[
+            html.P(f"This is the standings body for {abbrev}.")
+        ],
+        class_name="text-center"
+    )
+
+    return team_standings_body
+
 
 # This is how Dash knows what the layout of the page is!
 layout = html.Div([nav, body, ftr], className="make-footer-stick")
@@ -160,3 +330,31 @@ def display_team_info(team_selection):
         return html.Div(html.P("Please select a team with the dropdown menu."), className="text-center")
     else:
         return build_team_info_body(team_selection)
+    
+@callback(
+    Output(ids.TEAM_INFO_BODY, 'children'),
+    [Input(ids.ROSTER_BUTTON, 'n_clicks'),
+     Input(ids.GENERAL_TEAM_INFO_BUTTON, 'n_clicks'),
+     Input(ids.TEAM_INFO_SCHEDULE_BUTTON, 'n_clicks'),
+     Input(ids.STANDINGS_BUTTON, 'n_clicks'),],
+    [State(ids.TEAM_PAGE_DROPDOWN_MENU, 'value')]
+)
+def update_team_info(roster_clicks, general_info_clicks, schedule_clicks, standings_clicks, team_selection):
+    ctx = callback_context
+    
+    if not ctx.triggered:
+        return no_update  # No button was clicked, do nothing.
+
+    button_id = ctx.triggered[0]['prop_id'].split('.')[0]
+
+    # Check which button was clicked
+    if button_id == ids.ROSTER_BUTTON and roster_clicks:
+        return build_roster_body(team_selection)
+    elif button_id == ids.GENERAL_TEAM_INFO_BUTTON and general_info_clicks:
+        return build_general_team_info_body(team_selection)
+    elif button_id == ids.TEAM_INFO_SCHEDULE_BUTTON and schedule_clicks:
+        return build_team_schedule_body(team_selection)
+    elif button_id == ids.STANDINGS_BUTTON and standings_clicks:
+        return build_team_standings_body(team_selection)
+    else:
+        return no_update  # If none match, do nothing.
