@@ -7,13 +7,10 @@ def scrape_nba_schedule():
     # Get today's date
     today = date.today()
     month = calendar.month_abbr[datetime.now().month]
-    print(month)
     month_url = today.strftime("%B").lower()
     day = today.strftime("%d")
-    print(day)
     # Construct the URL based on today's date
     url = f"https://www.basketball-reference.com/leagues/NBA_{today.year}_games-{month_url}.html"
-    print(url)
     # Send an HTTP GET request to the URL
     response = requests.get(url)
 
