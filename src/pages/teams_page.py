@@ -7,9 +7,10 @@ import pandas as pd
 from data.nba_teams import get_all_team_options
 from components.navbar import navbar_simple
 from components.footer import footer
-from utils.functions import basic_team_info, detailed_team_info, get_team_championships, get_team_roster, get_social_media_links
+from utils.functions import basic_team_info, detailed_team_info, get_team_championships, get_team_roster, get_social_media_links, get_league_standings
 from utils.functions import get_top_left_pixel_color
 from assets.links_to_nba_logo_gifs import nba_logo_gifs_links
+
 
 from dash import callback
 
@@ -330,6 +331,18 @@ def display_team_info(team_selection):
         return html.Div(html.P("Please select a team with the dropdown menu."), className="text-center")
     else:
         return build_team_info_body(team_selection)
+
+def build_team_standings_body(abbrev):
+    standings_df = get_league_standings()  # Call a function to get the league standings data
+
+    standings_body = dbc.Container(
+        children=[
+            dbc.Table.from_dataframe(standings_df, striped=True, bordered=True, hover=True)
+        ],
+        class_name="centered"
+    )
+    return standings_body
+       
     
 @callback(
     Output(ids.TEAM_INFO_BODY, 'children'),
@@ -358,3 +371,5 @@ def update_team_info(roster_clicks, general_info_clicks, schedule_clicks, standi
         return build_team_standings_body(team_selection)
     else:
         return no_update  # If none match, do nothing.
+
+
