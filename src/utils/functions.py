@@ -2,6 +2,8 @@
 
 from nba_api.stats.static import teams
 from nba_api.stats.endpoints import teamdetails, commonteamroster
+from nba_api.stats.endpoints import leaguestandings 
+
 
 from PIL import Image
 
@@ -39,3 +41,6 @@ def get_social_media_links(abbrev):
     social_df.set_index('ACCOUNTTYPE', inplace=True)
     return social_df.loc['Facebook', 'WEBSITE_LINK'], social_df.loc['Twitter', 'WEBSITE_LINK'], social_df.loc['Instagram', 'WEBSITE_LINK']
 
+def get_league_standings():
+    standings_data = leaguestandings.LeagueStandings(season='2023-24').standings.get_data_frame()
+    return standings_data
