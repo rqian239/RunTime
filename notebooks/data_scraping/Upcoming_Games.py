@@ -39,7 +39,10 @@ def scrape_nba_schedule():
                         print(game_date)
                         home_team = name_column[3].text.strip()
                         away_team = name_column[1].text.strip()
-                        print(f"{away_team} vs {home_team} @ {name_column[0].text.strip()}\n")
+                        time = name_column[0].text.strip()
+                        if time == "":
+                            time = "(No time has been set yet...)"
+                        print(f"{away_team} vs {home_team} @ {time}\n")
 
         else:
             print("No schedule table found on the page.")
