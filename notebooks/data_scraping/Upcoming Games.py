@@ -26,7 +26,7 @@ def scrape_nba_schedule():
             # Extract the rows of the table (each row represents a game)
             rows = schedule_table.find_all("tr")
             # Print the schedule for today
-            print(f"Upcoming Games: ")
+            print(f"Upcoming Games (Including Today): \n")
             key = 0
             for row in rows[1:]:
                 columns = row.find_all("th")
@@ -39,7 +39,7 @@ def scrape_nba_schedule():
                         print(game_date)
                         home_team = name_column[3].text.strip()
                         away_team = name_column[1].text.strip()
-                        print(f"{away_team} vs {home_team} @ {name_column[0].text.strip()}")
+                        print(f"{away_team} vs {home_team} @ {name_column[0].text.strip()}\n")
 
         else:
             print("No schedule table found on the page.")
