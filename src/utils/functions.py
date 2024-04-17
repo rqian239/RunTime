@@ -33,7 +33,12 @@ def get_top_left_pixel_color(image_path):
 
 def get_team_roster(abbrev):
     team_id = get_team_id_from_abbrev(abbrev)
-    return commonteamroster.CommonTeamRoster(team_id=team_id).common_team_roster.get_data_frame()
+    roster_df = commonteamroster.CommonTeamRoster(team_id=team_id).common_team_roster.get_data_frame()
+    
+    selected_columns = ['PLAYER', 'NUM', 'POSITION', 'HEIGHT', 'BIRTH_DATE', 'AGE', 'SCHOOL']
+    roster_filtered = roster_df.loc[:, selected_columns]
+    
+    return roster_filtered
 
 def get_social_media_links(abbrev):
     team_id = get_team_id_from_abbrev(abbrev)

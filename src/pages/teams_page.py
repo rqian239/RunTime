@@ -164,16 +164,36 @@ def build_team_info_body(abbrev):
     return team_info_body
 
 def build_roster_body(abbrev):
+    # Get the roster DataFrame
     roster_df = get_team_roster(abbrev)
+    
+    # Create the roster table with bordered set to True
+    roster_table = dbc.Table.from_dataframe(roster_df, striped=True, bordered=True, hover=True, className="table-bordered")
 
+    # Define the gradient border color
+    border_color = "#834847"  # Cyber color gradient
+
+    # Add custom CSS to ensure the gradient border color
+    roster_table.style = {
+        "border": f"2px solid {border_color}",  # Use the defined border color
+        "border-radius": "8px",  # Rounded corners
+        "box-shadow": "0 4px 6px rgba(0, 0, 0, 0.1)",  # Add shadow for depth
+        "font-size": "14px",  # Increase font size
+        "color": "#333",  # Text color
+        "margin": "auto"  # Center the table horizontally
+    }
+
+    # Wrap the table in a container
     roster_body = dbc.Container(
-        children=[
-            dbc.Table.from_dataframe(roster_df, striped=True, bordered=True, hover=True)
-        ],
+        children=[roster_table],
         class_name="centered"
     )
 
     return roster_body
+
+
+
+
 
 def build_general_team_info_body(abbrev):
     
@@ -371,5 +391,3 @@ def update_team_info(roster_clicks, general_info_clicks, schedule_clicks, standi
         return build_team_standings_body(team_selection)
     else:
         return no_update  # If none match, do nothing.
-
-
