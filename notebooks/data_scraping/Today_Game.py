@@ -39,8 +39,16 @@ def scrape_Today_nba_schedule():
                     games.append({"Home Team": home_team, "Visitor Team": away_team, "Date": game_date, "Time": game_time})
             # Convert the list of dictionaries into a DataFrame
             schedule_df = pd.DataFrame(games)
+            if schedule_df.empty:
+                schedule_df = "No Games Today"
             return schedule_df
         else:
             print("No schedule table found on the page.")
     else:
         print(f"Failed to retrieve NBA schedule. Status code: {response.status_code}")
+
+# def main():
+#     print(scrape_Today_nba_schedule())
+#
+# if __name__ == "__main__":
+#     main()

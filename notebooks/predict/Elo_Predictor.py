@@ -160,6 +160,8 @@ def update_elo(team_pts, opp_pts, team_elo_before, team_opp_elo_before, home):
 
     return team_elo_after, team_opp_elo_after
 
+
+
 # Create DataFrames to store elo calculations for each game and elos for each team
 elo_df = pd.DataFrame(columns=dtype.keys()).astype(dtype)
 
@@ -270,5 +272,10 @@ def get_winner(team_abbv1, team_abbv2):
     new_df = pd.DataFrame(data)
     return new_df
 
+# def main():
+#     print(get_winner("MIA", "CLE"))
+#
+# if __name__ == "__main__":
+#     main()
 
 

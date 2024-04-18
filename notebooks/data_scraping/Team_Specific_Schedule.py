@@ -71,11 +71,19 @@ def scrape_team_specific_schedule(team_abbreviation):
             schedule_df = pd.DataFrame(games)
             # convert with most recent games first
             schedule_df = schedule_df[::-1]
+            if schedule_df.empty:
+                schedule_df = "This team has no schedule lol"
             return schedule_df
         else:
             print("table not found")
     else:
         print(f"Failed to retrieve NBA schedule. Status code: {response.status_code}")
+
+# def main():
+#     print(scrape_team_specific_schedule("LAL"))
+#
+# if __name__ == "__main__":
+#     main()
 
 
 

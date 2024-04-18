@@ -43,8 +43,16 @@ def scrape_upcoming_nba_schedule():
 
             # Convert the list of dictionaries into a DataFrame
             schedule_df = pd.DataFrame(games)
+            if schedule_df.empty:
+                schedule_df = "No Games for the week"
             return schedule_df
         else:
             print("No schedule table found on the page.")
     else:
         print(f"Failed to retrieve NBA schedule. Status code: {response.status_code}")
+
+# def main():
+#     print(scrape_upcoming_nba_schedule())
+#
+# if __name__ == "__main__":
+#     main()
