@@ -327,11 +327,24 @@ def build_team_schedule_body(abbrev):
 
 def build_team_standings_body(abbrev):
 
+    standings_df = get_league_standings(abbrev)
+
+    standings_table = dbc.Table.from_dataframe(standings_df, striped=True,bordered=True, hover=True, className="table-bordered")
+
+    border_color = "#834847"  # Cyber color gradient
+
+        # Add custom CSS to ensure the gradient border color
+    standings_table.style = {
+        "border": f"2px solid {border_color}",  # Use the defined border color
+        "border-radius": "8px",  # Rounded corners
+        "box-shadow": "0 4px 6px rgba(0, 0, 0, 0.1)",  # Add shadow for depth
+        "font-size": "14px",  # Increase font size
+        "color": "#333",  # Text color
+        "margin": "auto"  # Center the table horizontally
+    }
     # Create the standings body here
     team_standings_body = dbc.Container(
-        children=[
-            html.P(f"This is the standings body for {abbrev}.")
-        ],
+        children=[standings_table],
         class_name="text-center"
     )
 
@@ -352,7 +365,6 @@ def display_team_info(team_selection):
     else:
         return build_team_info_body(team_selection)
 
-def build_team_standings_body(abbrev):
     standings_df = get_league_standings()  # Call a function to get the league standings data
 
     standings_body = dbc.Container(
