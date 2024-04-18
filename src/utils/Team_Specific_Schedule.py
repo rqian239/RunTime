@@ -8,7 +8,7 @@ nba_teams = [
     {"team": "Atlanta Hawks", "abbreviation": "ATL"},
     {"team": "Boston Celtics", "abbreviation": "BOS"},
     {"team": "Brooklyn Nets", "abbreviation": "BKN"},
-    {"team": "Charlotte Hornets", "abbreviation": "CHA"},
+    {"team": "Charlotte Hornets", "abbreviation": "CHO"},
     {"team": "Chicago Bulls", "abbreviation": "CHI"},
     {"team": "Cleveland Cavaliers", "abbreviation": "CLE"},
     {"team": "Dallas Mavericks", "abbreviation": "DAL"},
@@ -80,7 +80,7 @@ def scrape_team_specific_schedule(team_abbreviation):
         print(f"Failed to retrieve NBA schedule. Status code: {response.status_code}")
 
 def main():
-    print(scrape_team_specific_schedule("MIA"))
+    print(scrape_team_specific_schedule("CHA"))
 
 if __name__ == "__main__":
     main()

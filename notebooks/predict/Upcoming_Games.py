@@ -11,7 +11,7 @@ nba_teams = [
     {"team": "Atlanta Hawks", "abbreviation": "ATL"},
     {"team": "Boston Celtics", "abbreviation": "BOS"},
     {"team": "Brooklyn Nets", "abbreviation": "BKN"},
-    {"team": "Charlotte Hornets", "abbreviation": "CHA"},
+    {"team": "Charlotte Hornets", "abbreviation": "CHO"},
     {"team": "Chicago Bulls", "abbreviation": "CHI"},
     {"team": "Cleveland Cavaliers", "abbreviation": "CLE"},
     {"team": "Dallas Mavericks", "abbreviation": "DAL"},
