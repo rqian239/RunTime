@@ -8,6 +8,7 @@ from data.nba_teams import get_all_team_options
 from components.navbar import navbar_simple
 from components.footer import footer
 from utils.functions import basic_team_info, detailed_team_info, get_team_championships, get_team_roster, get_social_media_links, get_league_standings
+from utils.Team_Specific_Schedule import scrape_team_specific_schedule
 from utils.functions import get_top_left_pixel_color
 from assets.links_to_nba_logo_gifs import nba_logo_gifs_links
 
@@ -314,16 +315,16 @@ def build_general_team_info_body(abbrev):
     return general_team_info_body
 
 def build_team_schedule_body(abbrev):
+ 
+    schedule_df = scrape_team_specific_schedule(abbrev)
 
-    # Create the schedule body here
-    team_schedule_body = dbc.Container(
-        children=[
-            html.P(f"This is the schedule body for {abbrev}.")
-        ],
-        class_name="text-center"
-    )
-
-    return team_schedule_body
+    if isinstance(schedule_df, pd.DataFrame):
+        schedule_table = dbc.Table.from_dataframe(schedule_df, striped=True, bordered=True, hover=True)
+        schedule_body = dbc.Container(children=[schedule_table], class_name="centered")
+    else:
+        schedule_body = dbc.Container(children=[html.P("This team has no schedule.")], class_name="text-center")
+    
+    return schedule_body
 
 def build_team_standings_body(abbrev):
 
