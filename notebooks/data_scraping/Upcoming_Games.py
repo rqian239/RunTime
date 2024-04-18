@@ -3,7 +3,7 @@ import calendar
 from bs4 import BeautifulSoup
 from datetime import date, datetime
 
-def scrape_nba_schedule():
+def scrape_upcoming_nba_schedule():
     # Get today's date
     today = date.today()
     month = calendar.month_abbr[datetime.now().month]
@@ -33,6 +33,7 @@ def scrape_nba_schedule():
                 game_date = columns[0].text.strip()
                 if day in game_date and month in game_date:
                     key = 1
+                ##if day and month are after a week, key  == 0
                 if key == 1:
                     name_column = row.find_all("td")
                     if name_column[1].text != "":
@@ -50,7 +51,7 @@ def scrape_nba_schedule():
         print(f"Failed to retrieve NBA schedule. Status code: {response.status_code}")
 
 def main():
-    scrape_nba_schedule()
+    scrape_upcoming_nba_schedule()
 
 if __name__ == "__main__":
     main()

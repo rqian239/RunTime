@@ -3,7 +3,7 @@ import calendar
 from bs4 import BeautifulSoup
 from datetime import date, datetime
 
-def scrape_nba_schedule():
+def scrape_Today_nba_schedule():
     # Get today's date
     today = date.today()
     month = calendar.month_abbr[datetime.now().month]
@@ -41,7 +41,7 @@ def scrape_nba_schedule():
         print(f"Failed to retrieve NBA schedule. Status code: {response.status_code}")
 
 def main():
-    scrape_nba_schedule()
+    scrape_Today_nba_schedule()
 
 if __name__ == "__main__":
     main()
