@@ -46,6 +46,11 @@ def get_social_media_links(abbrev):
     social_df.set_index('ACCOUNTTYPE', inplace=True)
     return social_df.loc['Facebook', 'WEBSITE_LINK'], social_df.loc['Twitter', 'WEBSITE_LINK'], social_df.loc['Instagram', 'WEBSITE_LINK']
 
-def get_league_standings():
-    standings_data = leaguestandings.LeagueStandings(season='2023-24').standings.get_data_frame()
-    return standings_data
+def get_league_standings(abbrev):
+    league_id = get_team_id_from_abbrev(abbrev)
+    standings_df = leaguestandings.LeagueStandings(season='2023-24').standings.get_data_frame()
+    
+    selected_columns = ['TeamCity', 'TeamName', 'Conference', 'PlayoffRank', 'Division', 'DivisionRank', 'LeagueRank']
+    roster_filtered = standings_df.loc[:, selected_columns]
+    
+    return roster_filtered

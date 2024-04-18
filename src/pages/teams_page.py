@@ -8,6 +8,7 @@ from data.nba_teams import get_all_team_options
 from components.navbar import navbar_simple
 from components.footer import footer
 from utils.functions import basic_team_info, detailed_team_info, get_team_championships, get_team_roster, get_social_media_links, get_league_standings
+from utils.Team_Specific_Schedule import scrape_team_specific_schedule
 from utils.functions import get_top_left_pixel_color
 from assets.links_to_nba_logo_gifs import nba_logo_gifs_links
 
@@ -314,24 +315,49 @@ def build_general_team_info_body(abbrev):
     return general_team_info_body
 
 def build_team_schedule_body(abbrev):
+ 
+    schedule_df = scrape_team_specific_schedule(abbrev)
+    
+    border_color = "#834847"  # Cyber color gradient
 
-    # Create the schedule body here
-    team_schedule_body = dbc.Container(
-        children=[
-            html.P(f"This is the schedule body for {abbrev}.")
-        ],
-        class_name="text-center"
-    )
+    if isinstance(schedule_df, pd.DataFrame):
+        schedule_table = dbc.Table.from_dataframe(schedule_df, striped=True, bordered=True, hover=True)
 
-    return team_schedule_body
+        schedule_table.style = {
+            "border": f"2px solid {border_color}",  # Use the defined border color
+            "border-radius": "8px",  # Rounded corners
+            "box-shadow": "0 4px 6px rgba(0, 0, 0, 0.1)",  # Add shadow for depth
+            "font-size": "14px",  # Increase font size
+            "color": "#333",  # Text color
+            "margin": "auto"  # Center the table horizontally
+        }
+
+        schedule_body = dbc.Container(children=[schedule_table], class_name="centered")
+    else:
+        schedule_body = dbc.Container(children=[html.P("This team has no schedule.")], class_name="text-center")
+    
+    return schedule_body
 
 def build_team_standings_body(abbrev):
 
+    standings_df = get_league_standings(abbrev)
+
+    standings_table = dbc.Table.from_dataframe(standings_df, striped=True,bordered=True, hover=True, className="table-bordered")
+
+    border_color = "#834847"  # Cyber color gradient
+
+        # Add custom CSS to ensure the gradient border color
+    standings_table.style = {
+        "border": f"2px solid {border_color}",  # Use the defined border color
+        "border-radius": "8px",  # Rounded corners
+        "box-shadow": "0 4px 6px rgba(0, 0, 0, 0.1)",  # Add shadow for depth
+        "font-size": "14px",  # Increase font size
+        "color": "#333",  # Text color
+        "margin": "auto"  # Center the table horizontally
+    }
     # Create the standings body here
     team_standings_body = dbc.Container(
-        children=[
-            html.P(f"This is the standings body for {abbrev}.")
-        ],
+        children=[standings_table],
         class_name="text-center"
     )
 
@@ -352,7 +378,6 @@ def display_team_info(team_selection):
     else:
         return build_team_info_body(team_selection)
 
-def build_team_standings_body(abbrev):
     standings_df = get_league_standings()  # Call a function to get the league standings data
 
     standings_body = dbc.Container(

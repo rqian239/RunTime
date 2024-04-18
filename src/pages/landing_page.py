@@ -3,7 +3,7 @@ import dash_bootstrap_components as dbc
 from dash import dcc, html
 import pandas as pd
 from pathlib import Path
-
+from utils.Today_Game import scrape_Today_nba_schedule
 
 from components.navbar import navbar_simple
 from components.footer import footer
@@ -28,6 +28,32 @@ game_schedule_data['Game'] = game_schedule_data['Home Team'] + ' vs ' + game_sch
 # Navbar and footer imported here
 nav = navbar_simple()
 ftr = footer()
+
+def build_team_schedule_body():
+    schedule_df = scrape_Today_nba_schedule()
+    border_color = "#834847"  # Cyber color gradient
+
+    if isinstance(schedule_df, pd.DataFrame) and not schedule_df.empty:
+        # If schedule_df is a non-empty DataFrame
+        schedule_table = dbc.Table.from_dataframe(schedule_df, striped=True, bordered=True, hover=True)
+
+        schedule_table.style = {
+            "border": f"2px solid {border_color}",  # Use the defined border color
+            "border-radius": "8px",  # Rounded corners
+            "box-shadow": "0 4px 6px rgba(0, 0, 0, 0.1)",  # Add shadow for depth
+            "font-size": "14px",  # Increase font size
+            "color": "#333",  # Text color
+            "margin": "auto"  # Center the table horizontally
+        }
+
+        schedule_body = dbc.Container(children=[schedule_table], class_name="centered")
+    else:
+        # If schedule_df is empty or not a DataFrame
+        schedule_body = dbc.Container(children=[html.P("No Games Today.")], class_name="text-center")
+    
+    return schedule_body
+
+    
 
 # Define the layout for the page
 body = dbc.Container(
@@ -175,7 +201,8 @@ body = dbc.Container(
                     [
                         html.H2("Game Schedule", className="home-page-title", style={'textAlign': 'center'}),
                         html.Br(), 
-                        html.P("To view the games scheduled for March and April of the 2023-2024 season, utilize the scroll bar to navigate through them.", style={'textAlign': 'center'})
+                        html.P("To view the games scheduled for March and April of the 2023-2024 season, utilize the scroll bar to navigate through them.", style={'textAlign': 'center'}),
+                        build_team_schedule_body()
                     ],
                 )
             ],
@@ -185,77 +212,7 @@ body = dbc.Container(
             [
                 dbc.Col(
                     [
-                        html.H2("March", className="home-page-title", style={'textAlign': 'center'}),
-                        html.Div(
-                            [
-                                html.Table(
-                                    className="table table-bordered table-hover",
-                                    children=[
-                                        html.Thead(
-                                            html.Tr(
-                                                [
-                                                    html.Th("Game", style={'text-align': 'center'}),
-                                                    html.Th("Date", style={'text-align': 'center'}),
-                                                    html.Th("Location", style={'text-align': 'center'})
-                                                ]
-                                            )
-                                        ),
-                                        html.Tbody(
-                                            [
-                                                html.Tr(
-                                                    [
-                                                        html.Td(game["Game"]),
-                                                        html.Td(game["Date"]),
-                                                        html.Td(game["Location"])
-                                                    ]
-                                                )
-                                                for index, game in game_schedule_data.iterrows()
-                                                if pd.to_datetime(game["Date"], dayfirst=True).month_name() == 'March'
-                                            ]
-                                        )
-                                    ]
-                                )
-                            ],
-                            style={'maxHeight': '400px', 'overflowY': 'scroll', 'border': '2px solid #cccccc', 'border-radius': '5px'}
-                        )
-                    ],
-                    md=6
-                ),
-                dbc.Col(
-                    [
-                        html.H2("April", className="home-page-title", style={'textAlign': 'center'}),
-                        html.Div(
-                            [
-                                html.Table(
-                                    className="table table-bordered table-hover",
-                                    children=[
-                                        html.Thead(
-                                            html.Tr(
-                                                [
-                                                    html.Th("Game", style={'text-align': 'center'}),
-                                                    html.Th("Date", style={'text-align': 'center'}),
-                                                    html.Th("Location", style={'text-align': 'center'})
-                                                ]
-                                            )
-                                        ),
-                                        html.Tbody(
-                                            [
-                                                html.Tr(
-                                                    [
-                                                        html.Td(game["Game"]),
-                                                        html.Td(game["Date"]),
-                                                        html.Td(game["Location"])
-                                                    ]
-                                                )
-                                                for index, game in game_schedule_data.iterrows()
-                                                if pd.to_datetime(game["Date"], dayfirst=True).month_name() == 'April'
-                                            ]
-                                        )
-                                    ]
-                                )
-                            ],
-                            style={'maxHeight': '400px', 'overflowY': 'scroll','border': '2px solid #cccccc', 'border-radius': '5px'}
-                        )
+                        
                     ],
                     md=6
                 ),
@@ -266,5 +223,10 @@ body = dbc.Container(
     class_name="body-flex-wrapper",
 )
 
+
+
+
 # This is how Dash knows what the layout of the page is!
 layout = html.Div([nav, body, ftr], className="make-footer-stick")
+
+

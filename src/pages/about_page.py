@@ -204,11 +204,11 @@ dbc.Row(
                             [
                                 html.P(
                                     """
-                                    Curabitur sodales ligula in libero. Sed dignissim lacinia nunc. Curabitur tortor. 
-                                    Pellentesque nibh. Aenean quam. In scelerisque sem at dolor. Maecenas mattis. Sed 
-                                    convallis tristique sem. Proin ut ligula vel nunc egestas porttitor. Morbi lectus 
-                                    risus, iaculis vel, suscipit quis, luctus non, massa. Fusce ac turpis quis ligula 
-                                    lacinia aliquet. Mauris ipsum.
+                                    My name is Nikitha Chintalapati and I am a 4th-year Computer Science major with a minor in 
+                                    Digital Arts and Sciences. I have a wide skillset ranging from Software Engineering to Game Design, and I love 
+                                    showcasing my skills through different opportunities that allow me to be creative. In my free time, I enjoy exploring the intersection 
+                                    of technology and art, experimenting with new software tools and techniques to push the boundaries of what's possible. Whether it's 
+                                    coding a new algorithm or mastering a new design tool, I'm always eager to expand my knowledge and refine my skills.
                                     """,
                                     className="card-text"
                                 )
