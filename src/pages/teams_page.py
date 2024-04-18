@@ -317,9 +317,21 @@ def build_general_team_info_body(abbrev):
 def build_team_schedule_body(abbrev):
  
     schedule_df = scrape_team_specific_schedule(abbrev)
+    
+    border_color = "#834847"  # Cyber color gradient
 
     if isinstance(schedule_df, pd.DataFrame):
         schedule_table = dbc.Table.from_dataframe(schedule_df, striped=True, bordered=True, hover=True)
+
+        schedule_table.style = {
+            "border": f"2px solid {border_color}",  # Use the defined border color
+            "border-radius": "8px",  # Rounded corners
+            "box-shadow": "0 4px 6px rgba(0, 0, 0, 0.1)",  # Add shadow for depth
+            "font-size": "14px",  # Increase font size
+            "color": "#333",  # Text color
+            "margin": "auto"  # Center the table horizontally
+        }
+
         schedule_body = dbc.Container(children=[schedule_table], class_name="centered")
     else:
         schedule_body = dbc.Container(children=[html.P("This team has no schedule.")], class_name="text-center")
