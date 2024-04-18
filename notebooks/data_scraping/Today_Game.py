@@ -47,8 +47,8 @@ def scrape_Today_nba_schedule():
     else:
         print(f"Failed to retrieve NBA schedule. Status code: {response.status_code}")
 
-def main():
-    print(scrape_Today_nba_schedule())
-
-if __name__ == "__main__":
-    main()
+# def main():
+#     print(scrape_Today_nba_schedule())
+#
+# if __name__ == "__main__":
+#     main()

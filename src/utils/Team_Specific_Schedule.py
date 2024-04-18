@@ -1,3 +1,5 @@
+import time
+
 import requests
 import calendar
 from bs4 import BeautifulSoup
@@ -79,11 +81,14 @@ def scrape_team_specific_schedule(team_abbreviation):
     else:
         print(f"Failed to retrieve NBA schedule. Status code: {response.status_code}")
 
-def main():
-    print(scrape_team_specific_schedule("CHA"))
-
-if __name__ == "__main__":
-    main()
+# def main():
+#     for team_info in nba_teams:
+#         print(team_info["team"])
+#         print(scrape_team_specific_schedule(team_info["abbreviation"]))
+#         time.sleep(3)
+#
+# if __name__ == "__main__":
+#     main()
 
 
 
