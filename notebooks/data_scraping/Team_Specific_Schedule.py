@@ -74,6 +74,8 @@ def scrape_team_specific_schedule(team_abbreviation):
             return schedule_df
         else:
             print("table not found")
+    else:
+        print(f"Failed to retrieve NBA schedule. Status code: {response.status_code}")
 
 
 
