@@ -1,7 +1,8 @@
 import requests
 import calendar
 from bs4 import BeautifulSoup
-from datetime import date, datetime
+from datetime import date, datetime, timedelta
+import pandas as pd
 
 def scrape_upcoming_nba_schedule():
     # Get today's date
@@ -9,6 +10,7 @@ def scrape_upcoming_nba_schedule():
     month = calendar.month_abbr[datetime.now().month]
     month_url = today.strftime("%B").lower()
     day = today.strftime("%d")
+    one_week = today + timedelta(days=7)
     # Construct the URL based on today's date
     url = f"https://www.basketball-reference.com/leagues/NBA_{today.year}_games-{month_url}.html"
     # Send an HTTP GET request to the URL
@@ -25,33 +27,31 @@ def scrape_upcoming_nba_schedule():
         if schedule_table:
             # Extract the rows of the table (each row represents a game)
             rows = schedule_table.find_all("tr")
-            # Print the schedule for today
-            print(f"Upcoming Games (Including Today): \n")
-            key = 0
+            # Initialize a list to store game information
+            games = []
             for row in rows[1:]:
                 columns = row.find_all("th")
                 game_date = columns[0].text.strip()
-                if day in game_date and month in game_date:
-                    key = 1
-                ##if day and month are after a week, key  == 0
-                if key == 1:
+                game_date_obj = datetime.strptime(game_date, "%a, %b %d, %Y").date()
+                if today <= game_date_obj <= one_week:
                     name_column = row.find_all("td")
                     if name_column[1].text != "":
-                        print(game_date)
                         home_team = name_column[3].text.strip()
                         away_team = name_column[1].text.strip()
-                        time = name_column[0].text.strip()
-                        if time == "":
-                            time = "(No time has been set yet...)"
-                        print(f"{away_team} vs {home_team} @ {time}\n")
+                        game_time = name_column[0].text.strip() if name_column[0].text.strip() else "(No time has been set yet...)"
+                        games.append({"Home Team": home_team, "Visitor Team": away_team, "Date": game_date, "Time": game_time})
 
+            # Convert the list of dictionaries into a DataFrame
+            schedule_df = pd.DataFrame(games)
+            return schedule_df
         else:
             print("No schedule table found on the page.")
     else:
         print(f"Failed to retrieve NBA schedule. Status code: {response.status_code}")
 
 def main():
-    scrape_upcoming_nba_schedule()
+    schedule_df = scrape_upcoming_nba_schedule()
+    print(schedule_df)
 
 if __name__ == "__main__":
     main()

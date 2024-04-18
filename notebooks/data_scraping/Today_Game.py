@@ -1,7 +1,8 @@
-import requests
 import calendar
+import requests
 from bs4 import BeautifulSoup
 from datetime import date, datetime
+import pandas as pd
 
 def scrape_Today_nba_schedule():
     # Get today's date
@@ -25,8 +26,8 @@ def scrape_Today_nba_schedule():
         if schedule_table:
             # Extract the rows of the table (each row represents a game)
             rows = schedule_table.find_all("tr")
-            # Print the schedule for today
-            print(f"Today's NBA Schedule ({month_url.capitalize()} {day}, {today.year}): \n")
+            # Initialize a list to store game information
+            games = []
             for row in rows[1:]:
                 columns = row.find_all("th")
                 game_date = columns[0].text.strip()
@@ -34,14 +35,19 @@ def scrape_Today_nba_schedule():
                     name_column = row.find_all("td")
                     home_team = name_column[3].text.strip()
                     away_team = name_column[1].text.strip()
-                    print(f"{away_team} vs {home_team} @ {name_column[0].text.strip()}\n")
+                    game_time = name_column[0].text.strip()
+                    games.append({"Home Team": home_team, "Visitor Team": away_team, "Date": game_date, "Time": game_time})
+            # Convert the list of dictionaries into a DataFrame
+            schedule_df = pd.DataFrame(games)
+            return schedule_df
         else:
             print("No schedule table found on the page.")
     else:
         print(f"Failed to retrieve NBA schedule. Status code: {response.status_code}")
 
 def main():
-    scrape_Today_nba_schedule()
+    schedule_df = scrape_Today_nba_schedule()
+    print(schedule_df)
 
 if __name__ == "__main__":
     main()
