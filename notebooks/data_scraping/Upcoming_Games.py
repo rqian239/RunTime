@@ -48,10 +48,3 @@ def scrape_upcoming_nba_schedule():
             print("No schedule table found on the page.")
     else:
         print(f"Failed to retrieve NBA schedule. Status code: {response.status_code}")
-
-def main():
-    schedule_df = scrape_upcoming_nba_schedule()
-    print(schedule_df)
-
-if __name__ == "__main__":
-    main()
