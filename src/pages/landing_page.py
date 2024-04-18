@@ -199,14 +199,48 @@ body = dbc.Container(
             [
                 dbc.Col(
                     [
-                        html.H2("Game Schedule", className="home-page-title", style={'textAlign': 'center'}),
-                        html.Br(), 
-                        html.P("To view the games scheduled for March and April of the 2023-2024 season, utilize the scroll bar to navigate through them.", style={'textAlign': 'center'}),
-                        build_team_schedule_body()
+                        html.H2("Today's NBA Schedule", className="home-page-title", style={'textAlign': 'center'}),
+                        html.Br(),
+                        html.P("Check out today's NBA schedule below. Scroll to view the list of games happening today, including the home and visitor teams, along with the game date and time.", style={'textAlign': 'center'}),
+                        html.Br(),
+                        html.Div(
+                            [
+                                html.Table(
+                                    className="table table-bordered table-hover",
+                                    children=[
+                                        html.Thead(
+                                            html.Tr(
+                                                [
+                                                    html.Th("Home Team", style={'text-align': 'center'}),
+                                                    html.Th("Visitor Team", style={'text-align': 'center'}),
+                                                    html.Th("Date", style={'text-align': 'center'}),
+                                                    html.Th("Time", style={'text-align': 'center'}),
+                                                ]
+                                            )
+                                        ),
+                                        html.Tbody(
+                                            [
+                                                html.Tr(
+                                                    [
+                                                        html.Td(game["Home Team"]),
+                                                        html.Td(game["Visitor Team"]),
+                                                        html.Td(game["Date"]),
+                                                        html.Td(game["Time"]),
+                                                    ]
+                                                )
+                                                for index, game in scrape_Today_nba_schedule().iterrows()
+                                            ]
+                                        )
+                                    ]
+                                )
+                            ],
+                            style={'maxHeight': '400px', 'overflowY': 'scroll', 'border': '2px solid #cccccc', 'border-radius': '5px'}
+                        )
                     ],
-                )
+                    md=12
+                ),
             ],
-            class_name="my-5",
+            class_name="mb-5",
         ),
         dbc.Row(
             [
