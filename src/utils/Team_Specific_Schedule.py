@@ -9,8 +9,8 @@ import pandas as pd
 nba_teams = [
     {"team": "Atlanta Hawks", "abbreviation": "ATL"},
     {"team": "Boston Celtics", "abbreviation": "BOS"},
-    {"team": "Brooklyn Nets", "abbreviation": "BRK"},
-    {"team": "Charlotte Hornets", "abbreviation": "CHO"},
+    {"team": "Brooklyn Nets", "abbreviation": "BKN"},
+    {"team": "Charlotte Hornets", "abbreviation": "CHA"},
     {"team": "Chicago Bulls", "abbreviation": "CHI"},
     {"team": "Cleveland Cavaliers", "abbreviation": "CLE"},
     {"team": "Dallas Mavericks", "abbreviation": "DAL"},
@@ -30,7 +30,7 @@ nba_teams = [
     {"team": "Oklahoma City Thunder", "abbreviation": "OKC"},
     {"team": "Orlando Magic", "abbreviation": "ORL"},
     {"team": "Philadelphia 76ers", "abbreviation": "PHI"},
-    {"team": "Phoenix Suns", "abbreviation": "PHO"},
+    {"team": "Phoenix Suns", "abbreviation": "PHX"},
     {"team": "Portland Trail Blazers", "abbreviation": "POR"},
     {"team": "Sacramento Kings", "abbreviation": "SAC"},
     {"team": "San Antonio Spurs", "abbreviation": "SAS"},
@@ -40,6 +40,12 @@ nba_teams = [
 ]
 
 def scrape_team_specific_schedule(team_abbreviation):
+    if team_abbreviation == 'BKN':
+        team_abbreviation = 'BRK'
+    if team_abbreviation == 'CHA':
+        team_abbreviation = 'CHO'
+    if team_abbreviation == 'PHX':
+        team_abbreviation = 'PHO'
     year = datetime.now().year
     url = f"https://www.basketball-reference.com/teams/{team_abbreviation}/{year}_games.html#games_link"
     response = requests.get(url)
@@ -87,7 +93,7 @@ def main():
     #     print(scrape_team_specific_schedule(team_info["abbreviation"]))
     #     time.sleep(3)
 
-    print(scrape_team_specific_schedule("PHX"))
+    print(scrape_team_specific_schedule("PHO"))
 
 if __name__ == "__main__":
     main()
