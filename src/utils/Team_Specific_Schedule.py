@@ -9,7 +9,7 @@ import pandas as pd
 nba_teams = [
     {"team": "Atlanta Hawks", "abbreviation": "ATL"},
     {"team": "Boston Celtics", "abbreviation": "BOS"},
-    {"team": "Brooklyn Nets", "abbreviation": "BKN"},
+    {"team": "Brooklyn Nets", "abbreviation": "BRK"},
     {"team": "Charlotte Hornets", "abbreviation": "CHO"},
     {"team": "Chicago Bulls", "abbreviation": "CHI"},
     {"team": "Cleveland Cavaliers", "abbreviation": "CLE"},
@@ -30,7 +30,7 @@ nba_teams = [
     {"team": "Oklahoma City Thunder", "abbreviation": "OKC"},
     {"team": "Orlando Magic", "abbreviation": "ORL"},
     {"team": "Philadelphia 76ers", "abbreviation": "PHI"},
-    {"team": "Phoenix Suns", "abbreviation": "PHX"},
+    {"team": "Phoenix Suns", "abbreviation": "PHO"},
     {"team": "Portland Trail Blazers", "abbreviation": "POR"},
     {"team": "Sacramento Kings", "abbreviation": "SAC"},
     {"team": "San Antonio Spurs", "abbreviation": "SAS"},
