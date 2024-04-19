@@ -1,7 +1,7 @@
 all_nba_teams = {
     'Atlanta Hawks' : 'ATL',
     'Boston Celtics' : 'BOS',
-    'Brooklyn Nets' : 'BRK' or 'BKN',
+    'Brooklyn Nets' : 'BKN',
     'Charlotte Hornets' : 'CHA',
     'Chicago Bulls' : 'CHI',
     'Cleveland Cavaliers' : 'CLE',
@@ -22,7 +22,7 @@ all_nba_teams = {
     'Oklahoma City Thunder' : 'OKC',
     'Orlando Magic' : 'ORL',
     'Philadelphia 76ers' : 'PHI',
-    'Phoenix Suns' : 'PHO' or 'PHX',
+    'Phoenix Suns' : 'PHX',
     'Portland Trail Blazers' : 'POR',
     'Sacramento Kings' : 'SAC',
     'San Antonio Spurs' : 'SAS',
