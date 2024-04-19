@@ -81,14 +81,16 @@ def scrape_team_specific_schedule(team_abbreviation):
     else:
         print(f"Failed to retrieve NBA schedule. Status code: {response.status_code}")
 
-# def main():
-#     for team_info in nba_teams:
-#         print(team_info["team"])
-#         print(scrape_team_specific_schedule(team_info["abbreviation"]))
-#         time.sleep(3)
-#
-# if __name__ == "__main__":
-#     main()
+def main():
+    # for team_info in nba_teams:
+    #     print(team_info["team"])
+    #     print(scrape_team_specific_schedule(team_info["abbreviation"]))
+    #     time.sleep(3)
+
+    print(scrape_team_specific_schedule("PHO"))
+
+if __name__ == "__main__":
+    main()
 
 
 
