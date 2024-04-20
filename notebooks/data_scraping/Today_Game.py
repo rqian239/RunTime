@@ -7,9 +7,7 @@ import pandas as pd
 def scrape_Today_nba_schedule():
     # Get today's date
     today = date.today()
-    month = calendar.month_abbr[datetime.now().month]
     month_url = today.strftime("%B").lower()
-    day = today.strftime("%d")
     # Construct the URL based on today's date
     url = f"https://www.basketball-reference.com/leagues/NBA_{today.year}_games-{month_url}.html"
     # Send an HTTP GET request to the URL
@@ -37,6 +35,8 @@ def scrape_Today_nba_schedule():
                     home_team = name_column[3].text.strip()
                     away_team = name_column[1].text.strip()
                     game_time = name_column[0].text.strip()
+                    if game_time == "":
+                        game_time = "No Time Set..."
                     games.append({"Home Team": home_team, "Visitor Team": away_team, "Date": game_date, "Time": game_time})
             # Convert the list of dictionaries into a DataFrame
             schedule_df = pd.DataFrame(games)

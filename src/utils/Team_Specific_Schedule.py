@@ -99,8 +99,6 @@ def main():
         print(scrape_team_specific_schedule(team_info["abbreviation"]))
         time.sleep(3)
 
-    print(scrape_team_specific_schedule("PHO"))
-
 if __name__ == "__main__":
     main()
 
