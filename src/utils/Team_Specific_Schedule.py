@@ -48,6 +48,12 @@ def scrape_team_specific_schedule(team_abbreviation):
         team_abbreviation = 'PHO'
     year = datetime.now().year
     url = f"https://www.basketball-reference.com/teams/{team_abbreviation}/{year}_games.html#games_link"
+    if team_abbreviation == 'BRK':
+        team_abbreviation = 'BKN'
+    if team_abbreviation == 'CHO':
+        team_abbreviation = 'CHA'
+    if team_abbreviation == 'PHO':
+        team_abbreviation = 'PHX'
     response = requests.get(url)
     if response.status_code == 200:
         # Parse the HTML content of the page
@@ -88,10 +94,10 @@ def scrape_team_specific_schedule(team_abbreviation):
         print(f"Failed to retrieve NBA schedule. Status code: {response.status_code}")
 
 def main():
-    # for team_info in nba_teams:
-    #     print(team_info["team"])
-    #     print(scrape_team_specific_schedule(team_info["abbreviation"]))
-    #     time.sleep(3)
+    for team_info in nba_teams:
+        print(team_info["team"])
+        print(scrape_team_specific_schedule(team_info["abbreviation"]))
+        time.sleep(3)
 
     print(scrape_team_specific_schedule("PHO"))
 
