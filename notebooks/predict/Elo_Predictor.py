@@ -272,10 +272,11 @@ def get_winner(team_abbv1, team_abbv2):
     new_df = pd.DataFrame(data)
     return new_df
 
-def main():
-    print(get_winner("MIA", "GSW"))
-
-if __name__ == "__main__":
-    main()
+# def main():
+#     print(elo_df)
+#     print(get_winner("MIA", "CHI"))
+#
+# if __name__ == "__main__":
+#     main()
 
 
