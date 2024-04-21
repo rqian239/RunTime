@@ -263,19 +263,19 @@ def project_season_wins(elo):
 
 # spews dataframe of 1 row with stats that include: teams, winner, point differential, what percantage they have of winning per team
 # function for fantasy games
-def get_winner(team_abbv1, team_abbv2):
-    team_elo_1 = get_recent_elo(team_abbv1)
-    team_elo_2 = get_recent_elo(team_abbv2)
-    winner = team_abbv1
+def get_winner(home_team_abbrev, away_team_abbrev):
+    team_elo_1 = get_recent_elo(home_team_abbrev) + 100
+    team_elo_2 = get_recent_elo(away_team_abbrev)
+    winner = home_team_abbrev
     if team_elo_1 < team_elo_2:
-        winner = team_abbv2
-    if winner == team_abbv1:
+        winner = away_team_abbrev
+    if winner == home_team_abbrev:
         win_prob = calculate_expected_win_probability(team_elo_1, team_elo_2)
         point_spread_new = point_spread(team_elo_1, team_elo_2)
     else:
         win_prob = calculate_expected_win_probability(team_elo_2, team_elo_1)
         point_spread_new = point_spread(team_elo_2, team_elo_1)
-    data = {'Team1': [team_abbv1], 'Team2': [team_abbv2], 'Expected_Winner': [winner], 'Winner_Probability': [win_prob],
+    data = {'Home': [home_team_abbrev], 'Away': [away_team_abbrev], 'Expected_Winner': [winner], 'Winner_Probability': [win_prob],
             'Point_Spread': [point_spread_new]}
     new_df = pd.DataFrame(data)
     return new_df
