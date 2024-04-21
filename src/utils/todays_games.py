@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 from datetime import date, datetime
 import pandas as pd
 
-def scrape_Today_nba_schedule():
+def scrape_todays_nba_schedule():
     # Get today's date
     today = date.today()
     month = calendar.month_abbr[datetime.now().month]
@@ -17,6 +17,7 @@ def scrape_Today_nba_schedule():
 
     # Check if the request was successful (status code 200)
     if response.status_code == 200:
+        print("Successfully retrieved page from Basketball Reference")
         # Parse the HTML content of the page
         soup = BeautifulSoup(response.content, "html.parser")
 
@@ -44,6 +45,17 @@ def scrape_Today_nba_schedule():
             return schedule_df
         else:
             print("No schedule table found on the page.")
+            return None
     else:
         print(f"Failed to retrieve NBA schedule. Status code: {response.status_code}")
+        return None
 
+def main():
+    todays_games_df = scrape_todays_nba_schedule()
+
+    if todays_games_df is not None:
+        print(todays_games_df.head(10))
+
+
+if __name__ == "__main__":
+    main()
