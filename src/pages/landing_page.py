@@ -3,7 +3,8 @@ import dash_bootstrap_components as dbc
 from dash import dcc, html
 import pandas as pd
 from pathlib import Path
-from utils.Today_Game import scrape_Today_nba_schedule
+# from utils.Today_Game import scrape_Today_nba_schedule
+from utils.this_weeks_games import scrape_this_weeks_nba_schedule
 
 from components.navbar import navbar_simple
 from components.footer import footer
@@ -29,29 +30,29 @@ game_schedule_data['Game'] = game_schedule_data['Home Team'] + ' vs ' + game_sch
 nav = navbar_simple()
 ftr = footer()
 
-def build_team_schedule_body():
-    schedule_df = scrape_Today_nba_schedule()
-    border_color = "#834847"  # Cyber color gradient
+# def build_team_schedule_body():
+#     schedule_df = scrape_Today_nba_schedule()
+#     border_color = "#834847"  # Cyber color gradient
 
-    if isinstance(schedule_df, pd.DataFrame) and not schedule_df.empty:
-        # If schedule_df is a non-empty DataFrame
-        schedule_table = dbc.Table.from_dataframe(schedule_df, striped=True, bordered=True, hover=True)
+#     if isinstance(schedule_df, pd.DataFrame) and not schedule_df.empty:
+#         # If schedule_df is a non-empty DataFrame
+#         schedule_table = dbc.Table.from_dataframe(schedule_df, striped=True, bordered=True, hover=True)
 
-        schedule_table.style = {
-            "border": f"2px solid {border_color}",  # Use the defined border color
-            "border-radius": "8px",  # Rounded corners
-            "box-shadow": "0 4px 6px rgba(0, 0, 0, 0.1)",  # Add shadow for depth
-            "font-size": "14px",  # Increase font size
-            "color": "#333",  # Text color
-            "margin": "auto"  # Center the table horizontally
-        }
+#         schedule_table.style = {
+#             "border": f"2px solid {border_color}",  # Use the defined border color
+#             "border-radius": "8px",  # Rounded corners
+#             "box-shadow": "0 4px 6px rgba(0, 0, 0, 0.1)",  # Add shadow for depth
+#             "font-size": "14px",  # Increase font size
+#             "color": "#333",  # Text color
+#             "margin": "auto"  # Center the table horizontally
+#         }
 
-        schedule_body = dbc.Container(children=[schedule_table], class_name="centered")
-    else:
-        # If schedule_df is empty or not a DataFrame
-        schedule_body = dbc.Container(children=[html.P("No Games Today.")], class_name="text-center")
+#         schedule_body = dbc.Container(children=[schedule_table], class_name="centered")
+#     else:
+#         # If schedule_df is empty or not a DataFrame
+#         schedule_body = dbc.Container(children=[html.P("No Games Today.")], class_name="text-center")
     
-    return schedule_body
+#     return schedule_body
 
     
 
@@ -199,9 +200,9 @@ body = dbc.Container(
             [
                 dbc.Col(
                     [
-                        html.H2("Today's NBA Schedule", className="home-page-title", style={'textAlign': 'center'}),
+                        html.H2("This Week's NBA Games", className="home-page-title", style={'textAlign': 'center'}),
                         html.Br(),
-                        html.P("Check out today's NBA schedule below. Scroll to view the list of games happening today, including the home and visitor teams, along with the game date and time.", style={'textAlign': 'center'}),
+                        html.P("Scroll to view this week's NBA matchups.", style={'textAlign': 'center'}),
                         html.Br(),
                         html.Div(
                             [
@@ -211,11 +212,12 @@ body = dbc.Container(
                                         html.Thead(
                                             html.Tr(
                                                 [
-                                                    html.Th("Home Team", style={'text-align': 'center'}),
-                                                    html.Th("Visitor Team", style={'text-align': 'center'}),
-                                                    html.Th("Date", style={'text-align': 'center'}),
-                                                    html.Th("Time", style={'text-align': 'center'}),
-                                                ]
+                                                    html.Th("Home"),
+                                                    html.Th("Away"),
+                                                    html.Th("Date"),
+                                                    html.Th("Time"),
+                                                ],
+                                                className="table-heading"
                                             )
                                         ),
                                         html.Tbody(
@@ -226,9 +228,10 @@ body = dbc.Container(
                                                         html.Td(game["Visitor Team"]),
                                                         html.Td(game["Date"]),
                                                         html.Td(game["Time"]),
-                                                    ]
+                                                    ],
+                                                    #className="centered"
                                                 )
-                                                for index, game in scrape_Today_nba_schedule().iterrows()
+                                                for index, game in scrape_this_weeks_nba_schedule().iterrows()
                                             ]
                                         )
                                     ]
@@ -256,7 +259,6 @@ body = dbc.Container(
     ],
     class_name="body-flex-wrapper",
 )
-
 
 
 
