@@ -287,6 +287,7 @@ del initial_elo
 def main():
     print(elo_df)
     print(get_winner("MIN", "PHX"))
+    print(get_winner("TOR", "DET"))
 
 if __name__ == "__main__":
     main()
