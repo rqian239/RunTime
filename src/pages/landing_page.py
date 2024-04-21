@@ -201,8 +201,8 @@ body = dbc.Container(
                 dbc.Col(
                     [
                         html.H2("This Week's NBA Games", className="home-page-title", style={'textAlign': 'center'}),
-                        html.Br(),
-                        html.P("Scroll to view this week's NBA matchups.", style={'textAlign': 'center'}),
+                        # html.Br(),
+                        # html.P("Scroll to view this week's NBA matchups.", style={'textAlign': 'center'}),
                         html.Br(),
                         html.Div(
                             [
