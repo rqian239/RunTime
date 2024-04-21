@@ -35,6 +35,7 @@ def get_team_roster(abbrev):
     team_id = get_team_id_from_abbrev(abbrev)
     roster_df = commonteamroster.CommonTeamRoster(team_id=team_id).common_team_roster.get_data_frame()
     
+    
     selected_columns = ['PLAYER', 'NUM', 'POSITION', 'HEIGHT', 'BIRTH_DATE', 'AGE', 'SCHOOL']
     roster_filtered = roster_df.loc[:, selected_columns]
     
@@ -49,8 +50,12 @@ def get_social_media_links(abbrev):
 def get_league_standings(abbrev):
     league_id = get_team_id_from_abbrev(abbrev)
     standings_df = leaguestandings.LeagueStandings(season='2023-24').standings.get_data_frame()
+
+    # Rename the 'TeamCity' column to 'Team City' and 'TeamName' column to 'Team Name'
+    standings_df.rename(columns={'TeamCity': 'Team City', 'TeamName': 'Team Name'}, inplace=True)
     
-    selected_columns = ['TeamCity', 'TeamName', 'Conference', 'PlayoffRank', 'Division', 'DivisionRank', 'LeagueRank']
+    
+    selected_columns = ['Team City', 'Team Name', 'Conference', 'PlayoffRank', 'Division', 'DivisionRank', 'LeagueRank']
     roster_filtered = standings_df.loc[:, selected_columns]
     
     return roster_filtered

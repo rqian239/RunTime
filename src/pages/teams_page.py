@@ -343,6 +343,7 @@ def build_team_schedule_body(abbrev):
 
            # Add custom CSS to style the first row
         schedule_table.children[0].children[0].style = {
+
             "font-weight": "bold",  # Make text bold
             "text-decoration": "underline",  # Underline text
             "color": "#a932ff",  # Set text color to neon purple
