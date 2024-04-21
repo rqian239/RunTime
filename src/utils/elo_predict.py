@@ -3,11 +3,15 @@ import pandas as pd
 from nba_api.stats.endpoints import teamgamelogs
 
 
+# Get the entire season of data
 teamGameLogs = teamgamelogs.TeamGameLogs(season_nullable='2023-24', season_type_nullable='Regular Season')
 regular_season_df = teamGameLogs.get_data_frames()[0]
 teamGameLogs = teamgamelogs.TeamGameLogs(season_nullable='2023-24', season_type_nullable='Playoffs')
 playoff_season_df = teamGameLogs.get_data_frames()[0]
 df = pd.concat([playoff_season_df, regular_season_df], axis=0)
+# Freeing up these dataframes
+del regular_season_df
+del playoff_season_df
 
 # Set initial Elo ratings manually
 
@@ -62,6 +66,9 @@ dtype = {
     'team_opp_elo_after': float,
     'home': bool  # Assuming this column represents whether the team is playing at home
 }
+
+# Create DataFrames to store elo calculations for each game and elos for each team
+elo_df = pd.DataFrame(columns=dtype.keys()).astype(dtype)
 
 
 def team_opponent(game_id, team_we_know):
@@ -164,10 +171,7 @@ def update_elo(team_pts, opp_pts, team_elo_before, team_opp_elo_before, home):
     return team_elo_after, team_opp_elo_after
 
 
-
-# Create DataFrames to store elo calculations for each game and elos for each team
-elo_df = pd.DataFrame(columns=dtype.keys()).astype(dtype)
-
+# ----------------------------- compute_all_elos_for_the_season -----------------------------
 row_count = 0
 
 for index, row in df.iterrows():
@@ -223,6 +227,7 @@ for index, row in df.iterrows():
 
     row_count += 1
 
+# ----------------------------- ----------------------------- -----------------------------
 
 # Functions to calculate and retrieve elos
 def get_recent_elo(team_abbv):
@@ -275,11 +280,15 @@ def get_winner(team_abbv1, team_abbv2):
     new_df = pd.DataFrame(data)
     return new_df
 
-# def main():
-#     print(elo_df)
-#     print(get_winner("MIA", "CHI"))
-#
-# if __name__ == "__main__":
-#     main()
+# Free these up, we don't need them anymore
+del df
+del initial_elo
+
+def main():
+    print(elo_df)
+    print(get_winner("MIN", "PHX"))
+
+if __name__ == "__main__":
+    main()
 
 
