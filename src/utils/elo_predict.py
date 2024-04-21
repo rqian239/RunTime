@@ -3,44 +3,47 @@ import pandas as pd
 from nba_api.stats.endpoints import teamgamelogs
 
 
-teamGameLogs = teamgamelogs.TeamGameLogs(season_nullable='2023-24')
-df = teamGameLogs.get_data_frames()[0]
+teamGameLogs = teamgamelogs.TeamGameLogs(season_nullable='2023-24', season_type_nullable='Regular Season')
+regular_season_df = teamGameLogs.get_data_frames()[0]
+teamGameLogs = teamgamelogs.TeamGameLogs(season_nullable='2023-24', season_type_nullable='Playoffs')
+playoff_season_df = teamGameLogs.get_data_frames()[0]
+df = pd.concat([playoff_season_df, regular_season_df], axis=0)
 
 # Set initial Elo ratings manually
 
 initial_elo = dict()  # Create a dictionary to hold initial elos
 
-# ELO RATINGS AT START OF 2023-24 SEASON, from https://neilpaine.substack.com/p/2023-24-nba-elo-ratings
-initial_elo["ATL"] = 1500
-initial_elo["BKN"] = 1431
-initial_elo["BOS"] = 1771
-initial_elo["CHA"] = 1291
-initial_elo["CHI"] = 1471
-initial_elo["CLE"] = 1556
-initial_elo["DAL"] = 1636
-initial_elo["DEN"] = 1650
-initial_elo["DET"] = 1287
-initial_elo["GSW"] = 1603
-initial_elo["HOU"] = 1531
-initial_elo["IND"] = 1583
-initial_elo["LAC"] = 1543
-initial_elo["LAL"] = 1571
-initial_elo["MEM"] = 1326
-initial_elo["MIA"] = 1555
-initial_elo["MIL"] = 1584
-initial_elo["MIN"] = 1674
-initial_elo["NOP"] = 1606
-initial_elo["NYK"] = 1569
-initial_elo["OKC"] = 1631
-initial_elo["ORL"] = 1529
-initial_elo["PHI"] = 1483
-initial_elo["PHX"] = 1613
-initial_elo["POR"] = 1300
-initial_elo["SAC"] = 1546
-initial_elo["SAS"] = 1372
-initial_elo["TOR"] = 1291
-initial_elo["UTA"] = 1365
-initial_elo["WAS"] = 1282
+# ELO RATINGS AT START OF 2023-24 SEASON
+initial_elo["ATL"] = 1525
+initial_elo["BKN"] = 1495
+initial_elo["BOS"] = 1624
+initial_elo["CHA"] = 1416
+initial_elo["CHI"] = 1534
+initial_elo["CLE"] = 1554
+initial_elo["DAL"] = 1458
+initial_elo["DEN"] = 1640
+initial_elo["DET"] = 1328
+initial_elo["GSW"] = 1569
+initial_elo["HOU"] = 1372
+initial_elo["IND"] = 1426
+initial_elo["LAC"] = 1519
+initial_elo["LAL"] = 1570
+initial_elo["MEM"] = 1553
+initial_elo["MIA"] = 1580
+initial_elo["MIL"] = 1547
+initial_elo["MIN"] = 1516
+initial_elo["NOP"] = 1524
+initial_elo["NYK"] = 1573
+initial_elo["OKC"] = 1514
+initial_elo["ORL"] = 1463
+initial_elo["PHI"] = 1606
+initial_elo["PHX"] = 1544
+initial_elo["POR"] = 1359
+initial_elo["SAC"] = 1529
+initial_elo["SAS"] = 1373
+initial_elo["TOR"] = 1546
+initial_elo["UTA"] = 1437
+initial_elo["WAS"] = 1454
 
 #Sort games by date
 df['GAME_DATE'] = pd.to_datetime(df['GAME_DATE'])
