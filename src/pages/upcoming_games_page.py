@@ -7,6 +7,7 @@ from data.nba_teams import get_all_team_options
 from components.navbar import navbar_simple
 from components.footer import footer
 import ids
+from utils.Upcoming_Games import scrape_upcoming_nba_schedule
 
 
 dash.register_page(__name__, path='/upcominggames')  # Change the path here
@@ -14,6 +15,30 @@ dash.register_page(__name__, path='/upcominggames')  # Change the path here
 # Navbar and footer imported here
 nav = navbar_simple()
 ftr = footer()
+
+
+def build_team_schedule_body():
+    schedule_df = scrape_upcoming_nba_schedule()
+    border_color = "#834847"  # Cyber color gradient
+
+    if isinstance(schedule_df, pd.DataFrame) and not schedule_df.empty:
+        # If schedule_df is a non-empty DataFrame
+        schedule_table = dbc.Table.from_dataframe(schedule_df, striped=True, bordered=True, hover=True)
+
+        schedule_table.style = {
+            "border": f"2px solid {border_color}",  # Use the defined border color
+            "border-radius": "8px",  # Rounded corners
+            "box-shadow": "0 4px 6px rgba(0, 0, 0, 0.1)",  # Add shadow for depth
+            "font-size": "14px",  # Increase font size
+            "color": "#333",  # Text color
+            "margin": "auto"  # Center the table horizontally
+        }
+
+        schedule_body = dbc.Container(children=[schedule_table], class_name="centered")
+    else:
+        schedule_body = dbc.Container(children=[html.P("No Games Today.")], class_name="text-center")
+        
+    return schedule_body
 
 # Define the layout for the page
 body = dbc.Container(
@@ -48,7 +73,7 @@ body = dbc.Container(
                         id=ids.FANTASY_DROPDOWN_MENU_1,
                         options=get_all_team_options(),  # Options generated from the function
                         placeholder="Select a Team",  # Placeholder text for the dropdown
-                        style={'width': '100%'}  # Set the width of the dropdown
+                        style={'width': '!00%'}  # Set the width of the dropdown
                         ),
                         dbc.Card(
                             [
@@ -64,65 +89,58 @@ body = dbc.Container(
                                 )
                             ],
                             className="border-primary mb-3",
-                            style={"maxWidth": "30rem"}  # Adjust the maxWidth here
+                            style={"maxWidth": "40rem"}  # Adjust the maxWidth here
                         ),
                     ],
-                    width=4  # 33% width for this column
+                    width=5 # 33% width for this column
                 ),
                 # Adding the second card with dropdown
+                
                 dbc.Col(
                     [
-                        dbc.DropdownMenu(
-                            label="Select Team",
-                            id=ids.FANTASY_DROPDOWN_MENU_2,
-                            style={'overflowY': 'auto', 'marginBottom': '10px'}  # Add marginBottom to add space between dropdown and card
-                        ),
-                         dbc.Card(
+                         html.H2("Current NBA Schedule", className="home-page-title", style={'textAlign': 'center'}),
+                        html.Br(),
+                        html.P("Scroll to view the list of scheduled games, including the home and visitor teams, along with the game date and time.", style={'textAlign': 'center'}),
+                        html.Br(),
+                        html.Div(
                             [
-                                dbc.CardHeader("Card 2"),
-                                dbc.CardBody(
-                                    [
-                                        html.H4("Card title", className="card-title"),
-                                        html.P(
-                                            "This is some text inside the card body. You can add any content you want here.",
-                                            className="card-text"
+                                html.Table(
+                                    className="table table-bordered table-hover",
+                                    children=[
+                                        html.Thead(
+                                            html.Tr(
+                                                [
+                                                    html.Th("Home Team", style={'text-align': 'center'}),
+                                                    html.Th("Visitor Team", style={'text-align': 'center'}),
+                                                    html.Th("Date", style={'text-align': 'center'}),
+                                                    html.Th("Time", style={'text-align': 'center'}),
+                                                ]
+                                            )
+                                        ),
+                                        html.Tbody(
+                                            [
+                                                html.Tr(
+                                                    [
+                                                        html.Td(game["Home Team"]),
+                                                        html.Td(game["Visitor Team"]),
+                                                        html.Td(game["Date"]),
+                                                        html.Td(game["Time"]),
+                                                        #html.Td(game["Predicted Winner"]),
+                                                        #html.Td(game["Winner Probability"]),
+                                                        
+                                                    ]
+                                                )
+                                                for index, game in scrape_upcoming_nba_schedule().iterrows()
+                                            ]
                                         )
                                     ]
                                 )
                             ],
-                            className="border-primary mb-3",
-                            style={"maxWidth": "30rem"}  # Adjust the maxWidth here
+                            style={'maxHeight': '400px', 'overflowY': 'scroll', 'border': '2px solid #cccccc', 'border-radius': '5px'}
                         ),
+
                     ],
-                    width=4  # 33% width for this column
-                ),
-                # Adding the third card with dropdown
-                dbc.Col(
-                    [
-                         dcc.Dropdown(
-                        id=ids.FANTASY_DROPDOWN_MENU_3,
-                        options=get_all_team_options(),  # Options generated from the function
-                        placeholder="Select a Team",  # Placeholder text for the dropdown
-                        style={'width': '100%'}  # Set the width of the dropdown
-                        ),
-                        dbc.Card(
-                            [
-                                dbc.CardHeader("Card 3"),
-                                dbc.CardBody(
-                                    [
-                                        html.H4("Card title", className="card-title"),
-                                        html.P(
-                                            "This is some text inside the card body. You can add any content you want here.",
-                                            className="card-text"
-                                        )
-                                    ]
-                                )
-                            ],
-                            className="border-primary mb-3",
-                            style={"maxWidth": "30rem"}  # Adjust the maxWidth here
-                        ),
-                    ],
-                    width=4  # 33% width for this column
+                    width=7  # 33% width for this column
                 ),
             ],
         ),

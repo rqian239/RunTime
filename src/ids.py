@@ -37,3 +37,10 @@ NAVBAR_ABOUT_BUTTON = "navbar-about-button"
 NAVBAR_TEAMS_BUTTON = "navbar-teams-button"
 NAVBAR_UPCOMING_BUTTON = "navbar-upcoming-button"
 NAVBAR_FANTASY_BUTTON = "navbar-fantasy-button"
+# ids.py
+
+# ids.py
+
+# Define your ids here
+CARD_1_BODY = "card-1-body"
+NBA_SCHEDULE_TABLE = "nba-schedule-table"
