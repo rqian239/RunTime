@@ -10,7 +10,7 @@ from dash import callback
 from components.navbar import navbar_simple
 from components.footer import footer
 import ids
-#from utils.Upcoming_Games import scrape_upcoming_nba_schedule
+from utils.todays_games import scrape_todays_nba_schedule
 
 
 dash.register_page(__name__, path='/upcominggames')  # Change the path here
@@ -115,22 +115,22 @@ body = dbc.Container(
                                                 ]
                                             )
                                         ),
-                                        # html.Tbody(
-                                        #     [
-                                        #         html.Tr(
-                                        #             [
-                                        #                 html.Td(game["Home Team"]),
-                                        #                 html.Td(game["Visitor Team"]),
-                                        #                 html.Td(game["Date"]),
-                                        #                 html.Td(game["Time"]),
-                                        #                 #html.Td(game["Predicted Winner"]),
-                                        #                 #html.Td(game["Winner Probability"]),
+                                        html.Tbody(
+                                            [
+                                                html.Tr(
+                                                    [
+                                                        html.Td(game["Home Team"]),
+                                                        html.Td(game["Visitor Team"]),
+                                                        html.Td(game["Date"]),
+                                                        html.Td(game["Time"]),
+                                                        #html.Td(game["Predicted Winner"]),
+                                                        #html.Td(game["Winner Probability"]),
                                                         
-                                        #             ]
-                                        #         )
-                                        #         for index, game in scrape_upcoming_nba_schedule().iterrows()
-                                        #     ]
-                                        # )
+                                                    ]
+                                                )
+                                                for index, game in scrape_todays_nba_schedule().iterrows()
+                                            ]
+                                        )
                                     ]
                                 )
                             ],

@@ -42,6 +42,7 @@ def scrape_todays_nba_schedule():
             schedule_df = pd.DataFrame(games)
             if schedule_df.empty:
                 schedule_df = pd.DataFrame({"Home Team": ["No Games Today"], "Visitor Team": [""], "Date": [""], "Time": [""]})
+                return None
             return schedule_df
         else:
             print("No schedule table found on the page.")
