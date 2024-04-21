@@ -172,7 +172,7 @@ def build_roster_body(abbrev):
     roster_table = dbc.Table.from_dataframe(roster_df, striped=True, bordered=True, hover=True, className="table-bordered")
 
     # Define the gradient border color
-    border_color = "#834847"  # Cyber color gradient
+    border_color = "#a932ff"  # Cyber color gradient
 
     # Add custom CSS to ensure the gradient border color
     roster_table.style = {
@@ -327,7 +327,7 @@ def build_team_schedule_body(abbrev):
  
     schedule_df = scrape_team_specific_schedule(abbrev)
     
-    border_color = "#834847"  # Cyber color gradient
+    border_color = "#a932ff"  # Cyber color gradient
 
     if isinstance(schedule_df, pd.DataFrame):
         schedule_table = dbc.Table.from_dataframe(schedule_df, striped=True, bordered=True, hover=True)
@@ -362,7 +362,7 @@ def build_team_standings_body(abbrev):
 
     standings_table = dbc.Table.from_dataframe(standings_df, striped=True,bordered=True, hover=True, className="table-bordered")
 
-    border_color = "#834847"  # Cyber color gradient
+    border_color = "#a932ff"  # Cyber color gradient
 
         # Add custom CSS to ensure the gradient border color
     standings_table.style = {
