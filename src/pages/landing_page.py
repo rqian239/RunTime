@@ -124,7 +124,8 @@ body = dbc.Container(
                             className="mr-2",
                             href="https://www.nba.com/",
                             external_link=True,
-                            style={'width': '100%'}
+                            style={'width': '100%'},
+                            target="_blank"
                         )
                     ],
                 ),
@@ -137,7 +138,8 @@ body = dbc.Container(
                             className="mr-2",
                             href="https://bleacherreport.com/nba%20",
                             external_link=True,
-                            style={'width': '100%'}
+                            style={'width': '100%'},
+                            target="_blank"
                         )
                     ],
                 ),
@@ -150,7 +152,8 @@ body = dbc.Container(
                             className="mr-2",
                             href="https://www.espn.com/nba/",
                             external_link=True,
-                            style={'width': '100%'}
+                            style={'width': '100%'},
+                            target="_blank"
                         )
                     ],
                 ),
@@ -163,7 +166,8 @@ body = dbc.Container(
                             className="mr-2",
                             href="https://www.si.com/nba",
                             external_link=True,
-                            style={'width': '100%'}
+                            style={'width': '100%'},
+                            target="_blank"
                         )
                     ],
                 ),
@@ -176,7 +180,8 @@ body = dbc.Container(
                             className="mr-2",
                             href="https://www.cbssports.com/nba/",
                             external_link=True,
-                            style={'width': '100%'}
+                            style={'width': '100%'},
+                            target="_blank"
                         )
                     ],
                 ),
@@ -189,7 +194,8 @@ body = dbc.Container(
                             className="mr-2",
                             href="https://hoopshype.com/",
                             external_link=True,
-                            style={'width': '100%'}
+                            style={'width': '100%'},
+                            target="_blank"
                         )
                     ],
                 ),
