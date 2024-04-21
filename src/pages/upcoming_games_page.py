@@ -10,7 +10,7 @@ from dash import callback
 from components.navbar import navbar_simple
 from components.footer import footer
 import ids
-from utils.Upcoming_Games import scrape_upcoming_nba_schedule
+#from utils.Upcoming_Games import scrape_upcoming_nba_schedule
 
 
 dash.register_page(__name__, path='/upcominggames')  # Change the path here
@@ -20,28 +20,28 @@ nav = navbar_simple()
 ftr = footer()
 
 
-def build_team_schedule_body():
-    schedule_df = scrape_upcoming_nba_schedule()
-    border_color = "#834847"  # Cyber color gradient
+# def build_team_schedule_body():
+#     schedule_df = scrape_upcoming_nba_schedule()
+#     border_color = "#834847"  # Cyber color gradient
 
-    if isinstance(schedule_df, pd.DataFrame) and not schedule_df.empty:
-        # If schedule_df is a non-empty DataFrame
-        schedule_table = dbc.Table.from_dataframe(schedule_df, striped=True, bordered=True, hover=True)
+#     if isinstance(schedule_df, pd.DataFrame) and not schedule_df.empty:
+#         # If schedule_df is a non-empty DataFrame
+#         schedule_table = dbc.Table.from_dataframe(schedule_df, striped=True, bordered=True, hover=True)
 
-        schedule_table.style = {
-            "border": f"2px solid {border_color}",  # Use the defined border color
-            "border-radius": "8px",  # Rounded corners
-            "box-shadow": "0 4px 6px rgba(0, 0, 0, 0.1)",  # Add shadow for depth
-            "font-size": "14px",  # Increase font size
-            "color": "#333",  # Text color
-            "margin": "auto"  # Center the table horizontally
-        }
+#         schedule_table.style = {
+#             "border": f"2px solid {border_color}",  # Use the defined border color
+#             "border-radius": "8px",  # Rounded corners
+#             "box-shadow": "0 4px 6px rgba(0, 0, 0, 0.1)",  # Add shadow for depth
+#             "font-size": "14px",  # Increase font size
+#             "color": "#333",  # Text color
+#             "margin": "auto"  # Center the table horizontally
+#         }
 
-        schedule_body = dbc.Container(children=[schedule_table], class_name="centered")
-    else:
-        schedule_body = dbc.Container(children=[html.P("No Games Today.")], class_name="text-center")
+#         schedule_body = dbc.Container(children=[schedule_table], class_name="centered")
+#     else:
+#         schedule_body = dbc.Container(children=[html.P("No Games Today.")], class_name="text-center")
         
-    return schedule_body
+#     return schedule_body
 
 # Define the layout for the page
 body = dbc.Container(
@@ -115,22 +115,22 @@ body = dbc.Container(
                                                 ]
                                             )
                                         ),
-                                        html.Tbody(
-                                            [
-                                                html.Tr(
-                                                    [
-                                                        html.Td(game["Home Team"]),
-                                                        html.Td(game["Visitor Team"]),
-                                                        html.Td(game["Date"]),
-                                                        html.Td(game["Time"]),
-                                                        #html.Td(game["Predicted Winner"]),
-                                                        #html.Td(game["Winner Probability"]),
+                                        # html.Tbody(
+                                        #     [
+                                        #         html.Tr(
+                                        #             [
+                                        #                 html.Td(game["Home Team"]),
+                                        #                 html.Td(game["Visitor Team"]),
+                                        #                 html.Td(game["Date"]),
+                                        #                 html.Td(game["Time"]),
+                                        #                 #html.Td(game["Predicted Winner"]),
+                                        #                 #html.Td(game["Winner Probability"]),
                                                         
-                                                    ]
-                                                )
-                                                for index, game in scrape_upcoming_nba_schedule().iterrows()
-                                            ]
-                                        )
+                                        #             ]
+                                        #         )
+                                        #         for index, game in scrape_upcoming_nba_schedule().iterrows()
+                                        #     ]
+                                        # )
                                     ]
                                 )
                             ],
