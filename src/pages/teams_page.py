@@ -184,6 +184,15 @@ def build_roster_body(abbrev):
         "margin": "auto"  # Center the table horizontally
     }
 
+    # Add custom CSS to style the first row
+    roster_table.children[0].children[0].style = {
+        "font-weight": "bold",  # Make text bold
+        "text-decoration": "underline",  # Underline text
+        "color": "#a932ff",  # Set text color to neon purple
+        "font-size": "16px",  # Increase font size
+        "font-style": "italic"  # Make text italic
+    }
+
     # Wrap the table in a container
     roster_body = dbc.Container(
         children=[roster_table],
@@ -332,6 +341,15 @@ def build_team_schedule_body(abbrev):
             "margin": "auto"  # Center the table horizontally
         }
 
+           # Add custom CSS to style the first row
+        schedule_table.children[0].children[0].style = {
+            "font-weight": "bold",  # Make text bold
+            "text-decoration": "underline",  # Underline text
+            "color": "#a932ff",  # Set text color to neon purple
+            "font-size": "16px",  # Increase font size
+            "font-style": "italic"  # Make text italic
+        }
+
         schedule_body = dbc.Container(children=[schedule_table], class_name="centered")
     else:
         schedule_body = dbc.Container(children=[html.P("This team has no schedule.")], class_name="text-center")
@@ -355,6 +373,16 @@ def build_team_standings_body(abbrev):
         "color": "#333",  # Text color
         "margin": "auto"  # Center the table horizontally
     }
+
+       # Add custom CSS to style the first row
+    standings_table.children[0].children[0].style = {
+        "font-weight": "bold",  # Make text bold
+        "text-decoration": "underline",  # Underline text
+        "color": "#a932ff",  # Set text color to neon purple
+        "font-size": "16px",  # Increase font size
+        "font-style": "italic"  # Make text italic
+    }
+
     # Create the standings body here
     team_standings_body = dbc.Container(
         children=[standings_table],
