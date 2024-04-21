@@ -3,6 +3,9 @@ import dash_bootstrap_components as dbc
 from dash import dcc, html
 
 from data.nba_teams import get_all_team_options
+from dash.dependencies import Input, Output, State
+from dash import callback
+
 
 from components.navbar import navbar_simple
 from components.footer import footer
@@ -66,34 +69,29 @@ body = dbc.Container(
         dbc.Row(
             [
                 # Adding the first card with dropdown
+               dbc.Row(
+            [
+                # Adding the dropdown
                 dbc.Col(
                     [
-            
                         dcc.Dropdown(
-                        id=ids.FANTASY_DROPDOWN_MENU_1,
-                        options=get_all_team_options(),  # Options generated from the function
-                        placeholder="Select a Team",  # Placeholder text for the dropdown
-                        style={'width': '!00%'}  # Set the width of the dropdown
-                        ),
-                        dbc.Card(
-                            [
-                                dbc.CardHeader("Card 1"),
-                                dbc.CardBody(
-                                    [
-                                        html.H4("Card title", className="card-title"),
-                                        html.P(
-                                            "This is some text inside the card body. You can add any content you want here.",
-                                            className="card-text"
-                                        )
-                                    ]
-                                )
-                            ],
-                            className="border-primary mb-3",
-                            style={"maxWidth": "40rem"}  # Adjust the maxWidth here
+                            id=ids.UPCOMING_GAMES_DROPDOWN_LEFT,
+                            options=get_all_team_options(),  # Options generated from the function
+                            placeholder="Select a Team",  # Placeholder text for the dropdown
+                            style={'width': '100%'}  # Set the width of the dropdown
                         ),
                     ],
                     width=5 # 33% width for this column
                 ),
+                # Adding the table to display the schedule
+                dbc.Col(
+                    [
+                        html.Div(id = ids.UPCOMING_GAMES_OUTPUT)
+                    ],
+                    width=7  # 33% width for this column
+                ),
+            ],
+        ),
                 # Adding the second card with dropdown
                 
                 dbc.Col(
@@ -147,6 +145,19 @@ body = dbc.Container(
     ],
     class_name="body-flex-wrapper",
 )
+
+@callback(
+    Output(ids.UPCOMING_GAMES_OUTPUT, 'children'),
+    [Input(ids.UPCOMING_GAMES_DROPDOWN_LEFT, 'value')]
+)
+def update_table(selected_team):
+    print("Selected team:", selected_team)  # Debugging line
+    if selected_team:
+        # Call the scraping function with the selected team
+        print("Schedule DataFrame:")  # Debugging line
+        return html.P(selected_team)
+    else:
+        return html.P("Please select a team", className="text-center")
 
 # This is how Dash knows what the layout of the page is!
 layout = html.Div([nav, body, ftr], className="make-footer-stick")

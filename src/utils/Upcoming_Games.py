@@ -83,11 +83,13 @@ def scrape_upcoming_nba_schedule():
                             if team_info["team"] == away_abbr:
                                 away_abbr = team_info["abbreviation"]
                         game_time = name_column[0].text.strip() if name_column[0].text.strip() else "(No time has been set yet...)"
-                        winner_df = get_winner(home_abbr, away_abbr)
-                        predicted_winner = winner_df.iloc[0, 2]
-                        winner_probability = winner_df.iloc[0, 3]
-                        games.append({"Home Team": home_team, "Visitor Team": away_team, "Date": game_date, "Time": game_time, "Predicted Winner": predicted_winner,
-                                      "Winner Probability": winner_probability})
+                        #winner_df = get_winner(home_abbr, away_abbr)
+                        #predicted_winner = winner_df.iloc[0, 2]
+                        #winner_probability = winner_df.iloc[0, 3]
+                        games.append({"Home Team": home_team, "Visitor Team": away_team, "Date": game_date, "Time": game_time, 
+                                      #"Predicted Winner": predicted_winner,
+                                     #"Winner Probability": winner_probability
+                                     })
 
             # Convert the list of dictionaries into a DataFrame
             schedule_df = pd.DataFrame(games)

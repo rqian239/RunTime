@@ -30,6 +30,7 @@ TEAM_INFO_SCHEDULE_BUTTON = "team-info-schedule-button"
 UPCOMING_GAMES_DROPDOWN_LEFT = "upcoming-games-dropdown-left"
 UPCOMING_GAMES_DROPDOWN_MIDDLE = "upcoming-games-dropdown-middle"
 UPCOMING_GAMES_DROPDOWN_RIGHT = "upcoming-games-dropdown-right"
+UPCOMING_GAMES_OUTPUT = "output-table"
 
 # navbar.py
 NAVBAR_HOME_BUTTON = "navbar-home-button"
