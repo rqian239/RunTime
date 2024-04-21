@@ -8,7 +8,7 @@ from data.nba_teams import get_all_team_options
 from components.navbar import navbar_simple
 from components.footer import footer
 from utils.functions import basic_team_info, detailed_team_info, get_team_championships, get_team_roster, get_social_media_links, get_league_standings
-from utils.Team_Specific_Schedule import scrape_team_specific_schedule
+from utils.team_schedule import scrape_team_specific_schedule
 from utils.functions import get_top_left_pixel_color
 from assets.links_to_nba_logo_gifs import nba_logo_gifs_links
 
