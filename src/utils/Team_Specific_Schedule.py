@@ -56,6 +56,7 @@ def scrape_team_specific_schedule(team_abbreviation):
         team_abbreviation = 'PHX'
     response = requests.get(url)
     if response.status_code == 200:
+        print("Successfully retreived html page from Basketball Reference of a team's season schedule")
         # Parse the HTML content of the page
         soup = BeautifulSoup(response.content, "html.parser")
         # Find the table containing the schedule
@@ -87,11 +88,14 @@ def scrape_team_specific_schedule(team_abbreviation):
             schedule_df = schedule_df[::-1]
             if schedule_df.empty:
                 schedule_df = "This team has no schedule lol"
+                return None
             return schedule_df
         else:
             print("table not found")
+            return None
     else:
         print(f"Failed to retrieve NBA schedule. Status code: {response.status_code}")
+        return None
 
 def main():
     for team_info in nba_teams:
