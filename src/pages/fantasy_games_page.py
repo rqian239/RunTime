@@ -26,10 +26,9 @@ body = dbc.Container(
                         html.Br(),
                         html.P(
                             """\
-                            Welcome to the Fantasy Games Page! Dive into the world of fantasy sports and games with ease! 
-                            Discover exciting adventures, challenge your friends, and compete for glory in virtual arenas.
-                            Whether you're a seasoned player seeking new challenges or a beginner looking to start your journey,
-                            this page is your ultimate destination for all things fantasy games.""",
+                            Welcome to the Fantasy Games Page! Set a matchup between any two NBA teams and see which one is
+                            projected to win. Use the dropdowns to select your home and away teams!
+                            """,
                             style={'textAlign': 'center'}
                         ),
                     ],
@@ -42,88 +41,98 @@ body = dbc.Container(
                 # Adding the first card with dropdown
                 dbc.Col(
                     [
-            
+                        html.H2("Home Team", className="centered"),
+                        html.Br(),
                         dcc.Dropdown(
-                        id=ids.FANTASY_DROPDOWN_MENU_1,
+                        id=ids.FANTASY_DROPDOWN_HOME,
                         options=get_all_team_options(),  # Options generated from the function
                         placeholder="Select a Team",  # Placeholder text for the dropdown
                         style={'width': '100%'}  # Set the width of the dropdown
                         ),
-                        dbc.Card(
-                            [
-                                dbc.CardHeader("Card 1"),
-                                dbc.CardBody(
-                                    [
-                                        html.H4("Card title", className="card-title"),
-                                        html.P(
-                                            "This is some text inside the card body. You can add any content you want here.",
-                                            className="card-text"
-                                        )
-                                    ]
-                                )
-                            ],
-                            className="border-primary mb-3",
-                            style={"maxWidth": "30rem"}  # Adjust the maxWidth here
-                        ),
+                        # dbc.Card(
+                        #     [
+                        #         dbc.CardHeader("Card 1"),
+                        #         dbc.CardBody(
+                        #             [
+                        #                 html.H4("Card title", className="card-title"),
+                        #                 html.P(
+                        #                     "This is some text inside the card body. You can add any content you want here.",
+                        #                     className="card-text"
+                        #                 )
+                        #             ]
+                        #         )
+                        #     ],
+                        #     className="border-primary mb-3",
+                        #     style={"maxWidth": "30rem"}  # Adjust the maxWidth here
+                        # ),
                     ],
                     width=4  # 33% width for this column
                 ),
                 # Adding the second card with dropdown
                 dbc.Col(
                     [
-                        dbc.DropdownMenu(
-                            label="Select Team",
-                            id=ids.FANTASY_DROPDOWN_MENU_2,
-                            style={'overflowY': 'auto', 'marginBottom': '10px'}  # Add marginBottom to add space between dropdown and card
-                        ),
-                         dbc.Card(
-                            [
-                                dbc.CardHeader("Card 2"),
-                                dbc.CardBody(
-                                    [
-                                        html.H4("Card title", className="card-title"),
-                                        html.P(
-                                            "This is some text inside the card body. You can add any content you want here.",
-                                            className="card-text"
-                                        )
-                                    ]
-                                )
-                            ],
-                            className="border-primary mb-3",
-                            style={"maxWidth": "30rem"}  # Adjust the maxWidth here
-                        ),
+                        # dbc.DropdownMenu(
+                        #     label="Select Team",
+                        #     id=ids.FANTASY_DROPDOWN_MENU_2,
+                        #     style={'overflowY': 'auto', 'marginBottom': '10px'}  # Add marginBottom to add space between dropdown and card
+                        # ),
+                        #  dbc.Card(
+                        #     [
+                        #         dbc.CardHeader("Card 2"),
+                        #         dbc.CardBody(
+                        #             [
+                        #                 html.H4("Card title", className="card-title"),
+                        #                 html.P(
+                        #                     "This is some text inside the card body. You can add any content you want here.",
+                        #                     className="card-text"
+                        #                 )
+                        #             ]
+                        #         )
+                        #     ],
+                        #     className="border-primary mb-3",
+                        #     style={"maxWidth": "30rem"}  # Adjust the maxWidth here
+                        # ),
                     ],
                     width=4  # 33% width for this column
                 ),
                 # Adding the third card with dropdown
                 dbc.Col(
                     [
-                         dcc.Dropdown(
-                        id=ids.FANTASY_DROPDOWN_MENU_3,
+                        html.H2("Away Team", className="centered"),
+                        html.Br(),
+                        dcc.Dropdown(
+                        id=ids.FANTASY_DROPDOWN_AWAY,
                         options=get_all_team_options(),  # Options generated from the function
                         placeholder="Select a Team",  # Placeholder text for the dropdown
                         style={'width': '100%'}  # Set the width of the dropdown
                         ),
-                        dbc.Card(
-                            [
-                                dbc.CardHeader("Card 3"),
-                                dbc.CardBody(
-                                    [
-                                        html.H4("Card title", className="card-title"),
-                                        html.P(
-                                            "This is some text inside the card body. You can add any content you want here.",
-                                            className="card-text"
-                                        )
-                                    ]
-                                )
-                            ],
-                            className="border-primary mb-3",
-                            style={"maxWidth": "30rem"}  # Adjust the maxWidth here
-                        ),
+                        # dbc.Card(
+                        #     [
+                        #         dbc.CardHeader("Card 3"),
+                        #         dbc.CardBody(
+                        #             [
+                        #                 html.H4("Card title", className="card-title"),
+                        #                 html.P(
+                        #                     "This is some text inside the card body. You can add any content you want here.",
+                        #                     className="card-text"
+                        #                 )
+                        #             ]
+                        #         )
+                        #     ],
+                        #     className="border-primary mb-3",
+                        #     style={"maxWidth": "30rem"}  # Adjust the maxWidth here
+                        # ),
                     ],
                     width=4  # 33% width for this column
                 ),
             ],
+        ),
+        dbc.Row(
+            id=ids.FANTASY_PAGE_CONTENT,
+            children=[
+
+            ],
+            class_name="my-4",
         ),
     ],
     class_name="body-flex-wrapper",
@@ -131,3 +140,4 @@ body = dbc.Container(
 
 # This is how Dash knows what the layout of the page is!
 layout = html.Div([nav, body, ftr], className="make-footer-stick")
+
