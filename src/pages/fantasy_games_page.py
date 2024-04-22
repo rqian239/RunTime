@@ -1,6 +1,8 @@
 import dash
 import dash_bootstrap_components as dbc
-from dash import dcc, html
+from dash import dcc, html, callback
+
+from dash.dependencies import Input, Output, State
 
 from data.nba_teams import get_all_team_options
 from components.navbar import navbar_simple
@@ -141,3 +143,13 @@ body = dbc.Container(
 # This is how Dash knows what the layout of the page is!
 layout = html.Div([nav, body, ftr], className="make-footer-stick")
 
+@callback(
+    Output(ids.FANTASY_PAGE_CONTENT, 'children'),
+    [Input(ids.FANTASY_DROPDOWN_HOME, 'value'),
+     Input(ids.FANTASY_DROPDOWN_AWAY, 'value')]
+)
+def simulate_fantasy_game(home, away):
+    if home is None or away is None:
+        return html.Div(html.P("Please select two teams."), className="text-center")
+    else:
+        return html.Div(html.P(f"{home} vs {away}"), className="text-center")
