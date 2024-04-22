@@ -130,7 +130,7 @@ body = dbc.Container(
                 # html.H2("Today's NBA Games", className="home-page-title", style={'textAlign': 'center'}),
                 # html.Br(),
                 # html.P("Scroll to view the list of scheduled games, including the home and visitor teams, along with the game date and time.", style={'textAlign': 'center'}),
-                # html.Br(),
+                html.Br(),
                 html.Div(
                     [
                         html.Table(

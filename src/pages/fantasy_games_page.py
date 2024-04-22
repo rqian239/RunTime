@@ -146,20 +146,34 @@ body = dbc.Container(
 def build_fantasy_content_body(home, away):
     predicted_outcome_df = get_winner(home, away)
 
-    fantasy_content_body = dbc.Container(
-        children=[
-            dbc.Row(
-                children=[
-                    html.P(f"{home} vs {away}", className="text-center"),
-                ],
-            ),
-            dbc.Row(
-                [
-                    dbc.Table.from_dataframe(predicted_outcome_df, striped=True, bordered=True, hover=True, className="table-bordered")
-                ]
-            )
+    # Format the matchup details
+    matchup_details = f"{home} vs {away}"
 
-        ]
+    # Create a header with the matchup details
+    header = dbc.Row(
+        dbc.Col(html.H2(matchup_details, className="text-center"))
+    )
+
+    # Style the DataFrame output
+    styled_table = dbc.Row(
+        dbc.Col(
+            dbc.Table.from_dataframe(
+                predicted_outcome_df,
+                striped=True,
+                bordered=True,
+                hover=True,
+                className="table-bordered",
+                style={"font-size": "14px", "margin": "auto", "width": "90%", "border": "2px solid #a932ff", "margin": "auto"}  # Add neon purple border and center horizontally
+            ),
+            width={"size": 10, "offset": 1}  # Center the column
+        )
+    )
+
+
+    # Combine the header and the styled DataFrame output into a container
+    fantasy_content_body = dbc.Container(
+        children=[header, styled_table],
+        className="my-4"
     )
 
     return fantasy_content_body
