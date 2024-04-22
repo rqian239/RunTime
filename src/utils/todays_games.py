@@ -41,7 +41,7 @@ def scrape_todays_nba_schedule():
             # Convert the list of dictionaries into a DataFrame
             schedule_df = pd.DataFrame(games)
             if schedule_df.empty:
-                schedule_df = pd.DataFrame({"Home Team": ["No Games Today"], "Visitor Team": [""], "Date": [""], "Time": [""]})
+                #schedule_df = pd.DataFrame({"Home Team": ["No Games Today"], "Visitor Team": [""], "Date": [""], "Time": [""]})
                 return None
             return schedule_df
         else:

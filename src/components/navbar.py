@@ -7,7 +7,7 @@ def navbar_simple():
         ("Home", "/", ids.NAVBAR_HOME_BUTTON),
         ("About", "/about", ids.NAVBAR_ABOUT_BUTTON),
         ("Teams", "/teams", ids.NAVBAR_TEAMS_BUTTON),
-        ("Upcoming Games", "/upcominggames", ids.NAVBAR_UPCOMING_BUTTON),
+        ("Today's Games", "/upcominggames", ids.NAVBAR_UPCOMING_BUTTON),
         ("Fantasy Games", "/fantasygames", ids.NAVBAR_FANTASY_BUTTON),
     ]
 
