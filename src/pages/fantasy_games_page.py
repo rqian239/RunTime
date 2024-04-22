@@ -7,6 +7,9 @@ from dash.dependencies import Input, Output, State
 from data.nba_teams import get_all_team_options
 from components.navbar import navbar_simple
 from components.footer import footer
+
+from utils.elo_predict import get_winner
+
 import ids
 
 
@@ -140,6 +143,27 @@ body = dbc.Container(
     class_name="body-flex-wrapper",
 )
 
+def build_fantasy_content_body(home, away):
+    predicted_outcome_df = get_winner(home, away)
+
+    fantasy_content_body = dbc.Container(
+        children=[
+            dbc.Row(
+                children=[
+                    html.P(f"{home} vs {away}", className="text-center"),
+                ],
+            ),
+            dbc.Row(
+                [
+                    dbc.Table.from_dataframe(predicted_outcome_df, striped=True, bordered=True, hover=True, className="table-bordered")
+                ]
+            )
+
+        ]
+    )
+
+    return fantasy_content_body
+
 # This is how Dash knows what the layout of the page is!
 layout = html.Div([nav, body, ftr], className="make-footer-stick")
 
@@ -152,4 +176,4 @@ def simulate_fantasy_game(home, away):
     if home is None or away is None:
         return html.Div(html.P("Please select two teams."), className="text-center")
     else:
-        return html.Div(html.P(f"{home} vs {away}"), className="text-center")
+        return build_fantasy_content_body(home, away)
