@@ -52,7 +52,7 @@ body = dbc.Container(
                         id=ids.FANTASY_DROPDOWN_HOME,
                         options=get_all_team_options(),  # Options generated from the function
                         placeholder="Select a Team",  # Placeholder text for the dropdown
-                        style={'width': '100%'}  # Set the width of the dropdown
+                        style={'width': '100%', 'color': 'black'}  # Set the width of the dropdown
                         ),
                         # dbc.Card(
                         #     [
@@ -109,7 +109,7 @@ body = dbc.Container(
                         id=ids.FANTASY_DROPDOWN_AWAY,
                         options=get_all_team_options(),  # Options generated from the function
                         placeholder="Select a Team",  # Placeholder text for the dropdown
-                        style={'width': '100%'}  # Set the width of the dropdown
+                        style={'width': '100%', 'color': 'black'}  # Set the width of the dropdown
                         ),
                         # dbc.Card(
                         #     [

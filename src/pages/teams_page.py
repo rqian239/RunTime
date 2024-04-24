@@ -70,7 +70,7 @@ body = dbc.Container(
                         options=get_all_team_options(),
                         placeholder="Select a Team",  # Placeholder text for the dropdown
                         className="dropdown-styling",
-                        style={'width': '100%'}
+                        style={'width': '100%', 'color': '#a932ff'}
                     ),
                     md=6,
                     class_name="center-content"

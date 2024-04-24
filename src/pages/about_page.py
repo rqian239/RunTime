@@ -65,7 +65,7 @@ body = dbc.Container(
                                 )
                             ],
                             className="border-primary mb-3",
-                            style={"maxWidth": "20rem", "width": "auto", "margin": "auto"}  # Adjust the maxWidth and width here
+                            style={"maxWidth": "20rem", "width": "auto", "margin": "auto", "height": "18rem"}  # Adjust the maxWidth and width here
                         ),
                     ],
                     width=2,  # Adjusted width for this column
@@ -87,7 +87,7 @@ body = dbc.Container(
                                 )
                             ],
                             className="border-primary mb-3",
-                            style={"maxWidth": "20rem", "width": "auto", "margin": "auto"}  # Adjust the maxWidth and width here
+                            style={"maxWidth": "20rem", "width": "auto", "margin": "auto", "height": "18rem"}  # Adjust the maxWidth and width here
                         ),
                     ],
                     width=2,  # Adjusted width for this column
@@ -108,7 +108,7 @@ body = dbc.Container(
                                 )
                             ],
                             className="border-primary mb-3",
-                            style={"maxWidth": "20rem", "width": "auto", "margin": "auto"}  # Adjust the maxWidth and width here
+                            style={"maxWidth": "20rem", "width": "auto", "margin": "auto", "height": "18rem"}  # Adjust the maxWidth and width here
                         ),
                     ],
                     width=2,  # Adjusted width for this column
@@ -130,7 +130,7 @@ body = dbc.Container(
                                 )
                             ],
                             className="border-primary mb-3",
-                            style={"maxWidth": "20rem", "width": "auto", "margin": "auto"}  # Adjust the maxWidth and width here
+                            style={"maxWidth": "20rem", "width": "auto", "margin": "auto", "height": "18rem"}  # Adjust the maxWidth and width here
                         ),
                     ],
                     width=2,  # Adjusted width for this column
@@ -151,7 +151,7 @@ body = dbc.Container(
                                 )
                             ],
                             className="border-primary mb-3",
-                            style={"maxWidth": "20rem", "width": "auto", "margin": "auto"}  # Adjust the maxWidth and width here
+                            style={"maxWidth": "20rem", "width": "auto", "margin": "auto", "height": "18rem"}  # Adjust the maxWidth and width here
                         ),
                     ],
                     width=2,  # Adjusted width for this column
