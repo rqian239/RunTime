@@ -33,6 +33,8 @@ body = dbc.Container(
                             """\
                             Welcome to the Fantasy Games Page! Set a matchup between any two NBA teams and see which one is
                             projected to win. Use the dropdowns to select your home and away teams!
+
+                            We use Nate Silver's Elo metric to predict the winner!
                             """,
                             style={'textAlign': 'center'}
                         ),

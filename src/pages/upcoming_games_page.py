@@ -117,6 +117,8 @@ body = dbc.Container(
                             """\
                                 Welcome! Here you can find today's NBA games and the projected winner of each matchup! Navigate
                                 through the page to study relevant team statistics ahead of today's games.
+
+                                We use Nate Silver's Elo metric to predict the winner!
                             """,
                             className="centered"
                         ),
