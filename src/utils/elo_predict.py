@@ -275,7 +275,10 @@ def get_winner(home_team_abbrev, away_team_abbrev):
     else:
         win_prob = calculate_expected_win_probability(team_elo_2, team_elo_1)
         point_spread_new = point_spread(team_elo_2, team_elo_1)
-    data = {'Home': [home_team_abbrev], 'Away': [away_team_abbrev], 'Expected_Winner': [winner], 'Winner_Probability': [win_prob],
+    win_prob = round(win_prob * 100, 2)
+    win_prob_symbol = str(win_prob) + "%"
+    point_spread_new = round(point_spread_new, 1)
+    data = {'Home': [home_team_abbrev], 'Away': [away_team_abbrev], 'Expected_Winner': [winner], 'Winner_Probability': [win_prob_symbol],
             'Point_Spread': [point_spread_new]}
     new_df = pd.DataFrame(data)
     return new_df
