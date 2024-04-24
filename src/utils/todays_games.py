@@ -32,7 +32,8 @@ def scrape_todays_nba_schedule():
             for row in rows[1:]:
                 columns = row.find_all("th")
                 game_date = columns[0].text.strip()
-                if day in game_date and month in game_date:
+                game_date_obj = datetime.strptime(game_date, "%a, %b %d, %Y").date()
+                if today == game_date_obj:
                     name_column = row.find_all("td")
                     home_team = name_column[3].text.strip()
                     away_team = name_column[1].text.strip()
